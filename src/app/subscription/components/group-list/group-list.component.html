@@ -1,0 +1,27 @@
+<div class="text-center mb-3">
+    <h2>Group list :</h2>
+</div>
+<div class="card-group">
+    <div *ngFor="let group of groups" class="col-lg-3 col-md-4 col-sm-6 col-12 my-4">
+        <div class="card border-primary">
+            <div class="card-body">
+                <h5 class="card-title">{{group.name}}</h5>
+                <h6 class="card-subtitle text-muted mb-2 font-italic">ID: #{{group.id}}</h6>
+                <p class="card-text">{{group.description ? group.description : 'No description'}}</p>
+                <div class="text-center">
+                    <a [routerLink]="['/groups', group.id, 'subscriptions']">Subscriptions</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template [ngIf]="groups.length == 0">
+    <div *ngIf="groupsError else waiting" class="col-md-6 col-8 mx-auto text-center my-4">
+        <app-http-error [error]="groupsError" (retryEvent)="getGroups()"></app-http-error>
+    </div>
+    <ng-template #waiting>
+        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-5 col-6 mx-auto text-center my-4">
+            <app-http-waiting></app-http-waiting>
+        </div>
+    </ng-template>
+</ng-template>

@@ -1,0 +1,10 @@
+<div class="alert alert-danger text-left" role="alert">
+    <h4 class="alert-heading">Oops, something wrong happened...</h4>
+    <p>{{error.message}}</p>
+    <small>Status: {{error.status}}/{{error.statusText}}</small>
+    <hr>
+    <div class="d-flex justify-content-between">
+        <button class="btn btn-outline-warning" (click)="toJson()">Parse to JSON in clipboard.</button>
+        <button *ngIf="retry" class="btn btn-outline-primary" (click)="retry()">Retry</button>
+    </div>
+</div>
