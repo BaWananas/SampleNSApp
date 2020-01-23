@@ -1,0 +1,10 @@
+<div class="container-fluid d-flex">
+    <div class="col-md-5 col-sm mr-auto">
+        <button *ngIf="backEnabled" class="btn btn-outline-primary mr-3" (click)="goBack()">Back</button>
+        <button *ngIf="homeUrl" class="btn btn-outline-warning" (click)="goHome()">Home</button>
+    </div>
+    <div class="col text-left">
+        <h2 *ngIf="title">{{title}}</h2>
+        <h5 *ngIf="subTitle" class="muted font-italic">{{subTitle}}</h5>
+    </div>
+</div>
