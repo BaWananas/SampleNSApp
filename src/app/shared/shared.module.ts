@@ -1,9 +1,7 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {componentDeclarations} from '@src/app/shared/shared.common';
-import { HttpWaitingComponent } from '@src/app/shared/components/http-waiting/http-waiting.component';
-import { NotFoundComponent } from '@src/app/shared/components/not-found/not-found.component';
-
+import {ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +9,8 @@ import { NotFoundComponent } from '@src/app/shared/components/not-found/not-foun
         componentDeclarations,
     ],
     imports: [
-        CommonModule
+        CommonModule,
+        ReactiveFormsModule
     ],
     exports: [
         componentDeclarations,

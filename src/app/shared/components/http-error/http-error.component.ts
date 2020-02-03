@@ -1,5 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {HttpErrorResponse} from '@angular/common/http';
+import {HttpError} from '@src/app/shared/models/HttpError/HttpError';
+import {HttpValidationError} from '@src/app/shared/models/HttpError/HttpValidationError';
 
 @Component({
   selector: 'app-http-error',
@@ -8,8 +10,9 @@ import {HttpErrorResponse} from '@angular/common/http';
 })
 export class HttpErrorComponent implements OnInit {
 
-  @Input() error: HttpErrorResponse;
-  @Output() public retryEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input() error: HttpError;
+  @Input('retry') enableRetry = false;
+  @Output() retryEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor() {
   }

@@ -26,6 +26,9 @@
               "src/*.tns.ts",
               "src/*.web.ts",
               "src/*.ts"
+          ],
+          "arhs-ui": [
+              "./nodes_modules/arhs-ui/"
           ]
       }
   }

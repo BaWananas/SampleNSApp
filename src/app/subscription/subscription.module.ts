@@ -4,7 +4,9 @@ import {CommonModule} from '@angular/common';
 import {SubscriptionRoutingModule} from './subscription-routing.module';
 import {SharedModule} from '@src/app/shared/shared.module';
 import {componentDeclarations} from '@src/app/subscription/subscription.common';
-
+import {RouterModule} from '@angular/router';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {ArhsUi} from 'arhs-ui';
 
 @NgModule({
   declarations: [
@@ -15,8 +17,12 @@ import {componentDeclarations} from '@src/app/subscription/subscription.common';
   ],
   imports: [
     CommonModule,
-    SubscriptionRoutingModule,
+    RouterModule,
     SharedModule,
+    SubscriptionRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
+    ArhsUi,
   ],
 })
 export class SubscriptionModule { }

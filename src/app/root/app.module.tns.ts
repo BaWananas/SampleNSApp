@@ -3,7 +3,7 @@ import {NativeScriptModule} from 'nativescript-angular/nativescript.module';
 import {AppComponent} from '@src/app/root/components/app.component';
 
 // Uncomment and add to NgModule imports if you need to use two-way binding
-// import { NativeScriptFormsModule } from 'nativescript-angular/forms';
+import { NativeScriptFormsModule } from 'nativescript-angular/forms';
 
 // Uncomment and add to NgModule imports  if you need to use the HTTP wrapper
 import { NativeScriptHttpClientModule } from 'nativescript-angular/http-client';
@@ -20,6 +20,7 @@ import {SharedModule} from '@src/app/shared/shared.module';
     NativeScriptHttpClientModule,
     SubscriptionModule,
     SharedModule,
+    NativeScriptFormsModule,
 
     // Must be specified at the end.
     AppRoutingModule,

@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import {IHttpService} from '@src/app/shared/services/IHttpService';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {observable, Observable, of} from 'rxjs';
+import {HttpError} from '@src/app/shared/models/HttpError/HttpError';
 
 @Injectable({
   providedIn: 'root'
 })
-export class HttpServiceService implements IHttpService {
+export class HttpService implements IHttpService {
 
   constructor(private httpClient: HttpClient) {}
 

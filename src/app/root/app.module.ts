@@ -6,6 +6,7 @@ import {AppComponent} from '@src/app/root/components/app.component';
 import {SubscriptionModule} from '@src/app/subscription/subscription.module';
 import {HttpClientModule} from '@angular/common/http';
 import {SharedModule} from '@src/app/shared/shared.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import {SharedModule} from '@src/app/shared/shared.module';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     SubscriptionModule,
     SharedModule,

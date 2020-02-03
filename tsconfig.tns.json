@@ -7,6 +7,9 @@
       "@src/*": [
         "src/*.tns.ts",
         "src/*.ts"
+      ],
+      "arhs-ui": [
+        "./nodes_modules/arhs-ui/"
       ]
     }
   },

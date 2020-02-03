@@ -1,0 +1,18 @@
+<form [formGroup]="groupCreationForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+        <label for="groupCreationFormName">Name :</label>
+        <input class="form-control" id="groupCreationFormName" type="text" formControlName="groupName">
+    </div>
+
+    <div class="form-group">
+        <label for="groupCreationFormDescription">Description :</label>
+        <textarea class="form-control" id="groupCreationFormDescription" type="text" formControlName="groupDescription"></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="groupCreationFormAssociationId">Association ID :</label>
+        <input class="form-control" id="groupCreationFormAssociationId" type="number" formControlName="associationId">
+    </div>
+
+    <button class="btn btn-primary" type="submit" [disabled]="!groupCreationForm.valid">Submit</button>
+</form>

@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Location} from '@angular/common';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-title-nav-bar',
@@ -10,20 +11,20 @@ export class TitleNavBarComponent implements OnInit {
 
   @Input() title: string;
   @Input() subTitle: string;
+  @Input() backUrl: string;
   @Input() homeUrl: string;
-  @Input() backEnabled: boolean;
 
-  constructor(private location: Location) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
   goBack(): void {
-    this.location.back();
+    this.router.navigate([this.backUrl]);
   }
 
   goHome(): void {
-    this.location.go(this.homeUrl);
+    this.router.navigate([this.homeUrl]);
   }
 
 }
