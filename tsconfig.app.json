@@ -8,9 +8,6 @@
       "@src/*": [
         "src/*.web",
         "src/*"
-      ],
-      "arhs-ui": [
-        "./nodes_modules/arhs-ui/"
       ]
     }
   },

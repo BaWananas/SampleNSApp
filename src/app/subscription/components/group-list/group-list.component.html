@@ -19,6 +19,7 @@
     <h6>Nothing to show.</h6>
 </div>
 
+<!-- Old groups list.
 <div *ngIf="groups" class="card-group">
     <div *ngFor="let group of groups; let index = index" class="col-lg-3 col-md-4 col-sm-6 col-12 my-4">
         <div class="card border-primary">
@@ -49,6 +50,17 @@
         </div>
     </div>
 </div>
+-->
+
+<arhs-ui-groups-list [detailsTemplate]="bip" [data]="groups" [options]="tableOptions" [refreshEvent]="refreshEvent" (onSelect)="onSelectedItem($event)"></arhs-ui-groups-list>
+
+<ng-template #bip let-id="id">
+    <div class="container-fluid p-0 m-0 text-right">
+        <a [routerLink]="['/groups', id, 'subscriptions']" class="btn btn-link text-light">
+            <i class="fas fa-list"></i>
+        </a>
+    </div>
+</ng-template>
 
 <div class="text-center my-4">
     <a role="button" data-toggle="collapse" href="#groupCreationModal" aria-expanded="false"
@@ -56,8 +68,6 @@
 </div>
 <div class="collapse container" id="groupCreationModal">
     <div class="col mx-auto">
-        <app-group-creation-form (createEvent)="createGroup($event)"></app-group-creation-form>
+        <app-group-creation-form class="w-100" (createEvent)="createGroup($event)"></app-group-creation-form>
     </div>
 </div>
-<lib-testcomp></lib-testcomp>
-<Button text="Button" (tap)="onButtonTap()"></Button>

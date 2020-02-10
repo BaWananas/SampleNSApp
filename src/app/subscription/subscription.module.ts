@@ -6,7 +6,7 @@ import {SharedModule} from '@src/app/shared/shared.module';
 import {componentDeclarations} from '@src/app/subscription/subscription.common';
 import {RouterModule} from '@angular/router';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {ArhsUi} from 'arhs-ui';
+import {ArhsUiModule} from '@arhs/ui';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,7 @@ import {ArhsUi} from 'arhs-ui';
     SubscriptionRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    ArhsUi,
+    ArhsUiModule
   ],
 })
 export class SubscriptionModule { }

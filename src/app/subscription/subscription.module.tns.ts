@@ -5,9 +5,9 @@ import {SubscriptionRoutingModule} from '@src/app/subscription/subscription-rout
 import {componentDeclarations} from '@src/app/subscription/subscription.common';
 import {SharedModule} from '@src/app/shared/shared.module';
 import {RouterModule} from '@angular/router';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { NativeScriptFormsModule } from 'nativescript-angular/forms';
-import {ArhsUi} from 'arhs-ui';
+import {ReactiveFormsModule} from '@angular/forms';
+import {NativeScriptFormsModule} from 'nativescript-angular/forms';
+import {ArhsUiModuleTns} from '@arhs/ui';
 
 @NgModule({
     declarations: [
@@ -23,7 +23,7 @@ import {ArhsUi} from 'arhs-ui';
         SubscriptionRoutingModule,
         ReactiveFormsModule,
         NativeScriptFormsModule,
-        ArhsUi,
+        ArhsUiModuleTns
     ],
   schemas: [NO_ERRORS_SCHEMA]
 })

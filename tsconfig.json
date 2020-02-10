@@ -18,7 +18,7 @@
           "es6",
           "es2015.iterable"
       ],
-      "baseUrl": ".",
+      "baseUrl": "",
       "paths": {
           "@src/*": [
               "src/*.android.ts",
@@ -26,9 +26,6 @@
               "src/*.tns.ts",
               "src/*.web.ts",
               "src/*.ts"
-          ],
-          "arhs-ui": [
-              "./nodes_modules/arhs-ui/"
           ]
       }
   }

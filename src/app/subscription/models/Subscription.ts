@@ -1,4 +1,3 @@
-import {Group} from '@src/app/subscription/models/Group';
 import {IEntityModel} from '@src/app/shared/models/HttpResponse/IEntityModel';
 import {HypermediaLinks} from '@src/app/shared/models/HttpResponse/HypermediaLinks';
 
