@@ -1,18 +1,21 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, ParamMap, Router} from '@angular/router';
-import {Subscription} from '@src/app/subscription/models/Subscription';
-import {Group} from '@src/app/subscription/models/Group';
-import {IGroupService} from '@src/app/subscription/services/IGroupService';
-import {GroupService} from '@src/app/subscription/services/implementations/group.service';
-import {switchMap} from 'rxjs/operators';
 import {ILoggerService} from '@src/app/shared/services/ILoggerService';
+import {
+  Group,
+  GroupService,
+  HttpError,
+  HttpErrorService,
+  IGroupService,
+  IHttpErrorService,
+  ISubscriptionService,
+  Subscription,
+  SubscriptionService
+} from '@arhs/core';
+import {ActivatedRoute, ParamMap} from '@angular/router';
+import {switchMap} from 'rxjs/operators';
+import {Component, OnInit} from '@angular/core';
 import {LoggerService} from '@src/app/shared/services/implementations/logger.service';
 import {HttpErrorResponse} from '@angular/common/http';
-import {ISubscriptionService} from '@src/app/subscription/services/ISubscriptionService';
-import {SubscriptionService} from '@src/app/subscription/services/implementations/subscription.service';
-import {HttpError} from '@src/app/shared/models/HttpError/HttpError';
-import {IHttpErrorService} from '@src/app/shared/services/IHttpErrorService';
-import {HttpErrorService} from '@src/app/shared/services/implementations/http-error.service';
+
 
 @Component({
   selector: 'app-subscriptions-list',

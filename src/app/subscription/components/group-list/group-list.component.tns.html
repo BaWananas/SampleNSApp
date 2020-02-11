@@ -1,3 +1,26 @@
-<StackLayout orientation="horizontal" horizontalAlignment="center" verticalAlignment="center">
-    <Label text="#ID: {{userId}}" verticalAlignment="middle" horizontalAlignment="center" fontSize="30"></Label>
-</StackLayout>
+<ScrollView orientation="vertical" *ngIf="groups">
+    <GridLayout height="50%" margin="20" padding="10" borderColor="#d3d3d3" borderWidth="2" borderRadius="3" [columns]="'auto, auto, *, auto'" [rows]="'auto' + getRowsWidth()">
+        <Label class="h3" marginRight="20" text="#ID" row="0" col="0"></Label>
+        <Label class="h3" marginRight="20" text="#Association" row="0" col="1"></Label>
+        <Label class="h3" text="Name" row="0" col="2"></Label>
+        <Label class="h3" text="" row="0" col="3"></Label>
+        <StackLayout *ngIf="groups.length > 0" marginTop="4" marginBottom="4" class="hr" row="1" colSpan="4"></StackLayout>
+
+        <ng-container *ngFor="let group of groups; let index = index; let last = last">
+            <FlexboxLayout class="" row="{{(index*2)+2}}" col="0">
+                <Label class="body" text="{{group.id}}"></Label>
+            </FlexboxLayout>
+            <FlexboxLayout class="" row="{{(index*2)+2}}" col="1">
+                <Label class="body" text="{{group.associationId}}"></Label>
+            </FlexboxLayout>
+            <FlexboxLayout class="" row="{{(index*2)+2}}" col="2">
+                <Label class="body" text="{{group.name}}"></Label>
+            </FlexboxLayout>
+            <FlexboxLayout  class="" row="{{(index*2)+2}}" verticalAlignment="middle" alignItems="center" justifyContent="center" col="3">
+                <Label class="fas text-danger m-r-8" text="&#xf1f8;" (tap)="deleteGroup(group.id, index)"></Label>
+                <Label class="fas m-r-8" text="&#xf142;"></Label>
+            </FlexboxLayout>
+            <StackLayout marginTop="4" marginBottom="4" *ngIf="!last" class="hr" row="{{(index*2)+3}}" colSpan="4"></StackLayout>
+        </ng-container>
+    </GridLayout>
+</ScrollView>

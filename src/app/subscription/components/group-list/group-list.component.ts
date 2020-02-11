@@ -1,20 +1,20 @@
 import {Component, EventEmitter, OnInit} from '@angular/core';
-import {Group} from '@src/app/subscription/models/Group';
-import {GroupService} from '@src/app/subscription/services/implementations/group.service';
 import {LoggerService} from '@src/app/shared/services/implementations/logger.service';
 import {ILoggerService} from '@src/app/shared/services/ILoggerService';
 import {HttpErrorResponse} from '@angular/common/http';
-import {CollectionModel} from '@src/app/shared/models/HttpResponse/CollectionModel';
-import {IHttpErrorService} from '@src/app/shared/services/IHttpErrorService';
-import {HttpError} from '@src/app/shared/models/HttpError/HttpError';
-import {HttpErrorService} from '@src/app/shared/services/implementations/http-error.service';
-import {IGroupService} from '@src/app/subscription/services/IGroupService';
-import {ISubscriptionService} from '@src/app/subscription/services/ISubscriptionService';
-import {SubscriptionService} from '@src/app/subscription/services/implementations/subscription.service';
-import {Subscription} from '@src/app/subscription/models/Subscription';
-import {ITableFactory} from '@arhs/ui';
-import {ITableOptions} from '@arhs/ui';
-import {TableFactoryService} from '@arhs/ui';
+import {ITableFactory, ITableOptions, TableFactoryService} from '@arhs/ui';
+import {
+    CollectionModel,
+    Group,
+    GroupService,
+    HttpError,
+    HttpErrorService,
+    IGroupService,
+    IHttpErrorService,
+    ISubscriptionService,
+    Subscription,
+    SubscriptionService
+} from '@arhs/core';
 
 @Component({
     selector: 'app-groups-list',
@@ -60,7 +60,7 @@ export class GroupListComponent implements OnInit {
         this.getUserSubscriptions();
     }
 
-    private getGroups() {
+    public getGroups() {
         this.groups = undefined;
         this.error = null;
         this.loggerService.info(this, 'Retrieving groups.');
@@ -78,7 +78,7 @@ export class GroupListComponent implements OnInit {
         });
     }
 
-    getUserSubscriptions(): void {
+    public getUserSubscriptions(): void {
         this.error = null;
         this.userSubscriptions = [];
         this.loggerService.info(this, 'Retrieving user subscriptions.');
@@ -95,7 +95,26 @@ export class GroupListComponent implements OnInit {
         });
     }
 
-    deleteGroup(id: any, index: number) {
+    public getSubscriptionId(groupId: number): number {
+        let id = -1;
+        this.userSubscriptions.forEach(value => {
+            if (value.groupId === groupId) {
+                id = value.id;
+                return;
+            }
+        });
+        return id;
+    }
+
+    public getRowsWidth(): string {
+        let rows = '';
+        this.groups.forEach(value => {
+            rows += ', auto, auto';
+        });
+        return rows;
+    }
+
+    public deleteGroup(id: any, index: number) {
         this.error = null;
         this.loggerService.info(this, 'Delete group ' + id + '.');
 
@@ -110,7 +129,7 @@ export class GroupListComponent implements OnInit {
         });
     }
 
-    createGroup(group: Group) {
+    public createGroup(group: Group) {
         this.error = null;
         this.loggerService.info(this, 'Create group.');
 
@@ -123,7 +142,7 @@ export class GroupListComponent implements OnInit {
         });
     }
 
-    subscribe(groupId: number): void {
+    public subscribe(groupId: number): void {
         this.error = null;
         this.loggerService.info(this, 'Subscribe to group ' + groupId + '.');
 
@@ -135,7 +154,7 @@ export class GroupListComponent implements OnInit {
         });
     }
 
-    unsubscribe(index: number, groupId: number): void {
+    public unsubscribe(index: number, groupId: number): void {
         const id = this.getSubscriptionId(groupId);
         if (id >= 0) {
             this.error = null;
@@ -152,7 +171,7 @@ export class GroupListComponent implements OnInit {
         }
     }
 
-    isSubscribed(groupId: number): boolean {
+    public isSubscribed(groupId: number): boolean {
         let isSubscribed = false;
         this.userSubscriptions.forEach(value => {
             if (value.groupId === groupId) {
@@ -163,17 +182,6 @@ export class GroupListComponent implements OnInit {
         return isSubscribed;
     }
 
-    getSubscriptionId(groupId: number): number {
-        let id = -1;
-        this.userSubscriptions.forEach(value => {
-            if (value.groupId === groupId) {
-                id = value.id;
-                return;
-            }
-        });
-        return id;
-    }
-
     public onSelectedItem(items: Group[]): void {
         if (items) {
             this.selectedItems = items;
@@ -181,7 +189,7 @@ export class GroupListComponent implements OnInit {
     }
 
     private initTable(): void {
-        this.tableOptions = this.tableFactory.getOptions<Group>(false, true, false, true, [5, 1, 25], true, true, true);
+        this.tableOptions = this.tableFactory.getOptions<Group>(false, true, false, true, [10, 1, 5, 25], true, true, true);
     }
 
     private refreshTable(newElement: Group[]): void {

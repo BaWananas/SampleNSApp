@@ -1,7 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {HttpErrorResponse} from '@angular/common/http';
-import {HttpError} from '@src/app/shared/models/HttpError/HttpError';
-import {HttpValidationError} from '@src/app/shared/models/HttpError/HttpValidationError';
+import {HttpError} from '@arhs/core';
 
 @Component({
   selector: 'app-http-error',

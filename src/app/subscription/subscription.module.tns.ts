@@ -1,5 +1,4 @@
 import {NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
-
 import {NativeScriptCommonModule} from 'nativescript-angular/common';
 import {SubscriptionRoutingModule} from '@src/app/subscription/subscription-routing.module';
 import {componentDeclarations} from '@src/app/subscription/subscription.common';
