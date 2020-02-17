@@ -16,7 +16,6 @@ import {Component, OnInit} from '@angular/core';
 import {LoggerService} from '@src/app/shared/services/implementations/logger.service';
 import {HttpErrorResponse} from '@angular/common/http';
 
-
 @Component({
   selector: 'app-subscriptions-list',
   templateUrl: './subscription-list.component.html',

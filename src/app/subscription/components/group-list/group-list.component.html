@@ -19,40 +19,7 @@
     <h6>Nothing to show.</h6>
 </div>
 
-<!-- Old groups list.
-<div *ngIf="groups" class="card-group">
-    <div *ngFor="let group of groups; let index = index" class="col-lg-3 col-md-4 col-sm-6 col-12 my-4">
-        <div class="card border-primary">
-            <div class="card-body">
-                <h5 class="card-title">
-                    {{group.name}}
-                    <button type="button" class="close" aria-label="Close" (click)="deleteGroup(group.id, index)">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </h5>
-                <h6 class="card-subtitle text-muted mb-2 font-italic">ID: #{{group.id}}</h6>
-                <p class="card-text">{{group.description ? group.description : 'No description'}}</p>
-                <div class="container-fluid p-0 m-0 text-right">
-                    <a [routerLink]="['/groups', group.id, 'subscriptions']" class="btn btn-link text-light">
-                        <i class="fas fa-list"></i>
-                    </a>
-                    <a *ngIf="!isSubscribed(group.id) else unsubscribeButton" class="btn btn-link text-success"
-                       (click)="subscribe(group.id)">
-                        <i class="fas fa-user-plus"></i>
-                    </a>
-                    <ng-template #unsubscribeButton>
-                        <a class="btn btn-link text-danger" (click)="unsubscribe(index, group.id)">
-                            <i class="far fa-window-close"></i>
-                        </a>
-                    </ng-template>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
--->
-
-<arhs-ui-groups-list [detailsTemplate]="bip" [data]="groups" [options]="tableOptions" [refreshEvent]="refreshEvent" (onSelect)="onSelectedItem($event)"></arhs-ui-groups-list>
+<arhs-ui-basic-table #table [columns]="tableColumns" [details]="bip" [data]="groups" [options]="tableOptions" [refreshEvent]="refreshEvent" (onSelect)="onSelectedItem($event)"></arhs-ui-basic-table>
 
 <ng-template #bip let-id="id">
     <div class="container-fluid p-0 m-0 text-right">

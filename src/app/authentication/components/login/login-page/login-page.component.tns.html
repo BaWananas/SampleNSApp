@@ -1,0 +1,6 @@
+<StackLayout horizontalAlignment="center" verticalAlignment="center">
+    <ActionBar title="Login">
+        <ActionItem text="Exit" android.systemIcon="ic_menu_close_clear_cancel" ios.systemIcon="1" (tap)="exit()"></ActionItem>
+    </ActionBar>
+    <app-login-form (submit)="onSubmit($event)"></app-login-form>
+</StackLayout>

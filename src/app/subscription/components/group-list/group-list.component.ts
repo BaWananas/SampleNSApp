@@ -1,8 +1,8 @@
-import {Component, EventEmitter, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {LoggerService} from '@src/app/shared/services/implementations/logger.service';
 import {ILoggerService} from '@src/app/shared/services/ILoggerService';
 import {HttpErrorResponse} from '@angular/common/http';
-import {ITableFactory, ITableOptions, TableFactoryService} from '@arhs/ui';
+import {ITableColumn, ITableFactory, ITableOptions, TableFactoryService} from '@arhs/ui';
 import {
     CollectionModel,
     Group,
@@ -15,6 +15,7 @@ import {
     Subscription,
     SubscriptionService
 } from '@arhs/core';
+import { Page } from 'tns-core-modules/ui/page/page';
 
 @Component({
     selector: 'app-groups-list',
@@ -36,22 +37,25 @@ export class GroupListComponent implements OnInit {
     userSubscriptions: Subscription[] = [];
 
     /**
-     * Lib table test required vars
+     * Required vars for library table test.
      */
     refreshEvent: EventEmitter<Group[]> = new EventEmitter<[]>();
     tableOptions: ITableOptions<Group> = null;
+    tableColumns: ITableColumn[] = null;
     selectedItems: Group[] = [];
 
     constructor(groupService: GroupService,
                 loggerService: LoggerService,
                 errorService: HttpErrorService,
                 subscriptionService: SubscriptionService,
-                tableFactory: TableFactoryService) {
+                tableFactory: TableFactoryService,
+                page: Page) {
         this.groupService = groupService;
         this.loggerService = loggerService;
         this.errorService = errorService;
         this.subscriptionService = subscriptionService;
         this.tableFactory = tableFactory;
+        page.actionBarHidden = true;
         this.initTable();
     }
 
@@ -104,14 +108,6 @@ export class GroupListComponent implements OnInit {
             }
         });
         return id;
-    }
-
-    public getRowsWidth(): string {
-        let rows = '';
-        this.groups.forEach(value => {
-            rows += ', auto, auto';
-        });
-        return rows;
     }
 
     public deleteGroup(id: any, index: number) {
@@ -190,6 +186,11 @@ export class GroupListComponent implements OnInit {
 
     private initTable(): void {
         this.tableOptions = this.tableFactory.getOptions<Group>(false, true, false, true, [10, 1, 5, 25], true, true, true);
+        this.tableColumns = this.tableFactory.getColumns([
+            '#ID', 'Name', 'Description'
+        ], [
+            'id', 'name', 'description'
+        ]);
     }
 
     private refreshTable(newElement: Group[]): void {

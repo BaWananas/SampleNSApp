@@ -10,7 +10,7 @@ import {Group} from '@arhs/core';
 export class GroupCreationFormComponent implements OnInit {
   @Output() createEvent: EventEmitter<Group> = new EventEmitter<Group>();
 
-  groupCreationForm = this.builder.group({
+  public groupCreationForm = this.builder.group({
     groupName: ['Name', Validators.required],
     groupDescription: [''],
     associationId: ['', Validators.required],

@@ -3,7 +3,6 @@ import {NativeScriptCommonModule} from 'nativescript-angular/common';
 import {SubscriptionRoutingModule} from '@src/app/subscription/subscription-routing.module';
 import {componentDeclarations} from '@src/app/subscription/subscription.common';
 import {SharedModule} from '@src/app/shared/shared.module';
-import {RouterModule} from '@angular/router';
 import {ReactiveFormsModule} from '@angular/forms';
 import {NativeScriptFormsModule} from 'nativescript-angular/forms';
 import {ArhsUiModuleTns} from '@arhs/ui';
@@ -12,18 +11,21 @@ import {ArhsUiModuleTns} from '@arhs/ui';
     declarations: [
         componentDeclarations,
     ],
-  exports: [
-      componentDeclarations,
-  ],
+    exports: [
+        componentDeclarations,
+    ],
     imports: [
         NativeScriptCommonModule,
-        RouterModule,
-        SharedModule,
-        SubscriptionRoutingModule,
         ReactiveFormsModule,
         NativeScriptFormsModule,
-        ArhsUiModuleTns
+
+        // Custom modules
+        SharedModule,
+        ArhsUiModuleTns,
+
+        // Routing
+        SubscriptionRoutingModule,
     ],
-  schemas: [NO_ERRORS_SCHEMA]
+    schemas: [NO_ERRORS_SCHEMA]
 })
 export class SubscriptionModule { }

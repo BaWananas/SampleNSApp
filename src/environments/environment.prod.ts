@@ -1,3 +1,8 @@
 export const environment = {
-  production: true
+  production: true,
+  defaultRoutingTransition: {
+    name: 'slide',
+    duration: 300,
+    curve: 'linear'
+  }
 };

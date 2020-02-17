@@ -1,0 +1,13 @@
+<StackLayout width="100%" height="100%">
+    <StackLayout class="" height="50%" verticalAlignment="center">
+        <Label class="fas text-center c-white" fontSize="170" text="&#xf2bd;"></Label>
+    </StackLayout>
+    <StackLayout verticalAlignment="top" height="50%">
+        <form [formGroup]="loginForm">
+            <TextField class="body" width="70%" borderColor="#d3d3d3" borderWidth="3" textAlignment="center" borderRadius="5" backgroundColor="white" formControlName="id" keyboardType="email" hint="Email"></TextField>
+            <TextField class="body" width="70%" borderColor="#d3d3d3" borderWidth="3" textAlignment="center" backgroundColor="white" borderRadius="5" formControlName="password" secure="true" hint="Password"></TextField>
+            <TextField class="body" width="70%" borderColor="#d3d3d3" borderWidth="3" textAlignment="center" backgroundColor="white" borderRadius="5" formControlName="userId" keyboardType="number" hint="#ID"></TextField>
+        </form>
+        <Button width="100" text="Sign-in" class="-primary -rounded-sm text-uppercase body m-t-20" (tap)="submitForm()"></Button>
+    </StackLayout>
+</StackLayout>
