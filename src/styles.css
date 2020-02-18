@@ -1,3 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@fortawesome/fontawesome-free/css/all.min.css";
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+.hover:hover {
+    animation-name: buttonAnimationDefault;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+/*
+ * Animations
+ */
+@keyframes buttonAnimationDefault {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0.5;
+    }
+}

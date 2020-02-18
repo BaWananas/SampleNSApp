@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Page } from 'tns-core-modules/ui/page/page';
+import {Component, OnInit} from '@angular/core';
+import {Page} from 'tns-core-modules/ui/page/page';
+import {GestureEventData} from '@nativescript/core/ui/gestures/gestures';
+import {AnimationCurve} from '@nativescript/core/ui/enums';
+import {View} from '@nativescript/core';
 
 @Component({
   selector: 'app-subscription-home',

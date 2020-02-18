@@ -1,12 +1,12 @@
-<StackLayout orientation="vertical" class="dark p-15">
-    <StackLayout height="50%">
+<GridLayout rows="*, *, auto" class="dark p-15">
+    <StackLayout height="50%" row="0">
         <Label class="h2 dark" text="Current subscriptions :"></Label>
         <app-user-subscriptions-list></app-user-subscriptions-list>
     </StackLayout>
-    <StackLayout horizontalAlignment="center">
+    <StackLayout horizontalAlignment="center" row="1">
         <Label class="text-center fas c-success" fontSize="30" text="&#xf067;"></Label>
     </StackLayout>
-    <StackLayout orientation="vertical" verticalAlignment="stretch" horizontalAlignment="right">
-        <Label class="text-right fas dark" fontSize="30" text="&#xf085;"></Label>
+    <StackLayout verticalAlignment="bottom" horizontalAlignment="right" row="2">
+        <Label class="text-center fas" fontSize="25" text="&#xf7d9;"></Label>
     </StackLayout>
-</StackLayout>
+</GridLayout>
