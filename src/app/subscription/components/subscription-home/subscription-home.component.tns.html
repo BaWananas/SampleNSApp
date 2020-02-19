@@ -4,9 +4,9 @@
         <app-user-subscriptions-list></app-user-subscriptions-list>
     </StackLayout>
     <StackLayout horizontalAlignment="center" row="1">
-        <Label class="text-center fas c-success" fontSize="30" text="&#xf067;"></Label>
+        <Label class="text-center fas c-success" fontSize="30" text="&#xf067;" (tap)="animateButton($event)"></Label>
     </StackLayout>
     <StackLayout verticalAlignment="bottom" horizontalAlignment="right" row="2">
-        <Label class="text-center fas" fontSize="25" text="&#xf7d9;"></Label>
+        <Label class="text-center fas" fontSize="25" text="&#xf7d9;" (tap)="animateButton($event)"></Label>
     </StackLayout>
 </GridLayout>

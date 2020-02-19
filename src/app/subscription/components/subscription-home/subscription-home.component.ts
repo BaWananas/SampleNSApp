@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Page} from 'tns-core-modules/ui/page/page';
-import {GestureEventData} from '@nativescript/core/ui/gestures/gestures';
-import {AnimationCurve} from '@nativescript/core/ui/enums';
-import {View} from '@nativescript/core';
+import {MobileAnimationService} from '@src/app/animation/services/implementations/mobile-animation.service';
+import {GestureEventData, Page} from '@nativescript/core';
+import {IMobileAnimationService} from '@src/app/animation/services/IMobileAnimationService';
+import {TapAnimation} from '@src/app/animation/models/TapAnimations/TapAnimation';
 
 @Component({
   selector: 'app-subscription-home',
@@ -11,11 +11,18 @@ import {View} from '@nativescript/core';
 })
 export class SubscriptionHomeComponent implements OnInit {
 
-  constructor(page: Page) {
+  private animationService: IMobileAnimationService;
+
+  constructor(page: Page, animationService: MobileAnimationService) {
     page.actionBarHidden = true;
+    this.animationService = animationService;
   }
 
   ngOnInit() {
+  }
+
+  public animateButton(event: GestureEventData): void {
+    const btnAnimation = this.animationService.animate<TapAnimation>(event.view, TapAnimation);
   }
 
 }
