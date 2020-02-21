@@ -1,1 +1,16 @@
-<Button text="title-nav-bar works!" class="btn btn-primary"></Button>
+<GridLayout class="dark" columns="auto, auto, *" rows="auto">
+    <StackLayout row="0" col="0" class="m-r-15">
+        <Label (tap)="goBack()" *ngIf="backEnabled" class="text-center far dark" fontSize="25" text="&#xf191;"></Label>
+    </StackLayout>
+    <StackLayout row="0" col="1">
+        <Label (tap)="goHome()" *ngIf="homeUrls" class="text-center fas dark" color="orange" fontSize="25" text="&#xf015;"></Label>
+    </StackLayout>
+    <GridLayout horizontalAlignment="right" row="0" col="2" columns="auto, auto">
+        <StackLayout col="0" verticalAlignment="center">
+            <Label *ngIf="title" class="h2 dark" text="{{title}}"></Label>
+        </StackLayout>
+        <StackLayout col="1" verticalAlignment="center" class="m-l-10">
+            <Label *ngIf="subTitle" class="h3 text-muted" text="/ {{subTitle}}"></Label>
+        </StackLayout>
+    </GridLayout>
+</GridLayout>

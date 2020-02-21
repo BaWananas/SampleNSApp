@@ -19,22 +19,12 @@
     <h6>Nothing to show.</h6>
 </div>
 
-<arhs-ui-basic-table #table [columns]="tableColumns" [details]="bip" [data]="groups" [options]="tableOptions" [refreshEvent]="refreshEvent" (onSelect)="onSelectedItem($event)"></arhs-ui-basic-table>
+<arhs-ui-basic-table #table [columns]="tableColumns" [details]="details" [data]="groups" [options]="tableOptions" [refreshEvent]="refreshEvent" (onSelect)="onSelectedItem($event)"></arhs-ui-basic-table>
 
-<ng-template #bip let-id="id">
+<ng-template #details let-id="id">
     <div class="container-fluid p-0 m-0 text-right">
         <a [routerLink]="['/groups', id, 'subscriptions']" class="btn btn-link text-light">
             <i class="fas fa-list"></i>
         </a>
     </div>
 </ng-template>
-
-<div class="text-center my-4">
-    <a role="button" data-toggle="collapse" href="#groupCreationModal" aria-expanded="false"
-       aria-controls="groupCreationModal" class="btn btn-outline-success"><span class="fas fa-plus text-success"></span></a>
-</div>
-<div class="collapse container" id="groupCreationModal">
-    <div class="col mx-auto">
-        <app-group-creation-form class="w-100" (createEvent)="createGroup($event)"></app-group-creation-form>
-    </div>
-</div>

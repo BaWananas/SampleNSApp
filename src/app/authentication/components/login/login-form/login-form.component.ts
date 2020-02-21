@@ -1,6 +1,5 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
-import { RouterExtensions } from 'nativescript-angular/router';
 import {AuthenticationService} from '@src/app/authentication/services/implementations/authentication.service';
 import {IAuthenticationService} from '@src/app/authentication/services/IAuthenticationService';
 

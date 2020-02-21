@@ -1,26 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import {exit} from 'nativescript-exit';
-import { RouterExtensions } from 'nativescript-angular/router';
-import {environment} from '@src/environments/environment';
+import {Component, OnInit} from '@angular/core';
+import {LoginPageCommon} from '@src/app/authentication/components/login/login-page/login-page.common';
 
 @Component({
   selector: 'app-login-page',
   templateUrl: './login-page.component.html',
   styleUrls: ['./login-page.component.css']
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent extends LoginPageCommon implements OnInit {
 
-  constructor(private routerExtensions: RouterExtensions) {}
+  constructor() {
+    super();
+  }
 
   ngOnInit() {
   }
 
-  public exit(): void {
-    exit();
-  }
-
-  public onSubmit(event: boolean): void {
-    this.routerExtensions.navigate(['hub'], {clearHistory: true, transition: environment.defaultRoutingTransition});
+  onSubmit(): void {
   }
 
 }
