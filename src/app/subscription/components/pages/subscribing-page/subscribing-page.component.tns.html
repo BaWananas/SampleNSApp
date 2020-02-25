@@ -3,6 +3,11 @@
         <app-title-nav-bar [title]="'Subscription'" [subTitle]="'Subscribing'" [backEnabled]="true" [homeUrls]="['hub/subscription']"></app-title-nav-bar>
     </StackLayout>
     <StackLayout row="1">
-        <app-groups-list></app-groups-list>
+        <app-groups-list [removeElementFromList]="subscribingEvent" [onlyIfSubscribed]="false" [elementDetails]="elementDetails"></app-groups-list>
+        <ng-template #elementDetails let-element>
+            <StackLayout height="100%" width="100%">
+                <Label class="fas dark c-success" fontSize="15" text="&#xf234;" (tap)="animateButtons($event); subscribe(element.id)"></Label>
+            </StackLayout>
+        </ng-template>
     </StackLayout>
 </GridLayout>

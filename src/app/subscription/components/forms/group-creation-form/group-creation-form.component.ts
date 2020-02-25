@@ -11,9 +11,9 @@ export class GroupCreationFormComponent implements OnInit {
   @Output() createEvent: EventEmitter<Group> = new EventEmitter<Group>();
 
   public groupCreationForm = this.builder.group({
-    groupName: ['Name', Validators.required],
-    groupDescription: [''],
-    associationId: ['', Validators.required],
+    name: ['', Validators.required],
+    description: [''],
+    associationId: ['', Validators.required]
   });
 
   constructor(private builder: FormBuilder) {}
@@ -22,8 +22,11 @@ export class GroupCreationFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.createEvent.emit(new Group(this.groupCreationForm.value.associationId,
-        this.groupCreationForm.value.groupName,
-        this.groupCreationForm.value.groupDescription));
+    if (this.groupCreationForm.valid) {
+      const group: Group = new Group(this.groupCreationForm.value.associationId,
+          this.groupCreationForm.value.name,
+          this.groupCreationForm.value.description);
+      this.createEvent.emit(group);
+    }
   }
 }

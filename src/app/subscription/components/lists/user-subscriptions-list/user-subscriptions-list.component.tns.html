@@ -1,10 +1,6 @@
 <StackLayout height="100%" width="100%">
     <Label *ngIf="data && data.length == 0" class="text-center body dark font-italic" text="You haven't subscribed to any group yet."></Label>
-    <ng-container *ngIf="columns && options && onRefresh && data">
-        <arhs-ui-basic-table [columns]="columns" [options]="options" [data]="data" [refreshEvent]="onRefresh" (onSelect)="onSelect($event)" [details]="subscriptionDetail"></arhs-ui-basic-table>
+    <ng-container *ngIf="tableColumns && tableOptions && onRefresh && data && data.length > 0">
+        <arhs-ui-basic-table [columns]="tableColumns" [options]="tableOptions" [data]="data" [refreshEvent]="onRefresh" (onSelect)="onSelect($event)" [details]="elementDetails"></arhs-ui-basic-table>
     </ng-container>
 </StackLayout>
-
-<ng-template #subscriptionDetail>
-    <Label class="body dark" text="WIP"></Label>
-</ng-template>

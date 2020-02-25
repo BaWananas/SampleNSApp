@@ -1,8 +1,11 @@
-export class FormattedSubscription {
-    groupName: string;
-    date: Date;
+import {Subscription} from '@arhs/core';
 
-    constructor(groupName: string, date: Date) {
+export class FormattedSubscription extends Subscription {
+    public groupName: string;
+    public date: Date;
+
+    constructor(groupName: string, date: Date, groupId: number, userId: number, id: number) {
+        super(groupId, userId, id);
         this.groupName = groupName;
         this.date = date;
     }

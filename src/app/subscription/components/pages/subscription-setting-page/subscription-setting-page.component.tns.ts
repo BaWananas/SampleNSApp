@@ -1,20 +1,47 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {SubscriptionSettingPageCommon} from '@src/app/subscription/components/pages/subscription-setting-page/subscription-setting-page.common';
-import { Page } from '@nativescript/core';
+import {GestureEventData, Page} from '@nativescript/core';
+import {IMobileAnimationService, MobileAnimationService, TapAnimation} from '@arhs/ui';
+import {GroupService, HttpError, HttpErrorService} from '@arhs/core';
+import {AuthenticationService} from '@src/app/authentication/services/implementations/authentication.service';
+import {LoggerService} from '@src/app/shared/services/implementations/logger.service';
 
 @Component({
-  selector: 'app-subscription-setting-page',
-  templateUrl: './subscription-setting-page.component.html',
-  styleUrls: ['./subscription-setting-page.component.css']
+    selector: 'app-subscription-setting-page',
+    templateUrl: './subscription-setting-page.component.tns.html',
+    styleUrls: ['./subscription-setting-page.component.css']
 })
 export class SubscriptionSettingPageComponent extends SubscriptionSettingPageCommon implements OnInit {
+    private animationService: IMobileAnimationService;
 
-  constructor(private page: Page) {
-    super();
-    page.actionBarHidden = true;
-  }
+    constructor(private page: Page,
+                animationService: MobileAnimationService,
+                authenticationService: AuthenticationService,
+                groupService: GroupService,
+                logger: LoggerService,
+                errorService: HttpErrorService) {
+        super(authenticationService, groupService, logger, errorService);
+        page.actionBarHidden = true;
+        this.animationService = animationService;
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
+
+    public animateButton(event: GestureEventData): void {
+        this.animationService.animate<TapAnimation>(event.view, TapAnimation);
+    }
+
+    protected postGroupDeletion(succeeds: boolean, groupId: number, error?: HttpError): void {
+        if (succeeds && !error) {
+            this.deleteGroupEvent.emit(groupId);
+        }
+    }
+
+    protected postGroupCreation(succeeds: boolean, error?: HttpError): void {
+        if (succeeds && !error) {
+            this.createGroupEvent.emit();
+        }
+    }
 
 }

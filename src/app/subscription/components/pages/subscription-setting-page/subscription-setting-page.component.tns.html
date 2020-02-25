@@ -5,11 +5,18 @@
     <StackLayout row="1" orientation="vertical">
         <StackLayout orientation="vertical">
             <Label class="h3 m-b-10 dark" text="Delete a group :"></Label>
-            <app-groups-list></app-groups-list>
+            <app-groups-list [refreshEntireList]="createGroupEvent" [removeElementFromList]="deleteGroupEvent" [elementDetails]="elementDetails"></app-groups-list>
+            <ng-template #elementDetails let-element>
+                <StackLayout height="100%" width="100%">
+                    <Label class="fas dark" fontSize="15" color="red" text="&#xf2ed;" (tap)="animateButton($event); deleteGroup(element.id)"></Label>
+                </StackLayout>
+            </ng-template>
         </StackLayout>
-        <StackLayout class="m-b-15">
-            <Label class="h3 m-b-10 dark" text="Create a group :"></Label>
-            <app-group-creation-form></app-group-creation-form>
+        <StackLayout height="50%">
+            <Label class="h3 dark" text="Create a group :"></Label>
+            <ScrollView class="m-t-15" height="100%" row="1">
+                <app-group-creation-form (createEvent)="createGroup($event)"></app-group-creation-form>
+            </ScrollView>
         </StackLayout>
     </StackLayout>
 </GridLayout>

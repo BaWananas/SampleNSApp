@@ -23,7 +23,7 @@ export class LoginPageComponent extends LoginPageCommon implements OnInit {
   }
 
   public onSubmit(): void {
-    this.routerExtensions.navigate(['login'], {clearHistory: true, transition: environment.defaultRoutingTransition});
+    this.routerExtensions.navigate(['hub'], {clearHistory: true, transition: environment.defaultRoutingTransition});
   }
 
 }

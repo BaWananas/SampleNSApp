@@ -12,6 +12,6 @@ export class AppComponent {
   title: String = 'Sample Tns-Ang App';
 
   constructor(private httpService: HttpService) {
-    httpService.rootUrl = 'http://10.0.2.2:8080/';
+    httpService.rootUrl = 'http://localhost:8080/';
   }
 }

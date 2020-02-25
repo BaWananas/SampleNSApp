@@ -1,1 +1,10 @@
-<Button text="group-creation-form works!" class="btn btn-primary"></Button>
+<StackLayout [formGroup]="groupCreationForm">
+    <TextField class="body" borderColor="#d3d3d3" borderWidth="3" textAlignment="center" backgroundColor="white"
+               borderRadius="5" formControlName="name" hint="Name"></TextField>
+    <TextField class="body" borderColor="#d3d3d3" borderWidth="3" textAlignment="center" backgroundColor="white"
+               borderRadius="5" formControlName="description" hint="Description"></TextField>
+    <TextField class="body" borderColor="#d3d3d3" borderWidth="3" textAlignment="center" backgroundColor="white"
+               borderRadius="5" formControlName="associationId" keyboardType="number" hint="Association ID"></TextField>
+    <Button width="100" class="-primary" text="Create" (tap)="onSubmit()"
+            [isEnabled]="groupCreationForm.valid"></Button>
+</StackLayout>

@@ -1,12 +1,17 @@
 <GridLayout rows="auto, auto, *" class="dark p-15">
     <StackLayout height="50%" row="0">
         <Label class="h2 dark" text="Current subscriptions :"></Label>
-        <app-user-subscriptions-list></app-user-subscriptions-list>
+        <app-user-subscriptions-list [refreshEntireList]="refreshLists" [removeElementFromList]="unsubscriptionEvent" [elementDetails]="elementDetails"></app-user-subscriptions-list>
+        <ng-template #elementDetails let-element>
+            <StackLayout height="100%" width="100%">
+                <Label class="fas dark" fontSize="15" color="red" text="&#xf506;" (tap)="animateButton($event); unsubscribe(element.groupId)"></Label>
+            </StackLayout>
+        </ng-template>
     </StackLayout>
     <StackLayout horizontalAlignment="center" row="1">
         <Label class="text-center fas c-success" fontSize="30" text="&#xf067;" (tap)="animateButton($event); navToSubscribing();"></Label>
     </StackLayout>
     <StackLayout verticalAlignment="bottom" horizontalAlignment="right" row="2">
-        <Label class="text-center fas" fontSize="25" text="&#xf7d9;" (tap)="animateButton($event); navToSettings();"></Label>
+        <Label class="text-center fas" fontSize="25" text="&#xf509;" (tap)="animateButton($event); navToSettings();"></Label>
     </StackLayout>
 </GridLayout>
