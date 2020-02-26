@@ -1,9 +1,9 @@
-<ActionBar title=" " color="white">
-    <NavigationButton class="fas text-left" icon="font://&#xf0c9;" ios.position="left" (tap)="toggleSideDrawer()"></NavigationButton>
+<ActionBar title="" color="white">
+    <NavigationButton class="fas text-left" icon="font://&#xf0c9;" text="Menu" ios.position="left" (tap)="toggleSideDrawer()"></NavigationButton>
 </ActionBar>
 <RadSideDrawer #sideDrawer>
-    <StackLayout tkDrawerContent class="sidedrawer-left primary">
-        <StackLayout class="sidedrawer-header">
+    <GridLayout rows="auto, *" tkDrawerContent class="primary sidedrawer-left">
+        <StackLayout row="0" class="sidedrawer-header primary">
             <StackLayout horizontalAlignment="center" marginTop="20">
                 <Label class="text-center far" text="&#xf007;" fontSize="100"></Label>
             </StackLayout>
@@ -12,14 +12,14 @@
                 <Label class="fas text-danger" borderWidth="0" text="&#xf2f5;" fontSize="20" margin="10" (tap)="logout(); animateButtons($event)"></Label>
             </StackLayout>
         </StackLayout>
-        <StackLayout class="sidedrawer-content" paddingLeft="10" paddingRight="10">
-            <StackLayout class="hr"></StackLayout>
+        <StackLayout row="1" class="sidedrawer-content primary" paddingLeft="10" paddingRight="10">
+            <StackLayout class="hr primary" borderColor="white"></StackLayout>
             <StackLayout class="sidedrawer-list-item" orientation="horizontal" horizontalAlignment="center">
-                <Label class="body fas sidedrawer-list-item-text m-l-8 primary" fontSize="30" text="&#xf0c0;" (tap)="navToSubscriptions(); animateButtons($event)"></Label>
+                <Label class="body fas sidedrawer-list-item-text m-l-8 primary" color="white" fontSize="30" text="&#xf0c0;" (tap)="navToSubscriptions(); animateButtons($event)"></Label>
             </StackLayout>
-            <StackLayout class="hr"></StackLayout>
+            <StackLayout class="hr primary" borderColor="white"></StackLayout>
         </StackLayout>
-    </StackLayout>
+    </GridLayout>
 
     <page-router-outlet tkMainContent></page-router-outlet>
 </RadSideDrawer>
