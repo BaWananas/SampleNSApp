@@ -7,6 +7,7 @@ import {SubscriptionHomeCommon} from '@src/app/subscription/components/pages/sub
 import {HttpError, HttpErrorService, SubscriptionService} from '@arhs/core';
 import {AuthenticationService} from '@src/app/authentication/services/implementations/authentication.service';
 import {LoggerService} from '@src/app/shared/services/implementations/logger.service';
+import {FeedbackService} from '@src/app/feedback/services/implementations/feedback.service';
 
 @Component({
     selector: 'app-subscription-home',
@@ -25,8 +26,9 @@ export class SubscriptionHomeComponent extends SubscriptionHomeCommon implements
                 subscriptionService: SubscriptionService,
                 authenticationService: AuthenticationService,
                 errorService: HttpErrorService,
-                loggerService: LoggerService) {
-        super(subscriptionService, authenticationService, loggerService, errorService);
+                loggerService: LoggerService,
+                feedbackService: FeedbackService) {
+        super(subscriptionService, authenticationService, loggerService, errorService, feedbackService);
         page.actionBarHidden = true;
         page.on('navigatingTo', this.onNavigatedTo, this);
         this.animationService = animationService;

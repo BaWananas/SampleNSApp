@@ -19,6 +19,8 @@ import {IAuthenticationService} from '@src/app/authentication/services/IAuthenti
 import {AuthenticationService} from '@src/app/authentication/services/implementations/authentication.service';
 import {RefreshableListComponent} from '@src/app/shared/models/RefreshableListComponent';
 import {isNumber} from 'util';
+import {IFeedbackService} from '@src/app/feedback/services/IFeedbackService';
+import {FeedbackService} from '@src/app/feedback/services/implementations/feedback.service';
 
 @Component({
     selector: 'app-groups-list',
@@ -37,10 +39,10 @@ export class GroupListComponent extends RefreshableListComponent<Group, number> 
     private loggerService: ILoggerService;
     private tableFactory: ITableFactory;
     private authenticationService: IAuthenticationService;
+    private feedbackService: IFeedbackService;
 
     groups: Group[] = undefined;
     userSubscriptions: Subscription[] = [];
-    error: HttpError;
 
     /**
      * Required vars for library table test.
@@ -55,7 +57,8 @@ export class GroupListComponent extends RefreshableListComponent<Group, number> 
                 errorService: HttpErrorService,
                 subscriptionService: SubscriptionService,
                 tableFactory: TableFactoryService,
-                authenticationService: AuthenticationService) {
+                authenticationService: AuthenticationService,
+                feedbackService: FeedbackService) {
         super();
         this.groupService = groupService;
         this.loggerService = loggerService;
@@ -63,6 +66,7 @@ export class GroupListComponent extends RefreshableListComponent<Group, number> 
         this.subscriptionService = subscriptionService;
         this.tableFactory = tableFactory;
         this.authenticationService = authenticationService;
+        this.feedbackService = feedbackService;
         this.initList();
     }
 
@@ -73,7 +77,6 @@ export class GroupListComponent extends RefreshableListComponent<Group, number> 
 
     public getGroups() {
         this.groups = undefined;
-        this.error = null;
         this.loggerService.debug(this, 'Retrieving groups.');
 
         this.groupService.getAllGroups().subscribe((value: CollectionModel<Group>) => {
@@ -86,12 +89,11 @@ export class GroupListComponent extends RefreshableListComponent<Group, number> 
         }, (error: HttpErrorResponse) => {
             const formattedError = this.errorService.handleError(error);
             this.loggerService.error(this, 'Error during retrieving groups from API. Error: ' + formattedError);
-            this.error = formattedError;
+            this.feedbackService.notifyError(formattedError);
         });
     }
 
     public getUserSubscriptions(): void {
-        this.error = null;
         this.userSubscriptions = [];
         this.loggerService.debug(this, 'Retrieving user subscriptions.');
 
@@ -105,7 +107,7 @@ export class GroupListComponent extends RefreshableListComponent<Group, number> 
         }, error => {
             const formattedError = this.errorService.handleError(error);
             this.loggerService.error(this, 'Error during retrieving user subscriptions from API. Error: ' + formattedError);
-            this.error = formattedError;
+            this.feedbackService.notifyError(formattedError);
         });
     }
 

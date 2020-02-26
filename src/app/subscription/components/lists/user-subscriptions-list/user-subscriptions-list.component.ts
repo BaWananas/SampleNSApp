@@ -16,6 +16,8 @@ import {LoggerService} from '@src/app/shared/services/implementations/logger.ser
 import {FormattedSubscription} from '@src/app/subscription/models/FormattedSubscription';
 import {RefreshableListComponent} from '@src/app/shared/models/RefreshableListComponent';
 import {isNumber} from 'util';
+import {IFeedbackService} from '@src/app/feedback/services/IFeedbackService';
+import {FeedbackService} from '@src/app/feedback/services/implementations/feedback.service';
 
 @Component({
   selector: 'app-user-subscriptions-list',
@@ -33,6 +35,7 @@ export class UserSubscriptionsListComponent extends RefreshableListComponent<For
   private tableFactory: ITableFactory;
   private logger: ILoggerService;
   private errorService: IHttpErrorService;
+  private feedbackService: IFeedbackService;
 
   /* Data from API */
   groups: Group[] = [];
@@ -49,7 +52,8 @@ export class UserSubscriptionsListComponent extends RefreshableListComponent<For
               tableFactory: TableFactoryService,
               logger: LoggerService,
               errorService: HttpErrorService,
-              groupService: GroupService) {
+              groupService: GroupService,
+              feedbackService: FeedbackService) {
     super();
     this.authenticationService = authenticationService;
     this.subscriptionService = subscriptionService;
@@ -57,6 +61,7 @@ export class UserSubscriptionsListComponent extends RefreshableListComponent<For
     this.logger = logger;
     this.errorService = errorService;
     this.groupService = groupService;
+    this.feedbackService = feedbackService;
     this.initList();
   }
 
@@ -87,7 +92,9 @@ export class UserSubscriptionsListComponent extends RefreshableListComponent<For
         this.getGroups();
       }
     }, error => {
-      this.logger.error(this, 'Error occurred when retrieving subscriptions. Error : ' + this.errorService.handleError(error).message);
+      const formattedError = this.errorService.handleError(error);
+      this.logger.error(this, 'Error occurred when retrieving subscriptions. Error : ' + formattedError.message);
+      this.feedbackService.notifyError(formattedError);
     });
   }
 
@@ -99,7 +106,9 @@ export class UserSubscriptionsListComponent extends RefreshableListComponent<For
         this.refreshList(this.formatData());
       }
     }, (error) => {
+      const formattedError = this.errorService.handleError(error);
       this.logger.error(this, 'Error occurred when retrieving groups. Error : ' + this.errorService.handleError(error).message);
+      this.feedbackService.notifyError(formattedError);
     });
   }
 

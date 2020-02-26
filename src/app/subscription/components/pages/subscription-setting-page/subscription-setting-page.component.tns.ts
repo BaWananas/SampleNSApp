@@ -5,6 +5,7 @@ import {IMobileAnimationService, MobileAnimationService, TapAnimation} from '@ar
 import {GroupService, HttpError, HttpErrorService} from '@arhs/core';
 import {AuthenticationService} from '@src/app/authentication/services/implementations/authentication.service';
 import {LoggerService} from '@src/app/shared/services/implementations/logger.service';
+import {FeedbackService} from '@src/app/feedback/services/implementations/feedback.service';
 
 @Component({
     selector: 'app-subscription-setting-page',
@@ -19,8 +20,9 @@ export class SubscriptionSettingPageComponent extends SubscriptionSettingPageCom
                 authenticationService: AuthenticationService,
                 groupService: GroupService,
                 logger: LoggerService,
-                errorService: HttpErrorService) {
-        super(authenticationService, groupService, logger, errorService);
+                errorService: HttpErrorService,
+                feedbackService: FeedbackService) {
+        super(authenticationService, groupService, logger, errorService, feedbackService);
         page.actionBarHidden = true;
         this.animationService = animationService;
     }

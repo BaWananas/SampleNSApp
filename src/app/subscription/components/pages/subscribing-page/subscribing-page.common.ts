@@ -2,6 +2,7 @@ import {HttpError, IHttpErrorService, ISubscriptionService} from '@arhs/core';
 import {IAuthenticationService} from '@src/app/authentication/services/IAuthenticationService';
 import {ILoggerService} from '@src/app/shared/services/ILoggerService';
 import {EventEmitter} from '@angular/core';
+import {IFeedbackService} from '@src/app/feedback/services/IFeedbackService';
 
 export abstract class SubscribingPageCommon {
 
@@ -10,7 +11,8 @@ export abstract class SubscribingPageCommon {
     protected constructor(protected subscriptionService: ISubscriptionService,
                           protected authenticationService: IAuthenticationService,
                           protected errorService: IHttpErrorService,
-                          protected loggerService: ILoggerService) {
+                          protected loggerService: ILoggerService,
+                          protected feedbackService: IFeedbackService) {
     }
 
     protected subscribe(groupId: number): void {
@@ -20,25 +22,30 @@ export abstract class SubscribingPageCommon {
                 this.subscriptionService.subscribe(groupId, this.authenticationService.getAuthenticatedUserId()).subscribe((value1) => {
                     if (value1) {
                         this.loggerService.debug(this, 'Successfully subscribed to group.');
+                        this.feedbackService.notifySuccess('Successfully subscribed to group !');
                         this.postSubscribe(true, groupId);
                     } else {
                         this.loggerService.error(this, 'Error occurred during subscribing.');
+                        this.feedbackService.notifyError(new Error('Error occurred during subscribing.'));
                         this.postSubscribe(false, groupId);
                     }
                 }, error => {
                     const formattedError = this.errorService.handleError(error);
                     this.loggerService.error(this, 'Error occurred during subscription. Error : ' + formattedError.message);
                     this.loggerService.error(this, formattedError.debugMessage);
+                    this.feedbackService.notifyError(formattedError);
                     this.postSubscribe(false, groupId, formattedError);
                 });
             } else {
                 this.loggerService.warn(this, 'Subscription rejected, are you already subscribed ?');
+                this.feedbackService.notifyWarning('Subscription rejected, are you already subscribed ?');
                 this.postSubscribe(false, groupId);
             }
         }, error => {
             const formattedError = this.errorService.handleError(error);
             this.loggerService.error(this, 'Error occurred during checking if already subscribed. Error : ' + formattedError.message);
             this.loggerService.error(this, formattedError.debugMessage);
+            this.feedbackService.notifyError(formattedError);
             this.postSubscribe(false, groupId, formattedError);
         });
     }

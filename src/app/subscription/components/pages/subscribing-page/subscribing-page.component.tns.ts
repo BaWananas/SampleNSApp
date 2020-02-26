@@ -5,6 +5,7 @@ import {HttpError, HttpErrorService, SubscriptionService} from '@arhs/core';
 import {AuthenticationService} from '@src/app/authentication/services/implementations/authentication.service';
 import {LoggerService} from '@src/app/shared/services/implementations/logger.service';
 import {IMobileAnimationService, MobileAnimationService, TapAnimation} from '@arhs/ui';
+import {FeedbackService} from '@src/app/feedback/services/implementations/feedback.service';
 
 @Component({
   selector: 'app-subscribing-page',
@@ -20,8 +21,9 @@ export class SubscribingPageComponent extends SubscribingPageCommon implements O
               authenticationService: AuthenticationService,
               errorService: HttpErrorService,
               loggerService: LoggerService,
-              animationService: MobileAnimationService) {
-    super(subscriptionService, authenticationService, errorService, loggerService);
+              animationService: MobileAnimationService,
+              feedbackService: FeedbackService) {
+    super(subscriptionService, authenticationService, errorService, loggerService, feedbackService);
     page.actionBarHidden = true;
     this.animationService = animationService;
   }
