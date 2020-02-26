@@ -17,7 +17,6 @@ export class AppComponent {
   constructor(private httpService: HttpService, private routerExtensions: RouterExtensions) {
     httpService.rootUrl = 'http://10.0.2.2:8080/';
     AppComponent.hideAndroidStatusBar();
-
     on('resume', (args: ApplicationEventData) => {
       if (args.android) {
         AppComponent.hideAndroidStatusBar();

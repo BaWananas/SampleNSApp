@@ -1,5 +1,6 @@
 <ActionBar title="Menu" color="white">
-    <NavigationButton class="fas text-left" icon="font://&#xf0c9;" ios.position="left" (tap)="toggleSideDrawer()"></NavigationButton>
+    <ActionItem class="fas" android:visibility="hidden" ios.position="left" icon="font://&#xf0c9;" (tap)="toggleSideDrawer()"></ActionItem>
+    <NavigationButton ios:visibility="hidden" class="fas text-left" icon="font://&#xf0c9;" ios.position="left" (tap)="toggleSideDrawer()"></NavigationButton>
 </ActionBar>
 <RadSideDrawer #sideDrawer>
     <GridLayout rows="auto, *" tkDrawerContent class="primary sidedrawer-left">
