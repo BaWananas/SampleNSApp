@@ -1,7 +1,7 @@
 import {Routes} from '@angular/router';
 import {NotFoundComponent} from '@src/app/shared/components/http/not-found/not-found.component';
 import {HomeComponent} from '@src/app/root/components/home/home.component';
-import {AppComponent} from '@src/app/root/components/app/app.component.tns';
+import {AppComponent} from '@src/app/root/components/app/app.component';
 
 export const componentDeclarations: any[] = [
     AppComponent,

@@ -8,8 +8,8 @@ import {IMobileAnimationService, MobileAnimationService, TapAnimation} from '@ar
 import {RadSideDrawerComponent} from 'nativescript-ui-sidedrawer/angular';
 import {environment} from '@src/environments/environment';
 import {SessionService} from '@src/app/root/services/implementation/session.service.tns';
-import {IAuthenticationService} from '@src/app/authentication/services/IAuthenticationService';
 import {AuthenticationService} from '@src/app/authentication/services/implementations/authentication.service';
+import {AppCommon} from '@src/app/root/components/app/app.common';
 
 @Component({
   selector: 'app-root',
@@ -18,10 +18,10 @@ import {AuthenticationService} from '@src/app/authentication/services/implementa
       './app.component.css',
   ]
 })
-export class AppComponent implements OnInit {
+export class AppComponent extends AppCommon implements OnInit {
 
   private animationService: IMobileAnimationService;
-  private authenticationService: IAuthenticationService;
+
   @ViewChild('sideDrawer', {static: true}) sideDrawer: RadSideDrawerComponent;
 
   constructor(page: Page,
@@ -30,8 +30,8 @@ export class AppComponent implements OnInit {
               private sessionService: SessionService,
               animationSrv: MobileAnimationService,
               authenticationService: AuthenticationService) {
+    super(authenticationService);
     this.animationService = animationSrv;
-    this.authenticationService = authenticationService;
     httpService.rootUrl = 'http://10.0.2.2:8080/';
 
     AppComponent.hideAndroidStatusBar();
@@ -71,13 +71,5 @@ export class AppComponent implements OnInit {
 
   public animateButtons(event: GestureEventData): void {
     this.animationService.animate<TapAnimation>(event.view, TapAnimation);
-  }
-
-  public isOnSecuredPage(): boolean {
-    if (this.authenticationService.getAuthenticatedUserId() === -1) {
-      return true;
-    } else {
-      return false;
-    }
   }
 }

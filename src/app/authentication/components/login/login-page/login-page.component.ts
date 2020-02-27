@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {LoginPageCommon} from '@src/app/authentication/components/login/login-page/login-page.common';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -8,7 +9,7 @@ import {LoginPageCommon} from '@src/app/authentication/components/login/login-pa
 })
 export class LoginPageComponent extends LoginPageCommon implements OnInit {
 
-  constructor() {
+  constructor(private router: Router) {
     super();
   }
 
@@ -16,6 +17,7 @@ export class LoginPageComponent extends LoginPageCommon implements OnInit {
   }
 
   onSubmit(): void {
+    this.router.navigate(['home']);
   }
 
 }

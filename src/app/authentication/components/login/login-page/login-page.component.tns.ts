@@ -12,8 +12,8 @@ import {SessionService} from '@src/app/root/services/implementation/session.serv
 })
 export class LoginPageComponent extends LoginPageCommon implements OnInit {
 
-  constructor(private routerExtensions: RouterExtensions, private sessionService: SessionService) {
-    super();
+  constructor(private routerExtensions: RouterExtensions, sessionService: SessionService) {
+    super(sessionService);
   }
 
   ngOnInit() {

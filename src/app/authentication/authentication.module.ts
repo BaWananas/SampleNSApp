@@ -3,6 +3,8 @@ import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {componentDeclarations, routes} from '@src/app/authentication/authentication.common';
 import {ReactiveFormsModule} from '@angular/forms';
+import {MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule} from '@angular/material';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 @NgModule({
     declarations: [
@@ -11,7 +13,12 @@ import {ReactiveFormsModule} from '@angular/forms';
     imports: [
         CommonModule,
         RouterModule.forChild(routes),
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatButtonModule,
+        FontAwesomeModule
     ],
     exports: [
         RouterModule

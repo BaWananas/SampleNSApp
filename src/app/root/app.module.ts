@@ -7,6 +7,8 @@ import {SharedModule} from '@src/app/shared/shared.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AuthenticationModule} from '@src/app/authentication/authentication.module';
 import {componentDeclarations} from '@src/app/root/app.common';
+import {MatRippleModule, MatToolbarModule} from '@angular/material';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 @NgModule({
     declarations: [
@@ -23,6 +25,9 @@ import {componentDeclarations} from '@src/app/root/app.common';
 
         // Must be specified at the end.
         AppRoutingModule,
+        MatToolbarModule,
+        FontAwesomeModule,
+        MatRippleModule,
     ],
     providers: [],
     bootstrap: [AppComponent],
