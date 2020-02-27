@@ -15,15 +15,13 @@ import {FeedbackService} from '@src/app/feedback/services/implementations/feedba
 export class SubscriptionSettingPageComponent extends SubscriptionSettingPageCommon implements OnInit {
     private animationService: IMobileAnimationService;
 
-    constructor(private page: Page,
-                animationService: MobileAnimationService,
+    constructor(animationService: MobileAnimationService,
                 authenticationService: AuthenticationService,
                 groupService: GroupService,
                 logger: LoggerService,
                 errorService: HttpErrorService,
                 feedbackService: FeedbackService) {
         super(authenticationService, groupService, logger, errorService, feedbackService);
-        page.actionBarHidden = true;
         this.animationService = animationService;
     }
 

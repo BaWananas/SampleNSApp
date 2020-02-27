@@ -14,7 +14,11 @@ export class AuthenticationService implements IAuthenticationService {
     return this.userId;
   }
 
-  setAuthenticatedUserId(id: number): void {
+  signIn(id: number): void {
     this.userId = id;
+  }
+
+  signOut(): void {
+    this.userId = -1;
   }
 }

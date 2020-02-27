@@ -16,15 +16,13 @@ export class SubscribingPageComponent extends SubscribingPageCommon implements O
 
   private animationService: IMobileAnimationService;
 
-  constructor(page: Page,
-              subscriptionService: SubscriptionService,
+  constructor(subscriptionService: SubscriptionService,
               authenticationService: AuthenticationService,
               errorService: HttpErrorService,
               loggerService: LoggerService,
               animationService: MobileAnimationService,
               feedbackService: FeedbackService) {
     super(subscriptionService, authenticationService, errorService, loggerService, feedbackService);
-    page.actionBarHidden = true;
     this.animationService = animationService;
   }
 

@@ -3,16 +3,13 @@ import {AppComponent} from '@src/app/root/components/app/app.component';
 import {AppRoutingModule} from '@src/app/root/app-routing.module';
 import {SharedModule} from '@src/app/shared/shared.module';
 import {AuthenticationModule} from '@src/app/authentication/authentication.module';
-import {HubComponent} from '@src/app/root/components/hub/hub.component';
 import {NativeScriptUISideDrawerModule} from 'nativescript-ui-sidedrawer/angular';
-import {HomeComponent} from '@src/app/root/components/home/home.component';
 import {NativeScriptFormsModule, NativeScriptHttpClientModule, NativeScriptModule} from '@nativescript/angular';
+import {componentDeclarations} from '@src/app/root/app.common';
 
 @NgModule({
     declarations: [
-        AppComponent,
-        HubComponent,
-        HomeComponent
+        componentDeclarations
     ],
     imports: [
         NativeScriptModule,

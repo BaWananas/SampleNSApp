@@ -1,8 +1,12 @@
 import {Routes} from '@angular/router';
-import {NotFoundComponent} from '@src/app/shared/components/not-found/not-found.component';
+import {NotFoundComponent} from '@src/app/shared/components/http/not-found/not-found.component';
 import {HomeComponent} from '@src/app/root/components/home/home.component';
+import {AppComponent} from '@src/app/root/components/app/app.component.tns';
 
-export const componentDeclarations: any[] = [];
+export const componentDeclarations: any[] = [
+    AppComponent,
+    HomeComponent
+];
 
 export const providerDeclarations: any[] = [];
 

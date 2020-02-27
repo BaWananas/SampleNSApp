@@ -26,7 +26,7 @@ export class LoginFormComponent implements OnInit {
   }
 
   public submitForm(): void {
-    this.authenticationService.setAuthenticatedUserId(this.loginForm.value.userId);
+    this.authenticationService.signIn(this.loginForm.value.userId);
     this.submit.emit(true);
   }
 

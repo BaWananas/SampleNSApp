@@ -29,7 +29,6 @@ export class SubscriptionHomeComponent extends SubscriptionHomeCommon implements
                 loggerService: LoggerService,
                 feedbackService: FeedbackService) {
         super(subscriptionService, authenticationService, loggerService, errorService, feedbackService);
-        page.actionBarHidden = true;
         page.on('navigatingTo', this.onNavigatedTo, this);
         this.animationService = animationService;
     }
@@ -52,12 +51,12 @@ export class SubscriptionHomeComponent extends SubscriptionHomeCommon implements
     }
 
     public navToSubscribing(): void {
-        this.routerExtensions.navigate(['hub/subscription/subscribing'],
+        this.routerExtensions.navigate(['/subscription/subscribing'],
             {clearHistory: false, transition: environment.defaultRoutingTransition});
     }
 
     public navToSettings(): void {
-        this.routerExtensions.navigate(['hub/subscription/settings'], {
+        this.routerExtensions.navigate(['/subscription/settings'], {
             clearHistory: false,
             transition: environment.defaultRoutingTransition
         });
