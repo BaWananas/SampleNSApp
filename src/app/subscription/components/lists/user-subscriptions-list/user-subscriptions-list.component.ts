@@ -44,8 +44,11 @@ export class UserSubscriptionsListComponent extends RefreshableListComponent<For
   /* Formatted data for table */
   tableColumns: ITableColumn[];
   tableOptions: ITableOptions<FormattedSubscription>;
-  data: FormattedSubscription[] = [];
+  data: FormattedSubscription[] = undefined;
   onRefresh: EventEmitter<FormattedSubscription[]> = new EventEmitter<FormattedSubscription[]>();
+
+  /* API requests state (for waiting components) */
+  isAPIRequestFinalized = false;
 
   constructor(authenticationService: AuthenticationService,
               subscriptionService: SubscriptionService,
@@ -85,20 +88,28 @@ export class UserSubscriptionsListComponent extends RefreshableListComponent<For
   }
 
   private getUserSubscription(): void {
+    this.isAPIRequestFinalized = false;
+    this.data = undefined;
     this.logger.debug(this, 'Retrieving user subscriptions.');
     this.subscriptionService.getSubscriptionsByUserId(this.authenticationService.getAuthenticatedUserId()).subscribe(value => {
       if (value._embedded) {
         this.userSubscriptions = value._embedded.items;
         this.getGroups();
+      } else {
+        this.userSubscriptions = [];
+        this.data = [];
       }
     }, error => {
       const formattedError = this.errorService.handleError(error);
       this.logger.error(this, 'Error occurred when retrieving subscriptions. Error : ' + formattedError.message);
       this.feedbackService.notifyError(formattedError);
+    }, () => {
+      this.isAPIRequestFinalized = true;
     });
   }
 
   private getGroups(): void {
+    this.isAPIRequestFinalized = false;
     this.logger.debug(this, 'Retrieving groups.');
     this.groupService.getAllGroups().subscribe(value => {
       if (value._embedded) {
@@ -109,6 +120,8 @@ export class UserSubscriptionsListComponent extends RefreshableListComponent<For
       const formattedError = this.errorService.handleError(error);
       this.logger.error(this, 'Error occurred when retrieving groups. Error : ' + this.errorService.handleError(error).message);
       this.feedbackService.notifyError(formattedError);
+    }, () => {
+      this.isAPIRequestFinalized = true;
     });
   }
 
@@ -135,14 +148,14 @@ export class UserSubscriptionsListComponent extends RefreshableListComponent<For
 
   protected addElement(element: FormattedSubscription | number): void {
     if (this.userSubscriptions) {
-      this.data.push((isNumber(element) ? this.convertToElement(element) : element));
+      this.data.push((isNumber(element) ? this.convertToElement(element as number) : element as FormattedSubscription));
       this.refreshList(this.data);
     }
   }
 
   protected removeElement(element: FormattedSubscription | number): void {
     if (this.userSubscriptions) {
-      this.data.splice(this.findIndex((isNumber(element) ? element : this.convertToId(element))), 1);
+      this.data.splice(this.findIndex((isNumber(element) ? element as number : this.convertToId(element as FormattedSubscription))), 1);
       this.refreshList(this.data);
     }
   }

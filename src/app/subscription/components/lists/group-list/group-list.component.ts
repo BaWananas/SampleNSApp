@@ -7,7 +7,6 @@ import {
     CollectionModel,
     Group,
     GroupService,
-    HttpError,
     HttpErrorService,
     IGroupService,
     IHttpErrorService,
@@ -44,13 +43,14 @@ export class GroupListComponent extends RefreshableListComponent<Group, number> 
     groups: Group[] = undefined;
     userSubscriptions: Subscription[] = [];
 
-    /**
-     * Required vars for library table test.
-     */
+    /* Required vars for library table test. */
     refreshEvent: EventEmitter<Group[]> = new EventEmitter<[]>();
     tableOptions: ITableOptions<Group> = null;
     tableColumns: ITableColumn[] = null;
     selectedItems: Group[] = [];
+
+    /* API requests states (for waiting components) */
+    isAPIRequestFinalized = false;
 
     constructor(groupService: GroupService,
                 loggerService: LoggerService,
@@ -76,6 +76,7 @@ export class GroupListComponent extends RefreshableListComponent<Group, number> 
     }
 
     public getGroups() {
+        this.isAPIRequestFinalized = false;
         this.groups = undefined;
         this.loggerService.debug(this, 'Retrieving groups.');
 
@@ -90,10 +91,13 @@ export class GroupListComponent extends RefreshableListComponent<Group, number> 
             const formattedError = this.errorService.handleError(error);
             this.loggerService.error(this, 'Error during retrieving groups from API. Error: ' + formattedError);
             this.feedbackService.notifyError(formattedError);
+        }, () => {
+            this.isAPIRequestFinalized = true;
         });
     }
 
     public getUserSubscriptions(): void {
+        this.isAPIRequestFinalized = false;
         this.userSubscriptions = [];
         this.loggerService.debug(this, 'Retrieving user subscriptions.');
 
@@ -108,6 +112,8 @@ export class GroupListComponent extends RefreshableListComponent<Group, number> 
             const formattedError = this.errorService.handleError(error);
             this.loggerService.error(this, 'Error during retrieving user subscriptions from API. Error: ' + formattedError);
             this.feedbackService.notifyError(formattedError);
+        }, () => {
+            this.isAPIRequestFinalized = true;
         });
     }
 
@@ -165,14 +171,14 @@ export class GroupListComponent extends RefreshableListComponent<Group, number> 
 
     protected removeElement(group: Group | number): void {
         if (this.groups) {
-            this.groups.splice(this.findIndex(isNumber(group) ? group : this.convertToId(group)), 1);
+            this.groups.splice(this.findIndex(isNumber(group) ? group as number : this.convertToId(group as Group)), 1);
             this.refreshList(this.groups);
         }
     }
 
     protected addElement(group: Group | number): void {
         if (this.groups) {
-            this.groups.push((isNumber(group) ? this.convertToElement(group) : group));
+            this.groups.push((isNumber(group) ? this.convertToElement(group as number) : group as Group));
             this.refreshList(this.groups);
         }
     }

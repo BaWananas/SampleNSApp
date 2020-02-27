@@ -2,6 +2,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {componentDeclarations} from '@src/app/shared/shared.common';
 import {ReactiveFormsModule} from '@angular/forms';
+import {MatProgressSpinnerModule} from '@angular/material';
 
 
 @NgModule({
@@ -10,7 +11,8 @@ import {ReactiveFormsModule} from '@angular/forms';
     ],
     imports: [
         CommonModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        MatProgressSpinnerModule
     ],
     exports: [
         componentDeclarations,

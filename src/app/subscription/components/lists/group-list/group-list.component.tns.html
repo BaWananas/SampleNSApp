@@ -1,6 +1,11 @@
 <StackLayout height="100%" width="100%" orientation="vertical">
-    <Label *ngIf="groups && groups.length == 0" class="text-center body dark font-italic" text="No group found."></Label>
-    <ng-container *ngIf="tableColumns && tableOptions && groups && groups.length > 0">
-        <arhs-ui-basic-table [columns]="tableColumns" [details]="elementDetails" [data]="groups" [options]="tableOptions" [refreshEvent]="refreshEvent" (onSelect)="onSelectedItem($event)"></arhs-ui-basic-table>
+    <ng-container *ngIf="!isAPIRequestFinalized">
+        <app-http-waiting></app-http-waiting>
+    </ng-container>
+    <ng-container *ngIf="isAPIRequestFinalized">
+        <Label *ngIf="groups && groups.length == 0" class="text-center body dark font-italic" text="No group found."></Label>
+        <ng-container *ngIf="tableColumns && tableOptions && groups && groups.length > 0">
+            <arhs-ui-basic-table [columns]="tableColumns" [details]="elementDetails" [data]="groups" [options]="tableOptions" [refreshEvent]="refreshEvent" (onSelect)="onSelectedItem($event)"></arhs-ui-basic-table>
+        </ng-container>
     </ng-container>
 </StackLayout>

@@ -36,7 +36,6 @@ export class FeedbackService implements IFeedbackService {
       feedbackReference: feedbackReference + uniqueId,
       feedback: feedback
     });
-    console.log('Feedback stored');
     return feedbackReference + uniqueId;
   }
 
@@ -45,8 +44,6 @@ export class FeedbackService implements IFeedbackService {
     if (index >= 0) {
       this.feedbackList.splice(index, 1);
     }
-    console.log('Feedback removed.');
-    console.log('Remaining feedback: ' + this.feedbackList.length);
   }
 
   private getFeedbackIndex(feedbackReference: string): number {
