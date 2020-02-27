@@ -91,6 +91,7 @@ export class GroupListComponent extends RefreshableListComponent<Group, number> 
             const formattedError = this.errorService.handleError(error);
             this.loggerService.error(this, 'Error during retrieving groups from API. Error: ' + formattedError);
             this.feedbackService.notifyError(formattedError);
+            this.isAPIRequestFinalized = true;
         }, () => {
             this.isAPIRequestFinalized = true;
         });
@@ -112,6 +113,7 @@ export class GroupListComponent extends RefreshableListComponent<Group, number> 
             const formattedError = this.errorService.handleError(error);
             this.loggerService.error(this, 'Error during retrieving user subscriptions from API. Error: ' + formattedError);
             this.feedbackService.notifyError(formattedError);
+            this.isAPIRequestFinalized = true;
         }, () => {
             this.isAPIRequestFinalized = true;
         });

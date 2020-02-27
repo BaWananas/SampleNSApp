@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {environment} from '@src/environments/environment';
 import {GestureEventData} from '@nativescript/core';
-import {IMobileAnimationService, MobileAnimationService} from '@arhs/ui';
+import {IMobileAnimationService, MobileAnimationService, TapAnimation} from '@arhs/ui';
 import {RadSideDrawerComponent} from 'nativescript-ui-sidedrawer/angular';
 import { RouterExtensions } from '@nativescript/angular';
 
@@ -42,7 +42,7 @@ export class HubComponent implements OnInit {
   }
 
   public animateButtons(event: GestureEventData): void {
-    //this.animationService.animate<TapAnimation>(event.view, TapAnimation);
+    this.animationService.animate<TapAnimation>(event.view, TapAnimation);
   }
 
 }

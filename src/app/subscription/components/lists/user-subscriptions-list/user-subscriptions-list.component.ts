@@ -103,6 +103,7 @@ export class UserSubscriptionsListComponent extends RefreshableListComponent<For
       const formattedError = this.errorService.handleError(error);
       this.logger.error(this, 'Error occurred when retrieving subscriptions. Error : ' + formattedError.message);
       this.feedbackService.notifyError(formattedError);
+      this.isAPIRequestFinalized = true;
     }, () => {
       this.isAPIRequestFinalized = true;
     });
@@ -120,6 +121,7 @@ export class UserSubscriptionsListComponent extends RefreshableListComponent<For
       const formattedError = this.errorService.handleError(error);
       this.logger.error(this, 'Error occurred when retrieving groups. Error : ' + this.errorService.handleError(error).message);
       this.feedbackService.notifyError(formattedError);
+      this.isAPIRequestFinalized = true;
     }, () => {
       this.isAPIRequestFinalized = true;
     });
