@@ -4,6 +4,7 @@ import {GroupService, HttpError, HttpErrorService} from '@arhs/core';
 import {AuthenticationService} from '@src/app/authentication/services/implementations/authentication.service';
 import {LoggerService} from '@src/app/shared/services/implementations/logger.service';
 import {FeedbackService} from '@src/app/feedback/services/implementations/feedback.service';
+import {faTrashAlt} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-subscription-setting-page',
@@ -11,6 +12,8 @@ import {FeedbackService} from '@src/app/feedback/services/implementations/feedba
   styleUrls: ['./subscription-setting-page.component.css']
 })
 export class SubscriptionSettingPageComponent extends SubscriptionSettingPageCommon  implements OnInit {
+
+  public deleteIcon = faTrashAlt;
 
   constructor(authenticationService: AuthenticationService,
               groupService: GroupService,

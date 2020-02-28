@@ -1,6 +1,6 @@
 <RadSideDrawer #sideDrawer>
     <GridLayout rows="auto, *" tkDrawerContent class="primary sidedrawer-left">
-        <ng-container *ngIf="!isOnSecuredPage()">
+        <ng-container *ngIf="!isAuthenticated()">
             <StackLayout row="0" class="sidedrawer-header primary">
                 <StackLayout horizontalAlignment="center" marginTop="20">
                     <Label class="text-center far" text="&#xf007;" fontSize="100"></Label>
@@ -21,7 +21,7 @@
                 <StackLayout class="hr primary" borderColor="white"></StackLayout>
             </StackLayout>
         </ng-container>
-        <ng-container *ngIf="isOnSecuredPage()">
+        <ng-container *ngIf="isAuthenticated()">
             <StackLayout row="0" class="sidedrawer-header primary">
                 <StackLayout horizontalAlignment="center" marginTop="20" marginBottom="20">
                     <Label class="text-center fas" text="&#xf057;" fontSize="100" color="red"></Label>

@@ -18,6 +18,9 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
+        MatToolbarModule,
+        FontAwesomeModule,
+        MatRippleModule,
 
         // Custom modules
         SharedModule,
@@ -25,9 +28,6 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
         // Must be specified at the end.
         AppRoutingModule,
-        MatToolbarModule,
-        FontAwesomeModule,
-        MatRippleModule,
     ],
     providers: [],
     bootstrap: [AppComponent],

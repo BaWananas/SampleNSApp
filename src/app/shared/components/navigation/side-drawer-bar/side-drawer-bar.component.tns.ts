@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {SessionService} from '@src/app/root/services/implementation/session.service.tns';
+import {SessionService} from '@src/app/shared/services/implementations/session.service';
 import {RadSideDrawerComponent} from 'nativescript-ui-sidedrawer/angular';
 
 @Component({

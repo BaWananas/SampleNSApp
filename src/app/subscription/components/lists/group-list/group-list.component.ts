@@ -20,6 +20,8 @@ import {RefreshableListComponent} from '@src/app/shared/models/RefreshableListCo
 import {isNumber} from 'util';
 import {IFeedbackService} from '@src/app/feedback/services/IFeedbackService';
 import {FeedbackService} from '@src/app/feedback/services/implementations/feedback.service';
+import {ISessionService} from '@src/app/shared/services/ISessionService';
+import {SessionService} from '@src/app/shared/services/implementations/sessionService/session.service';
 
 @Component({
     selector: 'app-groups-list',
@@ -37,8 +39,8 @@ export class GroupListComponent extends RefreshableListComponent<Group, number> 
     private errorService: IHttpErrorService;
     private loggerService: ILoggerService;
     private tableFactory: ITableFactory;
-    private authenticationService: IAuthenticationService;
     private feedbackService: IFeedbackService;
+    private sessionService: ISessionService;
 
     groups: Group[] = undefined;
     userSubscriptions: Subscription[] = [];
@@ -57,16 +59,16 @@ export class GroupListComponent extends RefreshableListComponent<Group, number> 
                 errorService: HttpErrorService,
                 subscriptionService: SubscriptionService,
                 tableFactory: TableFactoryService,
-                authenticationService: AuthenticationService,
-                feedbackService: FeedbackService) {
+                feedbackService: FeedbackService,
+                sessionService: SessionService) {
         super();
         this.groupService = groupService;
         this.loggerService = loggerService;
         this.errorService = errorService;
         this.subscriptionService = subscriptionService;
         this.tableFactory = tableFactory;
-        this.authenticationService = authenticationService;
         this.feedbackService = feedbackService;
+        this.sessionService = sessionService;
         this.initList();
     }
 
@@ -102,7 +104,7 @@ export class GroupListComponent extends RefreshableListComponent<Group, number> 
         this.userSubscriptions = [];
         this.loggerService.debug(this, 'Retrieving user subscriptions.');
 
-        this.subscriptionService.getSubscriptionsByUserId(this.authenticationService.getAuthenticatedUserId()).subscribe(value => {
+        this.subscriptionService.getSubscriptionsByUserId(this.sessionService.user).subscribe(value => {
             if (value._embedded) {
                 this.userSubscriptions = value._embedded.items;
             } else {
@@ -127,7 +129,7 @@ export class GroupListComponent extends RefreshableListComponent<Group, number> 
     }
 
     private initList(): void {
-        this.tableOptions = this.tableFactory.getOptions<Group>(false, true, false, true, [10, 1, 5, 25], true, true, true);
+        this.tableOptions = this.tableFactory.getOptions<Group>(false, true, false, true, [10, 1, 5, 25], true, false, false);
         this.tableColumns = this.tableFactory.getColumns([
             '#ID', 'Name', 'Description'
         ], [

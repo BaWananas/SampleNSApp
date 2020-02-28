@@ -1,0 +1,24 @@
+<div class="container py-4">
+    <div class="row mb-4">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="mr-2">
+                    <fa-icon [icon]="navToSubscribingIcon" size="2x" class="btn btn-link text-decoration-none text-success" [routerLink]="['subscribing']"></fa-icon>
+                </div>
+                <div class="mr-auto">
+                    <fa-icon [icon]="navToSubscriptionSettingsIcon" size="2x" class="btn btn-link text-decoration-none" [routerLink]="['settings']"></fa-icon>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <app-user-subscriptions-list [removeElementFromList]="unsubscriptionEvent" [elementDetails]="elementDetails"></app-user-subscriptions-list>
+        </div>
+        <ng-template #elementDetails let-element>
+            <div class="w-100 h-100">
+                <fa-icon [icon]="unsubscribeIcon" size="1x" class="btn btn-link text-decoration-none text-danger" (click)="unsubscribe(element.groupId)"></fa-icon>
+            </div>
+        </ng-template>
+    </div>
+</div>

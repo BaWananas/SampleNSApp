@@ -16,8 +16,8 @@ export class LoginFormComponent implements OnInit {
 
   private authenticationService: IAuthenticationService;
   public loginForm = this.form.group({
-    id: ['', Validators.required],
-    password: ['', Validators.required],
+    id: [''],
+    password: [''],
     userId: ['0', Validators.required]
   });
   public passwordHidden = true;

@@ -1,4 +1,4 @@
-<mat-toolbar *ngIf="!isOnSecuredPage()" color="primary">
+<mat-toolbar *ngIf="isAuthenticated()" color="primary">
     <mat-toolbar-row>
         <fa-icon [icon]="angularIcon" size="2x" class="text-primary mr-auto"></fa-icon>
         <a [routerLink]="['home']" class="text-decoration-none text-white"><fa-icon [icon]="homeIcon" size="1x" class="mr-1"></fa-icon><span class="d-md-inline d-none">ome</span></a>

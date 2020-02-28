@@ -1,25 +1,25 @@
 import {HttpError, IHttpErrorService, ISubscriptionService} from '@arhs/core';
-import {IAuthenticationService} from '@src/app/authentication/services/IAuthenticationService';
 import {ILoggerService} from '@src/app/shared/services/ILoggerService';
 import {EventEmitter} from '@angular/core';
 import {IFeedbackService} from '@src/app/feedback/services/IFeedbackService';
+import {ISessionService} from '@src/app/shared/services/ISessionService';
 
 export abstract class SubscriptionHomeCommon {
 
     public unsubscriptionEvent: EventEmitter<number> = new EventEmitter<number>();
 
     protected constructor(protected subscriptionService: ISubscriptionService,
-                          protected authenticationService: IAuthenticationService,
                           protected loggerService: ILoggerService,
                           protected errorService: IHttpErrorService,
-                          protected feedbackService: IFeedbackService) {
+                          protected feedbackService: IFeedbackService,
+                          protected sessionService: ISessionService) {
     }
 
     protected unsubscribe(groupId: number): void {
         this.loggerService.debug(this, 'Unsubscribe to group ' + groupId + '.');
-        this.subscriptionService.isSubscribedToGroup(groupId, this.authenticationService.getAuthenticatedUserId()).subscribe((value) => {
+        this.subscriptionService.isSubscribedToGroup(groupId, this.sessionService.user).subscribe((value) => {
             if (value) {
-                this.subscriptionService.unsubscribeToGroup(groupId, this.authenticationService.getAuthenticatedUserId()).subscribe(
+                this.subscriptionService.unsubscribeToGroup(groupId, this.sessionService.user).subscribe(
                     () => {
                         this.loggerService.debug(this, 'Successfully unsubscribed to group ' + groupId + '.');
                         this.feedbackService.notifySuccess('Successfully unsubscribed to group !');

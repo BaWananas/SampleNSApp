@@ -1,17 +1,17 @@
-<form [formGroup]="groupCreationForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="groupCreationForm" (ngSubmit)="onSubmit()" class="text-white">
     <div class="form-group">
         <label for="groupCreationFormName">Name :</label>
-        <input class="form-control" id="groupCreationFormName" type="text" formControlName="groupName">
+        <input class="form-control bg-transparent text-primary" id="groupCreationFormName" type="text" placeholder="e.g. Football team A" required formControlName="name">
     </div>
 
     <div class="form-group">
         <label for="groupCreationFormDescription">Description :</label>
-        <textarea class="form-control" id="groupCreationFormDescription" type="textarea" formControlName="groupDescription"></textarea>
+        <textarea class="form-control bg-transparent text-primary" id="groupCreationFormDescription" type="textarea" placeholder="e.g. My fabulous football team..." formControlName="description"></textarea>
     </div>
 
     <div class="form-group">
         <label for="groupCreationFormAssociationId">Association ID :</label>
-        <input class="form-control" id="groupCreationFormAssociationId" type="number" formControlName="associationId">
+        <input class="form-control bg-transparent text-primary" id="groupCreationFormAssociationId" type="number" required placeholder="e.g. 5" formControlName="associationId">
     </div>
 
     <button class="btn btn-primary" type="submit" [disabled]="!groupCreationForm.valid">Submit</button>

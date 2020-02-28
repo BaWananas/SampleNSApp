@@ -1,10 +1,13 @@
-<div class="container-fluid d-flex mb-4">
-    <div *ngIf="backUrl || homeUrl" class="col-md-5 col-sm mr-auto">
-        <button *ngIf="backUrl" class="btn btn-outline-primary mr-3" (click)="goBack()">Back</button>
-        <button *ngIf="homeUrl" class="btn btn-outline-warning" (click)="goHome()">Home</button>
-    </div>
-    <div [class.text-left]="homeUrl || backUrl" [class.text-center]="!homeUrl || !backUrl" class="col">
-        <h2 *ngIf="title">{{title}}</h2>
-        <h5 *ngIf="subTitle" class="muted font-italic">{{subTitle}}</h5>
+<div class="container-fluid mb-4 text-white px-0">
+    <div class="row">
+        <div class="col-md col-12 mr-md-auto text-md-left mb-md-0 mb-4">
+            <fa-icon *ngIf="backUrl" [icon]="backIcon" size="2x" class="btn btn-link text-decoration-none mr-2" (click)="goBack()"></fa-icon>
+            <fa-icon *ngIf="homeUrl" [icon]="homeIcon" size="2x" class="btn btn-link text-decoration-none text-warning" (click)="goHome()"></fa-icon>
+        </div>
+        <div class="col-md col-12 ml-auto">
+            <div class="d-flex align-items-center justify-content-md-end justify-content-center">
+                <h2 *ngIf="title">{{title}}<h5 *ngIf="subTitle" class="d-inline text-primary text-muted font-italic"> / {{subTitle}}</h5></h2>
+            </div>
+        </div>
     </div>
 </div>
