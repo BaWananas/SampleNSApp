@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {HttpService} from '@arhs/core';
 import {GestureEventData, isAndroid, Page} from '@nativescript/core';
 import * as statusBar from 'nativescript-status-bar';
@@ -50,8 +50,7 @@ export class AppComponent extends AppCommon implements OnInit {
 
   ngOnInit(): void {
     super.ngOnInit();
-    // @ts-ignore Because IntelliJ was kinda stupid "sometimes".
-    this.sessionService.sideDrawer = this.sideDrawer;
+    (<SessionService>this.sessionService).sideDrawer = this.sideDrawer;
   }
 
   public navToHome(): void {

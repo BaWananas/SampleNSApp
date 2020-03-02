@@ -1,5 +1,4 @@
 export interface ISessionService {
-
     user: number;
 
     loadPersistentData(): void;

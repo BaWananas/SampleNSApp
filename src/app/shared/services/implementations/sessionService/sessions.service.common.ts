@@ -3,7 +3,7 @@ import {ISessionService} from '@src/app/shared/services/ISessionService';
 
 export abstract class SessionsServiceCommon implements ISessionService {
 
-    user = -1;
+    public user = -1;
 
     protected constructor(protected logger: ILoggerService) {
     }

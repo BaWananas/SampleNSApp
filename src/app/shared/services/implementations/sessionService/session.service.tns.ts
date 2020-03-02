@@ -11,17 +11,19 @@ export class SessionService extends SessionsServiceCommon {
 
   public sideDrawer: RadSideDrawerComponent;
 
-  constructor(authenticationService: AuthenticationService,
-              logger: LoggerService) {
+  constructor(logger: LoggerService) {
     super(logger);
   }
 
   loadLocalUser(): void {
+    // TODO
   }
 
   storeLocalUser(): void {
+    // TODO
   }
 
   clearLocalUser(): void {
+    // TODO
   }
 }
