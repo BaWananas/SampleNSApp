@@ -5,6 +5,7 @@ import {SharedModule} from '@src/app/shared/shared.module';
 import {componentDeclarations} from '@src/app/subscription/subscription.common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ArhsUiModule} from '@arhs/ui';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import {ArhsUiModule} from '@arhs/ui';
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
+    FontAwesomeModule,
 
     // Custom modules
     SharedModule,

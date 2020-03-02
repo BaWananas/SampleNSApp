@@ -3,6 +3,8 @@ import {LoginPageCommon} from '@src/app/authentication/components/login/login-pa
 import {environment} from '@src/environments/environment';
 import {exit} from 'nativescript-exit';
 import {RouterExtensions} from '@nativescript/angular';
+import {SessionService} from '@src/app/shared/services/implementations/sessionService/session.service';
+
 
 @Component({
   selector: 'app-login-page',
@@ -11,11 +13,12 @@ import {RouterExtensions} from '@nativescript/angular';
 })
 export class LoginPageComponent extends LoginPageCommon implements OnInit {
 
-  constructor(private routerExtensions: RouterExtensions) {
-    super();
+  constructor(private routerExtensions: RouterExtensions, sessionService: SessionService) {
+    super(sessionService);
   }
 
   ngOnInit() {
+    (<SessionService>this.sessionService).sideDrawer.gesturesEnabled = false;
   }
 
   public exit(): void {
@@ -23,7 +26,8 @@ export class LoginPageComponent extends LoginPageCommon implements OnInit {
   }
 
   public onSubmit(): void {
-    this.routerExtensions.navigate(['hub'], {clearHistory: true, transition: environment.defaultRoutingTransition});
+    this.routerExtensions.navigate(['home'], {clearHistory: true, transition: environment.defaultRoutingTransition});
+    (<SessionService>this.sessionService).sideDrawer.gesturesEnabled = true;
   }
 
 }

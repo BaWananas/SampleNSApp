@@ -1,3 +1,15 @@
-<div class="w-100 h-100">
-    <arhs-ui-basic-table [details]="elementDetails" [columns]="tableColumns" [options]="tableOptions" [data]="data" [refreshEvent]="onRefresh" (onSelect)="onSelect($event)"></arhs-ui-basic-table>
+<div class="container-fluid">
+    <div class="row">
+        <div *ngIf="!isAPIRequestFinalized" class="col-12 mx-auto">
+            <app-http-waiting></app-http-waiting>
+        </div>
+    </div>
+    <div class="row">
+        <div *ngIf="data && data.length == 0" class="col-12 text-center">
+            <h6 class="text-white font-italic text-muted">Nothing to show.</h6>
+        </div>
+        <div class="col-12" *ngIf="data && isAPIRequestFinalized && data.length > 0">
+            <arhs-ui-basic-table [details]="elementDetails" [columns]="tableColumns" [options]="tableOptions" [data]="data" [refreshEvent]="onRefresh" (onSelect)="onSelect($event)"></arhs-ui-basic-table>
+        </div>
+    </div>
 </div>

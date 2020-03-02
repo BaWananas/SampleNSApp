@@ -8,6 +8,7 @@ import {HttpError, HttpErrorService, SubscriptionService} from '@arhs/core';
 import {AuthenticationService} from '@src/app/authentication/services/implementations/authentication.service';
 import {LoggerService} from '@src/app/shared/services/implementations/logger.service';
 import {FeedbackService} from '@src/app/feedback/services/implementations/feedback.service';
+import {SessionService} from '@src/app/shared/services/implementations/sessionService/session.service';
 
 @Component({
     selector: 'app-subscription-home',
@@ -24,12 +25,11 @@ export class SubscriptionHomeComponent extends SubscriptionHomeCommon implements
                 animationService: MobileAnimationService,
                 private routerExtensions: RouterExtensions,
                 subscriptionService: SubscriptionService,
-                authenticationService: AuthenticationService,
                 errorService: HttpErrorService,
                 loggerService: LoggerService,
-                feedbackService: FeedbackService) {
-        super(subscriptionService, authenticationService, loggerService, errorService, feedbackService);
-        page.actionBarHidden = true;
+                feedbackService: FeedbackService,
+                sessionService: SessionService) {
+        super(subscriptionService, loggerService, errorService, feedbackService, sessionService);
         page.on('navigatingTo', this.onNavigatedTo, this);
         this.animationService = animationService;
     }
@@ -52,12 +52,12 @@ export class SubscriptionHomeComponent extends SubscriptionHomeCommon implements
     }
 
     public navToSubscribing(): void {
-        this.routerExtensions.navigate(['hub/subscription/subscribing'],
+        this.routerExtensions.navigate(['/subscription/subscribing'],
             {clearHistory: false, transition: environment.defaultRoutingTransition});
     }
 
     public navToSettings(): void {
-        this.routerExtensions.navigate(['hub/subscription/settings'], {
+        this.routerExtensions.navigate(['/subscription/settings'], {
             clearHistory: false,
             transition: environment.defaultRoutingTransition
         });

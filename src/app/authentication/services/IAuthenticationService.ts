@@ -1,4 +1,4 @@
 export interface IAuthenticationService {
-    setAuthenticatedUserId(id: number): void;
-    getAuthenticatedUserId(): number;
+    signIn(id: number): void;
+    signOut(): void;
 }

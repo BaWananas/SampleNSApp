@@ -5,6 +5,7 @@ import {SharedModule} from '@src/app/shared/shared.module';
 import {ReactiveFormsModule} from '@angular/forms';
 import {ArhsUiModuleTns} from '@arhs/ui';
 import {NativeScriptCommonModule, NativeScriptFormsModule} from '@nativescript/angular';
+import {CommonModule} from '@angular/common';
 
 @NgModule({
     declarations: [
@@ -14,6 +15,7 @@ import {NativeScriptCommonModule, NativeScriptFormsModule} from '@nativescript/a
         componentDeclarations,
     ],
     imports: [
+        CommonModule,
         NativeScriptCommonModule,
         ReactiveFormsModule,
         NativeScriptFormsModule,

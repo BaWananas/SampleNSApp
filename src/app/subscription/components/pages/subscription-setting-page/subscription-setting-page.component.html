@@ -1,1 +1,32 @@
-<p>subscription-setting-page works!</p>
+<div class="container py-4">
+    <div class="row mb-4">
+        <div class="col-12 px-0">
+            <app-title-nav-bar title="Subscriptions" subTitle="Settings" backUrl="/subscription"></app-title-nav-bar>
+        </div>
+    </div>
+    <div class="row">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 text-left text-white">
+                    <h3>Delete a group :</h3>
+                </div>
+                <div class="col-12 my-4">
+                    <app-groups-list [refreshEntireList]="createGroupEvent" [removeElementFromList]="deleteGroupEvent" [elementDetails]="elementDetails"></app-groups-list>
+                    <ng-template #elementDetails let-element>
+                        <div class="w-100 h-100">
+                            <fa-icon [icon]="deleteIcon" size="1x" class="btn btn-link text-decoration-none text-danger" (click)="deleteGroup(element.id)"></fa-icon>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 text-left text-white">
+                    <h3>Create a group :</h3>
+                </div>
+                <div class="col-12 my-4">
+                    <app-group-creation-form (createEvent)="createGroup($event)"></app-group-creation-form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

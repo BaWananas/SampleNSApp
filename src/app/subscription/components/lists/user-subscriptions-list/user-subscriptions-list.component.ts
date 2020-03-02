@@ -18,6 +18,8 @@ import {RefreshableListComponent} from '@src/app/shared/models/RefreshableListCo
 import {isNumber} from 'util';
 import {IFeedbackService} from '@src/app/feedback/services/IFeedbackService';
 import {FeedbackService} from '@src/app/feedback/services/implementations/feedback.service';
+import {ISessionService} from '@src/app/shared/services/ISessionService';
+import {SessionService} from '@src/app/shared/services/implementations/sessionService/session.service';
 
 @Component({
   selector: 'app-user-subscriptions-list',
@@ -29,13 +31,13 @@ export class UserSubscriptionsListComponent extends RefreshableListComponent<For
   @Input() elementDetails: TemplateRef<any>;
 
   /* Services */
-  private authenticationService: IAuthenticationService;
   private subscriptionService: ISubscriptionService;
   private groupService: IGroupService;
   private tableFactory: ITableFactory;
   private logger: ILoggerService;
   private errorService: IHttpErrorService;
   private feedbackService: IFeedbackService;
+  private sessionService: ISessionService;
 
   /* Data from API */
   groups: Group[] = [];
@@ -50,21 +52,21 @@ export class UserSubscriptionsListComponent extends RefreshableListComponent<For
   /* API requests state (for waiting components) */
   isAPIRequestFinalized = false;
 
-  constructor(authenticationService: AuthenticationService,
-              subscriptionService: SubscriptionService,
+  constructor(subscriptionService: SubscriptionService,
               tableFactory: TableFactoryService,
               logger: LoggerService,
               errorService: HttpErrorService,
               groupService: GroupService,
-              feedbackService: FeedbackService) {
+              feedbackService: FeedbackService,
+              sessionService: SessionService) {
     super();
-    this.authenticationService = authenticationService;
     this.subscriptionService = subscriptionService;
     this.tableFactory = tableFactory;
     this.logger = logger;
     this.errorService = errorService;
     this.groupService = groupService;
     this.feedbackService = feedbackService;
+    this.sessionService = sessionService;
     this.initList();
   }
 
@@ -84,14 +86,14 @@ export class UserSubscriptionsListComponent extends RefreshableListComponent<For
     ], [
         'groupName', 'date'
     ]);
-    this.tableOptions = this.tableFactory.getOptions(false, true, false, true, undefined, false, false, false);
+    this.tableOptions = this.tableFactory.getOptions(false, true, false, true, [10, 1, 5, 25], false, false, false);
   }
 
   private getUserSubscription(): void {
     this.isAPIRequestFinalized = false;
     this.data = undefined;
     this.logger.debug(this, 'Retrieving user subscriptions.');
-    this.subscriptionService.getSubscriptionsByUserId(this.authenticationService.getAuthenticatedUserId()).subscribe(value => {
+    this.subscriptionService.getSubscriptionsByUserId(this.sessionService.user).subscribe(value => {
       if (value._embedded) {
         this.userSubscriptions = value._embedded.items;
         this.getGroups();

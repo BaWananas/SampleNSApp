@@ -1,8 +1,10 @@
-<div class="container-fluid bg-primary py-3">
-    <div class="col mx-auto text-left">
-        <h1 class="text-white">{{title}}</h1>
-    </div>
-</div>
-<div class="container-fluid mx-auto my-4">
-    <router-outlet></router-outlet>
-</div>
+<mat-toolbar *ngIf="isAuthenticated()" color="primary">
+    <mat-toolbar-row>
+        <fa-icon [icon]="angularIcon" size="2x" class="text-primary mr-auto"></fa-icon>
+        <a [routerLink]="['home']" class="text-decoration-none text-white"><fa-icon [icon]="homeIcon" size="1x" class="mr-1"></fa-icon><span class="d-md-inline d-none">ome</span></a>
+        <span class="mx-2"></span>
+        <a [routerLink]="['subscription']" class="text-decoration-none text-white"><fa-icon [icon]="subscriptionIcon" size="1x" class="mr-1"></fa-icon><span class="d-md-inline d-none">ubscriptions</span></a>
+        <fa-icon class="btn btn-link ml-auto text-danger" [icon]="logOutIcon" size="2x" (click)="logout()"></fa-icon>
+    </mat-toolbar-row>
+</mat-toolbar>
+<router-outlet></router-outlet>

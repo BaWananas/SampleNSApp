@@ -2,12 +2,11 @@ import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angul
 import {FormBuilder, Validators} from '@angular/forms';
 import {AuthenticationService} from '@src/app/authentication/services/implementations/authentication.service';
 import {IAuthenticationService} from '@src/app/authentication/services/IAuthenticationService';
-import {faCheck, faUserSecret} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   encapsulation: ViewEncapsulation.None,
   selector: 'app-login-form',
-  templateUrl: './login-form.component.html',
+  templateUrl: './login-form.component.tns.html',
   styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent implements OnInit {
@@ -20,9 +19,6 @@ export class LoginFormComponent implements OnInit {
     password: [''],
     userId: ['0', Validators.required]
   });
-  public passwordHidden = true;
-  public loginIcon = faCheck;
-  public userIcon = faUserSecret;
 
   constructor(private form: FormBuilder, authenticationService: AuthenticationService) {
     this.authenticationService = authenticationService;

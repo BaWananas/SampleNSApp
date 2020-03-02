@@ -1,1 +1,33 @@
-<p>login-form works!</p>
+<form [formGroup]="loginForm" (ngSubmit)="submitForm()">
+    <div class="container-fluid p-4 text-white">
+        <div class="row">
+            <fa-icon [icon]="userIcon" size="10x" class="mx-auto text-white-50 mb-5"></fa-icon>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="outline" color="primary" class="w-100">
+                <mat-label class="text-white">Account</mat-label>
+                <input matInput placeholder="email@email.com" formControlName="id" type="email">
+                <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="outline" color="primary" class="w-100">
+                <mat-label class="text-white">Enter your password</mat-label>
+                <input matInput [type]="passwordHidden ? 'password' : 'text'" formControlName="password">
+                <button type="button" mat-icon-button matSuffix (click)="passwordHidden = !passwordHidden" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="passwordHidden">
+                    <mat-icon>{{passwordHidden ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field appearance="outline" color="primary" class="w-100">
+                <mat-label class="text-white">#ID</mat-label>
+                <input matInput required placeholder="#ID" formControlName="userId" type="number">
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <button class="btn btn-link text-decoration-none mx-auto text-success" type="submit" [disabled]="!loginForm.valid"><fa-icon [icon]="loginIcon" size="2x"></fa-icon></button>
+        </div>
+    </div>
+</form>
+

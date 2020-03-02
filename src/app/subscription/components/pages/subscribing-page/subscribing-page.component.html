@@ -1,1 +1,17 @@
-<p>subscribing-page works!</p>
+<div class="container py-4">
+    <div class="row mb-4">
+        <div class="col-12 px-0">
+            <app-title-nav-bar title="Subscriptions" subTitle="Subscribe" [homeUrl]="'/subscription'" [backUrl]="'/subscription'"></app-title-nav-bar>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <app-groups-list [removeElementFromList]="subscribingEvent" [onlyIfSubscribed]="false" [elementDetails]="elementDetails"></app-groups-list>
+            <ng-template #elementDetails let-element>
+                <div class="w-100 h-100">
+                    <fa-icon [icon]="subscribeIcon" size="1x" class="btn btn-link text-success" (click)="subscribe(element.id)"></fa-icon>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

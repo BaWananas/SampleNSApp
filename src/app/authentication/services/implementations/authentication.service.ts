@@ -1,20 +1,26 @@
 import { Injectable } from '@angular/core';
 import {IAuthenticationService} from '@src/app/authentication/services/IAuthenticationService';
+import {ISessionService} from '@src/app/shared/services/ISessionService';
+import {SessionService} from '@src/app/shared/services/implementations/sessionService/session.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService implements IAuthenticationService {
 
-  private userId = -1;
+  private sessionService: ISessionService;
 
-  constructor() { }
-
-  getAuthenticatedUserId(): number {
-    return this.userId;
+  constructor(sessionService: SessionService) {
+    this.sessionService = sessionService;
   }
 
-  setAuthenticatedUserId(id: number): void {
-    this.userId = id;
+  signIn(id: number): void {
+    this.sessionService.user = id;
+    this.sessionService.storeLocalUser();
+  }
+
+  signOut(): void {
+    this.sessionService.user = -1;
+    this.sessionService.clearLocalUser();
   }
 }

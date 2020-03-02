@@ -1,6 +1,7 @@
+<app-side-drawer-bar></app-side-drawer-bar>
 <GridLayout rows="auto, *" padding="15">
     <StackLayout row="0">
-        <app-title-nav-bar [title]="'Subscription'" [subTitle]="'Subscribing'" [backEnabled]="true" [homeUrls]="['hub/subscription']"></app-title-nav-bar>
+        <app-title-nav-bar [title]="'Subscription'" [subTitle]="'Subscribing'" [backEnabled]="true" [homeUrls]="['/subscription']"></app-title-nav-bar>
     </StackLayout>
     <StackLayout row="1">
         <app-groups-list [removeElementFromList]="subscribingEvent" [onlyIfSubscribed]="false" [elementDetails]="elementDetails"></app-groups-list>

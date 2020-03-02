@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {Page} from '@nativescript/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -8,8 +7,7 @@ import {Page} from '@nativescript/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(page: Page) {
-    page.actionBarHidden = true;
+  constructor() {
   }
 
   ngOnInit() {

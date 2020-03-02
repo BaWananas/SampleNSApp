@@ -1,9 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {TitleNavBarCommon} from '@src/app/shared/components/title-nav-bar/title-nav-bar.common';
 import {RouterExtensions} from '@nativescript/angular';
 import {environment} from '@src/environments/environment';
 import {GestureEventData} from '@nativescript/core';
 import {IMobileAnimationService, MobileAnimationService, TapAnimation} from '@arhs/ui';
+import {TitleNavBarCommon} from '@src/app/shared/components/navigation/title-nav-bar/title-nav-bar.common';
 
 @Component({
   selector: 'app-title-nav-bar',

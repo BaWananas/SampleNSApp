@@ -3,23 +3,24 @@ import {IAuthenticationService} from '@src/app/authentication/services/IAuthenti
 import {ILoggerService} from '@src/app/shared/services/ILoggerService';
 import {EventEmitter} from '@angular/core';
 import {IFeedbackService} from '@src/app/feedback/services/IFeedbackService';
+import {ISessionService} from '@src/app/shared/services/ISessionService';
 
 export abstract class SubscribingPageCommon {
 
     public subscribingEvent: EventEmitter<number> = new EventEmitter<number>();
 
     protected constructor(protected subscriptionService: ISubscriptionService,
-                          protected authenticationService: IAuthenticationService,
                           protected errorService: IHttpErrorService,
                           protected loggerService: ILoggerService,
-                          protected feedbackService: IFeedbackService) {
+                          protected feedbackService: IFeedbackService,
+                          protected sessionService: ISessionService) {
     }
 
     protected subscribe(groupId: number): void {
         this.loggerService.debug(this, 'Subscribe to group ' + groupId);
-        this.subscriptionService.isSubscribedToGroup(groupId, this.authenticationService.getAuthenticatedUserId()).subscribe(value => {
+        this.subscriptionService.isSubscribedToGroup(groupId, this.sessionService.user).subscribe(value => {
             if (!value) {
-                this.subscriptionService.subscribe(groupId, this.authenticationService.getAuthenticatedUserId()).subscribe((value1) => {
+                this.subscriptionService.subscribe(groupId, this.sessionService.user).subscribe((value1) => {
                     if (value1) {
                         this.loggerService.debug(this, 'Successfully subscribed to group.');
                         this.feedbackService.notifySuccess('Successfully subscribed to group !');

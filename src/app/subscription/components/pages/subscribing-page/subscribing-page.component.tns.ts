@@ -6,6 +6,7 @@ import {AuthenticationService} from '@src/app/authentication/services/implementa
 import {LoggerService} from '@src/app/shared/services/implementations/logger.service';
 import {IMobileAnimationService, MobileAnimationService, TapAnimation} from '@arhs/ui';
 import {FeedbackService} from '@src/app/feedback/services/implementations/feedback.service';
+import {SessionService} from '@src/app/shared/services/implementations/sessionService/session.service';
 
 @Component({
   selector: 'app-subscribing-page',
@@ -16,15 +17,13 @@ export class SubscribingPageComponent extends SubscribingPageCommon implements O
 
   private animationService: IMobileAnimationService;
 
-  constructor(page: Page,
-              subscriptionService: SubscriptionService,
-              authenticationService: AuthenticationService,
+  constructor(subscriptionService: SubscriptionService,
               errorService: HttpErrorService,
               loggerService: LoggerService,
               animationService: MobileAnimationService,
-              feedbackService: FeedbackService) {
-    super(subscriptionService, authenticationService, errorService, loggerService, feedbackService);
-    page.actionBarHidden = true;
+              feedbackService: FeedbackService,
+              sessionService: SessionService) {
+    super(subscriptionService, errorService, loggerService, feedbackService, sessionService);
     this.animationService = animationService;
   }
 
