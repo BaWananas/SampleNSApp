@@ -1,0 +1,6 @@
+<StackLayout verticalAlignment="top" height="50%">
+    <form [formGroup]="throwErrorForm">
+        <TextField class="body" width="70%" borderColor="#d3d3d3" borderWidth="3" textAlignment="center" borderRadius="5" backgroundColor="white" formControlName="message" hint="Error message"></TextField>
+    </form>
+    <Button width="100" text="Throw an error" class="-primary -rounded-sm text-uppercase body m-t-20" color="red" (tap)="throwError()" [isEnabled]="throwErrorForm.valid"></Button>
+</StackLayout>

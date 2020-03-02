@@ -6,6 +6,7 @@ import {AuthenticationModule} from '@src/app/authentication/authentication.modul
 import {NativeScriptUISideDrawerModule} from 'nativescript-ui-sidedrawer/angular';
 import {NativeScriptFormsModule, NativeScriptHttpClientModule, NativeScriptModule} from '@nativescript/angular';
 import {componentDeclarations} from '@src/app/root/app.common';
+import {SentryModule} from 'nativescript-sentry/angular';
 
 @NgModule({
     declarations: [
@@ -16,6 +17,7 @@ import {componentDeclarations} from '@src/app/root/app.common';
         NativeScriptFormsModule,
         NativeScriptHttpClientModule,
         NativeScriptUISideDrawerModule,
+        SentryModule.forRoot({dsn: 'https://5cd21f6df44849fca78bb7178af2debe@sentry.io/3462100'}),
 
         // Custom modules
         SharedModule,

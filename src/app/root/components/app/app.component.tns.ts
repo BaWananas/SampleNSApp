@@ -10,6 +10,7 @@ import {environment} from '@src/environments/environment';
 import {AuthenticationService} from '@src/app/authentication/services/implementations/authentication.service';
 import {AppCommon} from '@src/app/root/components/app/app.common';
 import {SessionService} from '@src/app/shared/services/implementations/sessionService/session.service';
+import {Sentry} from 'nativescript-sentry';
 
 @Component({
   selector: 'app-root',

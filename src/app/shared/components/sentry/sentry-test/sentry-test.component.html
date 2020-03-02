@@ -1,0 +1,8 @@
+<form [formGroup]="throwErrorForm" (ngSubmit)="throwError()" class="text-white">
+    <div class="form-group">
+        <label for="message">Error message :</label>
+        <input class="form-control bg-transparent text-primary" id="message" type="text" placeholder="e.g. Accidentally touch a button and break my App." required formControlName="message">
+    </div>
+
+    <button class="btn btn-primary" type="submit" [disabled]="!throwErrorForm.valid">Submit</button>
+</form>

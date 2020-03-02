@@ -4,6 +4,7 @@ import {componentDeclarations} from '@src/app/shared/shared.common';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MatProgressSpinnerModule} from '@angular/material';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import { SentryTestComponent } from '@src/app/shared/components/sentry/sentry-test/sentry-test.component';
 
 
 @NgModule({
