@@ -50,6 +50,8 @@
     "nativescript-imagepicker": "^7.1.0",
     "nativescript-status-bar": "^1.2.0",
     "nativescript-ui-sidedrawer": "latest",
+    "ngx-clipboard": "^12.3.1",
+    "popper.js": "^1.16.0",
     "reflect-metadata": "~0.1.12",
     "rxjs": "~6.4.0",
     "tns-core-modules": "^6.4.1",

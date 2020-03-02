@@ -94,8 +94,6 @@ export class GroupListComponent extends RefreshableListComponent<Group, number> 
             this.loggerService.error(this, 'Error during retrieving groups from API. Error: ' + formattedError);
             this.feedbackService.notifyError(formattedError);
             this.isAPIRequestFinalized = true;
-        }, () => {
-            this.isAPIRequestFinalized = true;
         });
     }
 

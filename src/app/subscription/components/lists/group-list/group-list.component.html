@@ -5,11 +5,13 @@
         </div>
     </div>
     <div class="row">
-        <div *ngIf="groups && groups.length == 0" class="col-12 text-center">
-            <h6 class="text-white font-italic text-muted">Nothing to show.</h6>
-        </div>
-        <div class="col-12" *ngIf="groups && isAPIRequestFinalized && groups.length > 0">
-            <arhs-ui-basic-table [columns]="tableColumns" [details]="elementDetails" [data]="groups" [options]="tableOptions" [refreshEvent]="refreshEvent" (onSelect)="onSelectedItem($event)"></arhs-ui-basic-table>
-        </div>
+        <ng-container *ngIf="isAPIRequestFinalized">
+            <div *ngIf="groups && groups.length == 0" class="col-12 text-center">
+                <h6 class="text-white font-italic text-muted">Nothing to show.</h6>
+            </div>
+            <div class="col-12" *ngIf="tableColumns && tableOptions && groups && groups.length > 0">
+                <arhs-ui-basic-table [columns]="tableColumns" [details]="elementDetails" [data]="groups" [options]="tableOptions" [refreshEvent]="refreshEvent" (onSelect)="onSelectedItem($event)"></arhs-ui-basic-table>
+            </div>
+        </ng-container>
     </div>
 </div>
