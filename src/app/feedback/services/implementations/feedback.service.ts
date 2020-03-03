@@ -4,25 +4,45 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {HttpError} from '@arhs/core';
 import {ClipboardService} from 'ngx-clipboard';
 
+/**
+ * Implementation of {@link IFeedbackService} for web platform.
+ */
 @Injectable({
   providedIn: 'root'
 })
-// TODO
 export class FeedbackService implements IFeedbackService {
 
+  /**
+   * Constructor.
+   * @param snackBar Angular material snackbar.
+   * @param clipboard Ngx-Clipboard library.
+   */
   constructor(private snackBar: MatSnackBar,
               private clipboard: ClipboardService) {
   }
 
+  /**
+   * Refers to {@link IFeedbackService}
+   * @param feedbackReference
+   */
   hideFeedbackNotification(feedbackReference: string): void {
     this.snackBar.dismiss();
   }
 
+  /**
+   * Refers to {@link IFeedbackService}
+   * @param options
+   */
   notifyCustom(options: any): string {
     this.snackBar.open(options.title, options.message, options);
     return undefined;
   }
 
+  /**
+   * Refers to {@link IFeedbackService}
+   * @param error
+   * @param expendable
+   */
   notifyError(error: any, expendable?: boolean): string {
     if (error && error instanceof HttpError) {
       const formattedError = <HttpError>error;
@@ -52,6 +72,11 @@ export class FeedbackService implements IFeedbackService {
     return undefined;
   }
 
+  /**
+   * Refers to {@link IFeedbackService}
+   * @param title
+   * @param message
+   */
   notifyInfo(title: string, message?: string): string {
     this.snackBar.open(title, (message) ? message : 'OK', {
       horizontalPosition: 'right',
@@ -63,6 +88,11 @@ export class FeedbackService implements IFeedbackService {
     return undefined;
   }
 
+  /**
+   * Refers to {@link IFeedbackService}
+   * @param title
+   * @param message
+   */
   notifySuccess(title: string, message?: string): string {
     this.snackBar.open(title, (message) ? message : 'OK', {
       horizontalPosition: 'right',
@@ -75,6 +105,11 @@ export class FeedbackService implements IFeedbackService {
     return undefined;
   }
 
+  /**
+   * Refers to {@link IFeedbackService}
+   * @param title
+   * @param message
+   */
   notifyWarning(title: string, message?: string): string {
     this.snackBar.open(title, (message) ? message : 'OK', {
       horizontalPosition: 'right',
@@ -85,10 +120,6 @@ export class FeedbackService implements IFeedbackService {
       duration: 1500,
     });
     return undefined;
-  }
-
-  private copyToClipboard(val: string): void {
-
   }
 
 }

@@ -3,26 +3,52 @@ import {Feedback, FeedbackShowOptions} from 'nativescript-feedback';
 import {HttpError} from '@arhs/core';
 import {IFeedbackService} from '@src/app/feedback/services/IFeedbackService';
 
+/**
+ * Implementation of IFeedbackService for mobile platforms.
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class FeedbackService implements IFeedbackService {
 
+  /**
+   * Constructor.
+   */
   constructor() {
   }
 
-  private static defaultDurationMs = 4000;
+  /**
+   * A default feedback duration.
+   */
+  private static defaultDurationMs = 1500;
 
+  /**
+   * Current feedback list.
+   */
   private feedbackList: {feedbackReference: string, feedback: Feedback}[] = [];
 
+  /**
+   * Create an empty feedback.
+   * @returns Empty feedback.
+   */
   private static createFeedback(): Feedback {
     return new Feedback();
   }
 
+  /**
+   * TODO
+   * Expand the feedback for displaying error details.
+   * @param error
+   */
   private static expendError(error: HttpError): void {
     // TODO
   }
 
+  /**
+   * Store a new feedback in the feedback list.
+   * @param feedback The feedback.
+   * @returns Unique id for the feedback.
+   */
   private storeFeedback(feedback: Feedback): string {
     this.enforceSingleFeedback();
     let uniqueId = 0;
@@ -39,6 +65,10 @@ export class FeedbackService implements IFeedbackService {
     return feedbackReference + uniqueId;
   }
 
+  /**
+   * Remove a feedback from the feedback list.
+   * @param feedbackReference The unique id of the feedback.
+   */
   private removeFeedback(feedbackReference: string): void {
     const index = this.getFeedbackIndex(feedbackReference);
     if (index >= 0) {
@@ -46,6 +76,11 @@ export class FeedbackService implements IFeedbackService {
     }
   }
 
+  /**
+   * Get the index of a feedback by using his unique ID.
+   * @param feedbackReference Unique feedback ID.
+   * @returns number The index; return -1 if feedback wasn't found
+   */
   private getFeedbackIndex(feedbackReference: string): number {
     let index = -1;
     this.feedbackList.forEach((value, i) => {
@@ -56,12 +91,19 @@ export class FeedbackService implements IFeedbackService {
     return index;
   }
 
+  /**
+   * Make sure that only one feedback can exist at the same time.
+   */
   private enforceSingleFeedback(): void {
     this.feedbackList.forEach(value => {
       this.hideFeedbackNotification(value.feedbackReference);
     });
   }
 
+  /**
+   * Refers to {@link IFeedbackService}
+   * @param options
+   */
   notifyCustom(options: FeedbackShowOptions): string {
     const feedback = FeedbackService.createFeedback();
     const feedbackReference = this.storeFeedback(feedback);
@@ -75,6 +117,11 @@ export class FeedbackService implements IFeedbackService {
     return feedbackReference;
   }
 
+  /**
+   * Refers to {@link IFeedbackService}
+   * @param error
+   * @param expendable
+   */
   notifyError(error: any, expendable?: boolean): string {
     const feedback = FeedbackService.createFeedback();
     const feedbackReference = this.storeFeedback(feedback);
@@ -106,6 +153,11 @@ export class FeedbackService implements IFeedbackService {
     return feedbackReference;
   }
 
+  /**
+   * Refers to {@link IFeedbackService}
+   * @param title
+   * @param message
+   */
   notifyInfo(title: string, message?: string): string {
     const feedback = FeedbackService.createFeedback();
     const feedbackReference = this.storeFeedback(feedback);
@@ -121,6 +173,11 @@ export class FeedbackService implements IFeedbackService {
     return feedbackReference;
   }
 
+  /**
+   * Refers to {@link IFeedbackService}
+   * @param title
+   * @param message
+   */
   notifySuccess(title: string, message?: string): string {
     const feedback = FeedbackService.createFeedback();
     const feedbackReference = this.storeFeedback(feedback);
@@ -136,6 +193,11 @@ export class FeedbackService implements IFeedbackService {
     return feedbackReference;
   }
 
+  /**
+   * Refers to {@link IFeedbackService}
+   * @param title
+   * @param message
+   */
   notifyWarning(title: string, message?: string): string {
     const feedback = FeedbackService.createFeedback();
     const feedbackReference = this.storeFeedback(feedback);
@@ -151,6 +213,10 @@ export class FeedbackService implements IFeedbackService {
     return feedbackReference;
   }
 
+  /**
+   * Refers to {@link IFeedbackService}
+   * @param feedbackReference
+   */
   hideFeedbackNotification(feedbackReference: string): void {
     const index = this.getFeedbackIndex(feedbackReference);
     if (index >= 0) {

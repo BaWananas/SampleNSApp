@@ -1,39 +1,48 @@
-import {Component, EventEmitter, OnInit, Output, ViewEncapsulation} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {FormBuilder} from '@angular/forms';
 import {AuthenticationService} from '@src/app/authentication/services/implementations/authentication.service';
-import {IAuthenticationService} from '@src/app/authentication/services/IAuthenticationService';
 import {faCheck, faUserSecret} from '@fortawesome/free-solid-svg-icons';
+import {LoginFormCommon} from '@src/app/authentication/components/login/login-form/login-form-common';
 
+/**
+ * LoginForm component for web platform.
+ */
 @Component({
-  encapsulation: ViewEncapsulation.None,
-  selector: 'app-login-form',
-  templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.css']
+    encapsulation: ViewEncapsulation.None,
+    selector: 'app-login-form',
+    templateUrl: './login-form.component.html',
+    styleUrls: ['./login-form.component.css']
 })
-export class LoginFormComponent implements OnInit {
+export class LoginFormComponent extends LoginFormCommon implements OnInit {
 
-  @Output() formSubmit: EventEmitter<boolean> = new EventEmitter<boolean>();
+    /**
+     * Is the password was currently hidden ?
+     */
+    public passwordHidden = true;
+    /**
+     * Login icon.
+     */
+    public loginIcon = faCheck;
+    /**
+     * User account icon.
+     */
+    public userIcon = faUserSecret;
 
-  private authenticationService: IAuthenticationService;
-  public loginForm = this.form.group({
-    id: [''],
-    password: [''],
-    userId: ['0', Validators.required]
-  });
-  public passwordHidden = true;
-  public loginIcon = faCheck;
-  public userIcon = faUserSecret;
+    /**
+     * Constructor.
+     *
+     * Refers to {@link LoginFormCommon}
+     * @param form
+     * @param authenticationService
+     */
+    constructor(private form: FormBuilder, authenticationService: AuthenticationService) {
+        super(form, authenticationService);
+    }
 
-  constructor(private form: FormBuilder, authenticationService: AuthenticationService) {
-    this.authenticationService = authenticationService;
-  }
-
-  ngOnInit() {
-  }
-
-  public submitForm(): void {
-    this.authenticationService.signIn(this.loginForm.value.userId);
-    this.formSubmit.emit(true);
-  }
+    /**
+     * Refers to {@link OnInit}
+     */
+    ngOnInit() {
+    }
 
 }

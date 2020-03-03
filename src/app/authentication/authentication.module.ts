@@ -6,6 +6,9 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule} from '@angular/material';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
+/**
+ * Authentication module of the App.
+ */
 @NgModule({
     declarations: [
         componentDeclarations
