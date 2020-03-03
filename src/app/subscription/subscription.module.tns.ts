@@ -7,6 +7,9 @@ import {ArhsUiModuleTns} from '@arhs/ui';
 import {NativeScriptCommonModule, NativeScriptFormsModule} from '@nativescript/angular';
 import {CommonModule} from '@angular/common';
 
+/**
+ * Subscription module of the App.
+ */
 @NgModule({
     declarations: [
         componentDeclarations,

@@ -1,14 +1,29 @@
 import {HttpError, IHttpErrorService, ISubscriptionService} from '@arhs/core';
-import {IAuthenticationService} from '@src/app/authentication/services/IAuthenticationService';
 import {ILoggerService} from '@src/app/shared/services/ILoggerService';
 import {EventEmitter} from '@angular/core';
 import {IFeedbackService} from '@src/app/feedback/services/IFeedbackService';
 import {ISessionService} from '@src/app/shared/services/ISessionService';
 
+/**
+ * Shared part of the SubscribingPage component.
+ */
 export abstract class SubscribingPageCommon {
 
+    /**
+     * Event used to refresh graphical component.
+     *
+     * Triggered when subscription was effectuated.
+     */
     public subscribingEvent: EventEmitter<number> = new EventEmitter<number>();
 
+    /**
+     * Constructor.
+     * @param subscriptionService Refers to {@link ISubscriptionService}
+     * @param errorService Refers to {@link IHttpErrorService}
+     * @param loggerService Refers to {@link ILoggerService}
+     * @param feedbackService Refers to {@link IFeedbackService}
+     * @param sessionService Refers to {@link ISessionService}
+     */
     protected constructor(protected subscriptionService: ISubscriptionService,
                           protected errorService: IHttpErrorService,
                           protected loggerService: ILoggerService,
@@ -16,6 +31,12 @@ export abstract class SubscribingPageCommon {
                           protected sessionService: ISessionService) {
     }
 
+    /**
+     * Subscribe to a group.
+     * @param groupId ID of the group that the user want to subscribe.
+     *
+     * Call postSubscribe at the end of the request.
+     */
     protected subscribe(groupId: number): void {
         this.loggerService.debug(this, 'Subscribe to group ' + groupId);
         this.subscriptionService.isSubscribedToGroup(groupId, this.sessionService.user).subscribe(value => {
@@ -51,5 +72,11 @@ export abstract class SubscribingPageCommon {
         });
     }
 
+    /**
+     * Action called after a subscription request.
+     * @param succeeds If the subscription succeeds or not.
+     * @param groupId ID of the subscribed group.
+     * @param error An optional error.
+     */
     protected abstract postSubscribe(succeeds: boolean, groupId: number, error?: HttpError): void;
 }

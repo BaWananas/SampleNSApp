@@ -6,6 +6,9 @@ import {SubscribingPageComponent} from '@src/app/subscription/components/pages/s
 import {Routes} from '@angular/router';
 import {SubscriptionSettingPageComponent} from '@src/app/subscription/components/pages/subscription-setting-page/subscription-setting-page.component';
 
+/**
+ * Shared components.
+ */
 export const componentDeclarations: any[] = [
     GroupListComponent,
     GroupCreationFormComponent,
@@ -15,9 +18,15 @@ export const componentDeclarations: any[] = [
     SubscriptionSettingPageComponent,
 ];
 
+/**
+ * Shared providers.
+ */
 export const providerDeclarations: any[] = [
 ];
 
+/**
+ * Shared routes.
+ */
 export const routes: Routes = [
     {path: '', component: SubscriptionHomeComponent},
     {path: 'subscribing', component: SubscribingPageComponent},

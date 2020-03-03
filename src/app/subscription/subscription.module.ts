@@ -7,6 +7,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {ArhsUiModule} from '@arhs/ui';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
+/**
+ * Subscription module of the App.
+ */
 @NgModule({
   declarations: [
       componentDeclarations,

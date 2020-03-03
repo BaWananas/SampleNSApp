@@ -1,4 +1,4 @@
-<form [formGroup]="groupCreationForm" (ngSubmit)="onSubmit()" class="text-white">
+<form [formGroup]="groupCreationForm" (ngSubmit)="submitForm()" class="text-white">
     <div class="form-group">
         <label for="groupCreationFormName">Name :</label>
         <input class="form-control bg-transparent text-primary" id="groupCreationFormName" type="text" placeholder="e.g. Football team A" required formControlName="name">
