@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 
+/**
+ * Home page component.
+ */
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.tns.html',
@@ -7,9 +10,15 @@ import {Component, OnInit} from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  /**
+   * Constructor.
+   */
   constructor() {
   }
 
+  /**
+   * Refers to {@link OnInit}
+   */
   ngOnInit() {
   }
 

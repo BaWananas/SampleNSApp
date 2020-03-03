@@ -3,7 +3,9 @@ import {componentDeclarations} from '@src/app/shared/shared.common';
 import {ReactiveFormsModule} from '@angular/forms';
 import {NativeScriptCommonModule, NativeScriptFormsModule} from '@nativescript/angular';
 
-
+/**
+ * Shared module of the App.
+ */
 @NgModule({
   declarations: [
       componentDeclarations,

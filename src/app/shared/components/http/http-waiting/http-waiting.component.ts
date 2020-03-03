@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 
+/**
+ * Activity indicator.
+ */
 @Component({
   selector: 'app-http-waiting',
   templateUrl: './http-waiting.component.html',
@@ -7,8 +10,14 @@ import {Component, OnInit} from '@angular/core';
 })
 export class HttpWaitingComponent implements OnInit {
 
+  /**
+   * Constructor.
+   */
   constructor() { }
 
+  /**
+   * Refers to {@link OnInit}
+   */
   ngOnInit() {
   }
 

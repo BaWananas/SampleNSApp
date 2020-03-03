@@ -8,6 +8,9 @@ import {NativeScriptFormsModule, NativeScriptHttpClientModule, NativeScriptModul
 import {componentDeclarations} from '@src/app/root/app.common';
 import {SentryModule} from 'nativescript-sentry/angular';
 
+/**
+ * Root module of the application - Mobile version.
+ */
 @NgModule({
     declarations: [
         componentDeclarations

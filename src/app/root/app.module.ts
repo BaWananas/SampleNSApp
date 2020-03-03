@@ -10,7 +10,6 @@ import {componentDeclarations} from '@src/app/root/app.common';
 import {MatRippleModule, MatSnackBarModule, MatToolbarModule} from '@angular/material';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {ClipboardModule} from 'ngx-clipboard';
-
 import * as Sentry from '@sentry/browser';
 
 Sentry.init({
@@ -26,6 +25,9 @@ export class SentryErrorHandler implements ErrorHandler {
     }
 }
 
+/**
+ * Root module of the application - web version.
+ */
 @NgModule({
     declarations: [
         componentDeclarations

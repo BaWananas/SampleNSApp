@@ -10,8 +10,12 @@ import {environment} from '@src/environments/environment';
 import {AuthenticationService} from '@src/app/authentication/services/implementations/authentication.service';
 import {AppCommon} from '@src/app/root/components/app/app.common';
 import {SessionService} from '@src/app/shared/services/implementations/sessionService/session.service';
-import {Sentry} from 'nativescript-sentry';
 
+/**
+ * Root component. Entrance of the App.
+ *
+ * Extends {@link AppCommon}.
+ */
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.tns.html',
@@ -21,10 +25,15 @@ import {Sentry} from 'nativescript-sentry';
 })
 export class AppComponent extends AppCommon implements OnInit {
 
-  private animationService: IMobileAnimationService;
-
-  @ViewChild('sideDrawer', {static: true}) sideDrawer: RadSideDrawerComponent;
-
+  /**
+   * Constructor.
+   * @param page Related page of the component.
+   * @param httpService Service used to Http CRUD operations.
+   * @param routerExtensions Nativescript router.
+   * @param sessionService Service related to user authentication.
+   * @param animationSrv Manage all the animations.
+   * @param authenticationService Service used for sessions and data persistence.
+   */
   constructor(page: Page,
               private httpService: HttpService,
               private routerExtensions: RouterExtensions,
@@ -43,27 +52,36 @@ export class AppComponent extends AppCommon implements OnInit {
     }, this);
   }
 
+  /**
+   * @ignore
+   */
+  private animationService: IMobileAnimationService;
+
+  /**
+   * Side drawer menu.
+   */
+  @ViewChild('sideDrawer', {static: true}) sideDrawer: RadSideDrawerComponent;
+
+  /**
+   * Hide android status Bar.
+   */
   private static hideAndroidStatusBar(): void {
     if (isAndroid) {
       statusBar.hide();
     }
   }
 
+  /**
+   * Refers to {@link OnInit}.
+   */
   ngOnInit(): void {
     super.ngOnInit();
     (<SessionService>this.sessionService).sideDrawer = this.sideDrawer;
   }
 
-  public navToHome(): void {
-    this.routerExtensions.navigate(['home'], {clearHistory: true, transition: environment.defaultRoutingTransition});
-    this.sideDrawer.sideDrawer.closeDrawer();
-  }
-
-  public navToSubscriptions(): void {
-    this.routerExtensions.navigate(['subscription'], {clearHistory: true, transition: environment.defaultRoutingTransition});
-    this.sideDrawer.sideDrawer.closeDrawer();
-  }
-
+  /**
+   * Refers to {@link AppCommon}
+   */
   public logout(): void {
     // Do user session cleanup here
     this.authenticationService.signOut();
@@ -71,6 +89,26 @@ export class AppComponent extends AppCommon implements OnInit {
     this.sideDrawer.sideDrawer.closeDrawer();
   }
 
+  /**
+   * Naviagte to home page.
+   */
+  public navToHome(): void {
+    this.routerExtensions.navigate(['home'], {clearHistory: true, transition: environment.defaultRoutingTransition});
+    this.sideDrawer.sideDrawer.closeDrawer();
+  }
+
+  /**
+   * Navigate to subscription page.
+   */
+  public navToSubscriptions(): void {
+    this.routerExtensions.navigate(['subscription'], {clearHistory: true, transition: environment.defaultRoutingTransition});
+    this.sideDrawer.sideDrawer.closeDrawer();
+  }
+
+  /**
+   * Animate the page buttons.
+   * @param event
+   */
   public animateButtons(event: GestureEventData): void {
     this.animationService.animate<TapAnimation>(event.view, TapAnimation);
   }

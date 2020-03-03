@@ -7,6 +7,11 @@ import {AppCommon} from '@src/app/root/components/app/app.common';
 import {AuthenticationService} from '@src/app/authentication/services/implementations/authentication.service';
 import {SessionService} from '@src/app/shared/services/implementations/sessionService/session.service';
 
+/**
+ * Root component. Entrance of the App.
+ *
+ * Extends {@link AppCommon}.
+ */
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,11 +21,30 @@ import {SessionService} from '@src/app/shared/services/implementations/sessionSe
 })
 export class AppComponent extends AppCommon implements OnInit {
 
+  /**
+   * Icon.
+   */
   angularIcon = faAngular;
+  /**
+   * Icon.
+   */
   logOutIcon = faSignOutAlt;
+  /**
+   * Icon.
+   */
   homeIcon = faHome;
+  /**
+   * Icon.
+   */
   subscriptionIcon = faUsers;
 
+  /**
+   * Constructor.
+   * @param httpService Service used to Http CRUD operations.
+   * @param router Angular router.
+   * @param authenticationService Service related to user authentication.
+   * @param sessionService Service used for sessions and data persistence.
+   */
   constructor(private httpService: HttpService,
               private router: Router,
               authenticationService: AuthenticationService,
@@ -29,12 +53,17 @@ export class AppComponent extends AppCommon implements OnInit {
     httpService.rootUrl = 'http://10.66.0.21:9700/';
   }
 
+  /**
+   * Refers to {@link AppCommon}
+   */
   logout(): void {
     this.authenticationService.signOut();
     this.router.navigate(['']);
   }
 
-
+  /**
+   * Refers to {@link OnInit}
+   */
   ngOnInit(): void {
     super.ngOnInit();
     if (!this.isAuthenticated()) {

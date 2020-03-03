@@ -6,6 +6,9 @@ import {TitleNavBarComponent} from '@src/app/shared/components/navigation/title-
 import {SideDrawerBarComponent} from '@src/app/shared/components/navigation/side-drawer-bar/side-drawer-bar.component';
 import {SentryTestComponent} from '@src/app/shared/components/sentry/sentry-test/sentry-test.component';
 
+/**
+ * Shared components.
+ */
 export const componentDeclarations: any[] = [
     SentryTestComponent,
     HttpErrorComponent,
@@ -15,8 +18,14 @@ export const componentDeclarations: any[] = [
     SideDrawerBarComponent,
 ];
 
+/**
+ * Shared providers.
+ */
 export const providerDeclarations: any[] = [
 ];
 
+/**
+ * Shared routes.
+ */
 export const routes: Routes = [
 ];
