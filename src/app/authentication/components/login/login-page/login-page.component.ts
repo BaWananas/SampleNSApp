@@ -2,6 +2,10 @@ import {Component, OnInit} from '@angular/core';
 import {LoginPageCommon} from '@src/app/authentication/components/login/login-page/login-page.common';
 import {Router} from '@angular/router';
 import {SessionService} from '@src/app/shared/services/implementations/sessionService/session.service';
+import {AuthenticationService} from '@src/app/authentication/services/implementations/authentication.service';
+import {IAuthenticationService} from '@src/app/authentication/services/IAuthenticationService';
+import {IFeedbackService} from '@src/app/feedback/services/IFeedbackService';
+import {FeedbackService} from '@src/app/feedback/services/implementations/feedback.service';
 
 /**
  * Implementation of {@link LoginPageCommon} for web platform.
@@ -14,13 +18,29 @@ import {SessionService} from '@src/app/shared/services/implementations/sessionSe
 export class LoginPageComponent extends LoginPageCommon implements OnInit {
 
   /**
+   * @ignore
+   */
+  private authenticationService: IAuthenticationService;
+
+  /**
+   * @ignore
+   */
+  private feedbackService: IFeedbackService;
+
+  /**
    * Constructor.
    * @param router Angular router
    * @param sessionService Refers to {@link ISessionService}
+   * @param authenticationService Service managing user authentication operations. Refers to {@link IAuthenticationService}
+   * @param feedbackService Refers to {@link IFeedbackService}
    */
   constructor(private router: Router,
-              sessionService: SessionService) {
+              sessionService: SessionService,
+              authenticationService: AuthenticationService,
+              feedbackService: FeedbackService) {
     super(sessionService);
+    this.authenticationService = authenticationService;
+    this.feedbackService = feedbackService;
   }
 
   /**
@@ -29,7 +49,7 @@ export class LoginPageComponent extends LoginPageCommon implements OnInit {
    * Verify if user was already authenticated, and redirect it if true.
    */
   ngOnInit() {
-    if (this.isAuthenticated()) {
+    if (this.authenticationService.isAuthenticated()) {
       this.router.navigate(['home']);
     }
   }
@@ -37,15 +57,12 @@ export class LoginPageComponent extends LoginPageCommon implements OnInit {
   /**
    * Refers to {@link LoginPageCommon}
    */
-  onSubmit(): void {
-    this.router.navigate(['home']);
-  }
-
-  /**
-   * Is the user was authenticated ?
-   */
-  private isAuthenticated(): boolean {
-    return (this.sessionService.user >= 0);
+  onSubmit(succeeds: boolean): void {
+    if (succeeds) {
+      this.router.navigate(['home']);
+    } else {
+      this.feedbackService.notifyWarning('Incorrect email or password.');
+    }
   }
 
 }

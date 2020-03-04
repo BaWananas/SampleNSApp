@@ -35,6 +35,6 @@ export abstract class LoginFormCommon {
      * Submit the form and do the authentication verification.
      */
     public submitForm(): void {
-        this.formSubmit.emit(this.authenticationService.signIn(this.loginForm.value.userId));
+        this.formSubmit.emit(this.authenticationService.signIn(+this.loginForm.value.userId));
     }
 }

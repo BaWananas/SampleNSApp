@@ -39,9 +39,9 @@ export abstract class SubscribingPageCommon {
      */
     protected subscribe(groupId: number): void {
         this.loggerService.debug(this, 'Subscribe to group ' + groupId);
-        this.subscriptionService.isSubscribedToGroup(groupId, this.sessionService.user).subscribe(value => {
+        this.subscriptionService.isSubscribedToGroup(groupId, this.sessionService.localUser).subscribe(value => {
             if (!value) {
-                this.subscriptionService.subscribe(groupId, this.sessionService.user).subscribe((value1) => {
+                this.subscriptionService.subscribe(groupId, this.sessionService.localUser).subscribe((value1) => {
                     if (value1) {
                         this.loggerService.debug(this, 'Successfully subscribed to group.');
                         this.feedbackService.notifySuccess('Successfully subscribed to group !');

@@ -177,7 +177,7 @@ export class GroupListComponent extends RefreshableListComponent<Group, number> 
         this.userSubscriptions = [];
         this.loggerService.debug(this, 'Retrieving user subscriptions.');
 
-        this.subscriptionService.getSubscriptionsByUserId(this.sessionService.user).subscribe(value => {
+        this.subscriptionService.getSubscriptionsByUserId(this.sessionService.localUser).subscribe(value => {
             if (value._embedded) {
                 this.userSubscriptions = value._embedded.items;
             } else {

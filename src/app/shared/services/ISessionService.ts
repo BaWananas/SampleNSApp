@@ -5,7 +5,7 @@ export interface ISessionService {
     /**
      * The authenticated user.
      */
-    user: number;
+    localUser: number;
 
     /**
      * Load data from the local storage.

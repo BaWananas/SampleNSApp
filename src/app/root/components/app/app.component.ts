@@ -66,8 +66,19 @@ export class AppComponent extends AppCommon implements OnInit {
    */
   ngOnInit(): void {
     super.ngOnInit();
-    if (!this.isAuthenticated()) {
-      this.router.navigate(['login']);
-    }
+  }
+
+  /**
+   * Refers to {@link AppCommon}
+   */
+  protected redirectToHomePage(): void {
+    this.router.navigate(['']);
+  }
+
+  /**
+   * Refers to {@link AppCommon}
+   */
+  protected redirectToLoginPage(): void {
+    this.router.navigate(['login']);
   }
 }

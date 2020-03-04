@@ -27,9 +27,10 @@ export class SessionService extends SessionsServiceCommon {
   public loadLocalUser(): void {
     const user = localStorage.getItem('userId');
     if (user && +user >= 0) {
-      this.user = +user;
+      this.localUser = +user;
+      this.logger.info(this, 'Local user found with ID: ' + this.localUser);
     } else {
-      this.user = -1;
+      this.localUser = -1;
     }
   }
 
@@ -37,11 +38,13 @@ export class SessionService extends SessionsServiceCommon {
    * Refers to {@link SessionsServiceCommon}
    */
   public storeLocalUser(): void {
-    if (this.user && this.user >= 0) {
-      localStorage.setItem('userId', '' + this.user);
+    if (!isNaN(this.localUser) && this.localUser >= 0) {
+      localStorage.setItem('userId', '' + this.localUser);
     } else {
+      this.localUser = -1;
       this.clearLocalUser();
     }
+    this.logger.info(this, 'Store user to local storage with ID: ' + this.localUser);
   }
 
   /**
@@ -49,5 +52,6 @@ export class SessionService extends SessionsServiceCommon {
    */
   public clearLocalUser(): void {
     localStorage.removeItem('userId');
+    this.logger.info(this, 'Local user cleared.');
   }
 }

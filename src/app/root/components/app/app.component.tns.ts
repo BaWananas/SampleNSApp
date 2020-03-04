@@ -83,14 +83,13 @@ export class AppComponent extends AppCommon implements OnInit {
    * Refers to {@link AppCommon}
    */
   public logout(): void {
-    // Do user session cleanup here
     this.authenticationService.signOut();
     this.routerExtensions.navigate([''], {clearHistory: true, transition: environment.defaultRoutingTransition});
     this.sideDrawer.sideDrawer.closeDrawer();
   }
 
   /**
-   * Naviagte to home page.
+   * Navigate to home page.
    */
   public navToHome(): void {
     this.routerExtensions.navigate(['home'], {clearHistory: true, transition: environment.defaultRoutingTransition});
@@ -106,10 +105,32 @@ export class AppComponent extends AppCommon implements OnInit {
   }
 
   /**
+   * Navigate to the login page.
+   */
+  public navToLogin(): void {
+    this.routerExtensions.navigate(['login'], {clearHistory: true, transition: environment.defaultRoutingTransition});
+    this.sideDrawer.sideDrawer.closeDrawer();
+  }
+
+  /**
    * Animate the page buttons.
    * @param event
    */
   public animateButtons(event: GestureEventData): void {
     this.animationService.animate<TapAnimation>(event.view, TapAnimation);
+  }
+
+  /**
+   * Refers to {@link AppCommon}
+   */
+  protected redirectToHomePage(): void {
+    this.navToHome();
+  }
+
+  /**
+   * Refers to {@link AppCommon}
+   */
+  protected redirectToLoginPage(): void {
+    this.navToLogin();
   }
 }

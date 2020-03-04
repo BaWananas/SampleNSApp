@@ -166,7 +166,7 @@ export class UserSubscriptionsListComponent extends RefreshableListComponent<For
         this.isAPIRequestFinalized = false;
         this.data = undefined;
         this.logger.debug(this, 'Retrieving user subscriptions.');
-        this.subscriptionService.getSubscriptionsByUserId(this.sessionService.user).subscribe(value => {
+        this.subscriptionService.getSubscriptionsByUserId(this.sessionService.localUser).subscribe(value => {
             if (value._embedded) {
                 this.userSubscriptions = value._embedded.items;
                 this.getGroups();

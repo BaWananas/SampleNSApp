@@ -17,5 +17,5 @@ export abstract class LoginPageCommon {
     /**
      * Called when the login form was submitted. Perform the redirection.
      */
-    abstract onSubmit(): void;
+    abstract onSubmit(succeeds: boolean): void;
 }

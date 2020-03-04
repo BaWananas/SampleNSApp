@@ -15,4 +15,9 @@ export interface IAuthenticationService {
      * Do/call all the cleaning methods.
      */
     signOut(): void;
+
+    /**
+     * Is the user was authenticated or not.
+     */
+    isAuthenticated(): boolean;
 }

@@ -20,7 +20,7 @@ export abstract class AppCommon implements OnInit {
      * Is the user authenticated ?
      */
     public isAuthenticated(): boolean {
-        return (this.sessionService.user >= 0);
+        return this.authenticationService.isAuthenticated();
     }
 
     /**
@@ -29,11 +29,31 @@ export abstract class AppCommon implements OnInit {
     public abstract logout(): void;
 
     /**
+     * Redirect the user to the login Page.
+     *
+     * Used if the user wasn't logged.
+     */
+    protected abstract redirectToLoginPage(): void;
+
+    /**
+     * Redirect the user to the home Page.
+     *
+     * Used if the user was already logged.
+     */
+    protected abstract redirectToHomePage(): void;
+
+    /**
      * Refers to {@OnInit}
      *
-     * Load persistent data.
+     * Load persistent data, try login if user account found in the local storage, and redirect to the right place.
      */
     ngOnInit(): void {
         this.sessionService.loadPersistentData();
+
+        if (this.authenticationService.signIn(this.sessionService.localUser)) {
+            this.redirectToHomePage();
+        } else {
+            this.redirectToLoginPage();
+        }
     }
 }

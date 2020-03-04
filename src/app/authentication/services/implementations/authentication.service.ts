@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {IAuthenticationService} from '@src/app/authentication/services/IAuthenticationService';
 import {ISessionService} from '@src/app/shared/services/ISessionService';
 import {SessionService} from '@src/app/shared/services/implementations/sessionService/session.service';
+import {ILoggerService} from '@src/app/shared/services/ILoggerService';
+import {LoggerService} from '@src/app/shared/services/implementations/logger.service';
 
 /**
  * Implementation of {@link IAuthenticationService}.
@@ -17,11 +19,24 @@ export class AuthenticationService implements IAuthenticationService {
   private sessionService: ISessionService;
 
   /**
+   * @ignore
+   */
+  private logger: ILoggerService;
+
+  /**
+   * Current authenticated user.
+   */
+  private authenticatedUser = -1;
+
+  /**
    * Constructor.
    * @param sessionService Refers to {@link ISessionService}
+   * @param logger Refers to {@link ILoggerService}
    */
-  constructor(sessionService: SessionService) {
+  constructor(sessionService: SessionService,
+              logger: LoggerService) {
     this.sessionService = sessionService;
+    this.logger = logger;
   }
 
   /**
@@ -29,7 +44,12 @@ export class AuthenticationService implements IAuthenticationService {
    * @param id
    */
   signIn(id: number): boolean {
-    this.sessionService.user = id;
+    if (isNaN(id) || id < 0) {
+      return false;
+    }
+
+    this.authenticatedUser = id;
+    this.sessionService.localUser = id;
     this.sessionService.storeLocalUser();
     return true;
   }
@@ -38,7 +58,12 @@ export class AuthenticationService implements IAuthenticationService {
    * Refers to {@link ISessionService}
    */
   signOut(): void {
-    this.sessionService.user = -1;
+    this.authenticatedUser = -1;
+    this.sessionService.localUser = -1;
     this.sessionService.clearLocalUser();
+  }
+
+  isAuthenticated(): boolean {
+    return (this.authenticatedUser >= 0);
   }
 }

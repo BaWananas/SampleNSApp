@@ -39,9 +39,9 @@ export abstract class SubscriptionHomeCommon {
      */
     protected unsubscribe(groupId: number): void {
         this.loggerService.debug(this, 'Unsubscribe to group ' + groupId + '.');
-        this.subscriptionService.isSubscribedToGroup(groupId, this.sessionService.user).subscribe((value) => {
+        this.subscriptionService.isSubscribedToGroup(groupId, this.sessionService.localUser).subscribe((value) => {
             if (value) {
-                this.subscriptionService.unsubscribeToGroup(groupId, this.sessionService.user).subscribe(
+                this.subscriptionService.unsubscribeToGroup(groupId, this.sessionService.localUser).subscribe(
                     () => {
                         this.loggerService.debug(this, 'Successfully unsubscribed to group ' + groupId + '.');
                         this.feedbackService.notifySuccess('Successfully unsubscribed to group !');

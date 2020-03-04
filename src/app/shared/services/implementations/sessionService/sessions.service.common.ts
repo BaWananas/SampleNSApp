@@ -11,7 +11,7 @@ export abstract class SessionsServiceCommon implements ISessionService {
     /**
      * Refers to {@link ISessionService}
      */
-    public user = -1;
+    public localUser = -1;
 
     /**
      * Constructor.

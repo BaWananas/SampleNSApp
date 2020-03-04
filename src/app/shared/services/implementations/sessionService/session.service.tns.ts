@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {RadSideDrawerComponent} from 'nativescript-ui-sidedrawer/angular';
 import {SessionsServiceCommon} from '@src/app/shared/services/implementations/sessionService/sessions.service.common';
 import {LoggerService} from '@src/app/shared/services/implementations/logger.service';
+import { remove, setNumber, getNumber } from '@nativescript/core/application-settings/application-settings';
 
 /**
  * Implementation of {@link ISessionService}.
@@ -28,26 +29,36 @@ export class SessionService extends SessionsServiceCommon {
   }
 
   /**
-   * TODO
    * Refers to {@link SessionsServiceCommon}
    */
   loadLocalUser(): void {
-    // TODO
+    const user = getNumber('userId', -1);
+    if (!isNaN(user) && +user >= 0) {
+      this.localUser = +user;
+      this.logger.info(this, 'Local user found with ID: ' + this.localUser);
+    } else {
+      this.localUser = -1;
+    }
   }
 
   /**
-   * TODO
    * Refers to {@link SessionsServiceCommon}
    */
   storeLocalUser(): void {
-    // TODO
+    if (!isNaN(this.localUser) && this.localUser >= 0) {
+      setNumber('userId', this.localUser);
+    } else {
+      this.localUser = -1;
+      this.clearLocalUser();
+    }
+    this.logger.info(this, 'Store user to local storage with ID: ' + this.localUser);
   }
 
-  /**
-   * TODO
+  /**s
    * Refers to {@link SessionsServiceCommon}
    */
   clearLocalUser(): void {
-    // TODO
+    remove('userId');
+    this.logger.info(this, 'Local user cleared.');
   }
 }
