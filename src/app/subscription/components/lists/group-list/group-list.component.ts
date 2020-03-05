@@ -2,7 +2,7 @@ import {Component, EventEmitter, Input, OnDestroy, OnInit, TemplateRef} from '@a
 import {LoggerService} from '@src/app/shared/services/implementations/logger.service';
 import {ILoggerService} from '@src/app/shared/services/ILoggerService';
 import {HttpErrorResponse} from '@angular/common/http';
-import {ITableColumn, ITableFactory, ITableOptions, TableFactoryService} from '@arhs/ui';
+import {ITableColumn, ITableFactory, ITableOptions, ITableStyles, TableFactoryService, TableStyles} from '@arhs/ui';
 import {
     CollectionModel,
     Group,
@@ -98,6 +98,10 @@ export class GroupListComponent extends RefreshableListComponent<Group, number> 
      * The current selected items.
      */
     selectedItems: Group[] = [];
+    /**
+     * Table custom styles.
+     */
+    styles: ITableStyles = null;
 
     /**
      * API requests states (for waiting components)
@@ -209,12 +213,20 @@ export class GroupListComponent extends RefreshableListComponent<Group, number> 
      * Init the list and his graphical component.
      */
     private initList(): void {
-        this.tableOptions = this.tableFactory.getOptions<Group>(false, true, false, true, [10, 1, 5, 25], true, false, false);
+        this.tableOptions = this.tableFactory.getOptions<Group>({
+            filtering: true,
+            stickyHeader: true,
+            sorting: true,
+            pagination: true,
+        });
         this.tableColumns = this.tableFactory.getColumns([
             '#ID', 'Name', 'Description'
         ], [
             'id', 'name', 'description'
         ]);
+        this.styles = this.tableFactory.getStyles({
+            filterContainer: ['bg-white']
+        });
     }
 
     /**

@@ -154,7 +154,11 @@ export class UserSubscriptionsListComponent extends RefreshableListComponent<For
         ], [
             'groupName', 'date'
         ]);
-        this.tableOptions = this.tableFactory.getOptions(false, true, false, true, [10, 1, 5, 25], false, false, false);
+        this.tableOptions = this.tableFactory.getOptions({
+            pagination: true,
+            sorting: true,
+            stickyHeader: true,
+        });
     }
 
     /**
