@@ -11,7 +11,7 @@
         <app-user-subscriptions-list [refreshEntireList]="refreshLists" [removeElementFromList]="unsubscriptionEvent" [elementDetails]="elementDetails"></app-user-subscriptions-list>
         <ng-template #elementDetails let-element>
             <StackLayout height="100%" width="100%">
-                <Label class="fas dark" fontSize="15" color="red" text="&#xf506;" (tap)="animateButton($event); unsubscribe(element.groupId)"></Label>
+                <Label class="fas dark pull-right" fontSize="15" color="red" text="&#xf506;" (tap)="animateButton($event); unsubscribe(element.groupId)"></Label>
             </StackLayout>
         </ng-template>
     </StackLayout>

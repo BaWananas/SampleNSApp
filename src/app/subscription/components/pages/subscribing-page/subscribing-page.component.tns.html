@@ -7,7 +7,7 @@
         <app-groups-list [removeElementFromList]="subscribingEvent" [onlyIfSubscribed]="false" [elementDetails]="elementDetails"></app-groups-list>
         <ng-template #elementDetails let-element>
             <StackLayout height="100%" width="100%">
-                <Label class="fas dark c-success" fontSize="15" text="&#xf234;" (tap)="animateButtons($event); subscribe(element.id)"></Label>
+                <Label class="fas dark c-success pull-right" fontSize="15" text="&#xf234;" (tap)="animateButtons($event); subscribe(element.id)"></Label>
             </StackLayout>
         </ng-template>
     </StackLayout>

@@ -8,8 +8,8 @@
             <Label class="h3 m-b-10 dark" text="Delete a group :"></Label>
             <app-groups-list [refreshEntireList]="createGroupEvent" [removeElementFromList]="deleteGroupEvent" [elementDetails]="elementDetails"></app-groups-list>
             <ng-template #elementDetails let-element>
-                <StackLayout height="100%" width="100%">
-                    <Label class="fas dark" fontSize="15" color="red" text="&#xf2ed;" (tap)="animateButton($event); deleteGroup(element.id)"></Label>
+                <StackLayout width="100%">
+                    <Label class="fas dark pull-right" fontSize="15" color="red" text="&#xf2ed;" (tap)="animateButton($event); deleteGroup(element.id)"></Label>
                 </StackLayout>
             </ng-template>
         </StackLayout>
