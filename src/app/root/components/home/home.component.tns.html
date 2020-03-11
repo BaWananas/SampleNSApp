@@ -1,8 +1,23 @@
 <app-side-drawer-bar></app-side-drawer-bar>
-<StackLayout class="dark p-t-15 p-l-15" horizontalAlignment="center" verticalAlignment="center">
-    <Label text="Welcome to APP_NAME !" class="h2 dark text-center"></Label>
-    <Label text="Test for Sentry" class="h2 dark text-center m-t-20"></Label>
-    <StackLayout>
-        <app-sentry-test></app-sentry-test>
+<GridLayout class="dark p-t-15 p-l-15" rows="auto, auto, *">
+    <StackLayout horizontalAlignment="left" row="0" marginBottom="50">
+        <Label class="fas" text="&#xf30c;" fontSize="50"></Label>
+        <Label class="body dark" text="Click to open menu !"></Label>
     </StackLayout>
-</StackLayout>
+    <StackLayout orientation="horizontal" horizontalAlignment="left" row="1">
+        <GridLayout rows="auto", columns="auto, auto">
+            <StackLayout row="0" col="0"  marginRight="25">
+                <Label class="fas" text="&#xf30b;" fontSize="50"></Label>
+            </StackLayout>
+            <StackLayout row="0" col="1" verticalAlignment="center">
+                <Label class="body dark" text="Swipe to right to open menu !"></Label>
+            </StackLayout>
+        </GridLayout>
+    </StackLayout>
+    <StackLayout horizontalAlignment="center" verticalAlignment="center" row="2">
+        <Label text="Test for Sentry" class="h2 dark text-center m-t-20"></Label>
+        <StackLayout>
+            <app-sentry-test></app-sentry-test>
+        </StackLayout>
+    </StackLayout>
+</GridLayout>

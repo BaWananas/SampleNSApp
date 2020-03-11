@@ -218,6 +218,7 @@ export class GroupListComponent extends RefreshableListComponent<Group, number> 
             stickyHeader: true,
             sorting: true,
             pagination: true,
+            paginationSorting: [10, 5 , 1, 25],
         });
         this.tableColumns = this.tableFactory.getColumns([
             '#ID', 'Name', 'Description'
@@ -225,7 +226,9 @@ export class GroupListComponent extends RefreshableListComponent<Group, number> 
             'id', 'name', 'description'
         ]);
         this.styles = this.tableFactory.getStyles({
-            filterContainer: ['bg-white']
+            filterContainer: ['bg-white', 'dark'],
+            headerText: ['dark'],
+            rowText: ['dark']
         });
     }
 

@@ -9,7 +9,7 @@
             <h6 class="text-white font-italic text-muted">Nothing to show.</h6>
         </div>
         <div class="col-12" *ngIf="data && isAPIRequestFinalized && data.length > 0">
-            <arhs-ui-basic-table [details]="elementDetails" [columns]="tableColumns" [options]="tableOptions" [data]="data" [refreshEvent]="onRefresh" (onSelect)="onSelect($event)"></arhs-ui-basic-table>
+            <arhs-ui-basic-table [styles]="styles" [details]="elementDetails" [columns]="tableColumns" [options]="tableOptions" [data]="data" [refreshEvent]="onRefresh" (onSelect)="onSelect($event)"></arhs-ui-basic-table>
         </div>
     </div>
 </div>

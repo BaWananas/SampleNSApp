@@ -9,7 +9,7 @@ import {
     Subscription,
     SubscriptionService
 } from '@arhs/core';
-import {ITableColumn, ITableFactory, ITableOptions, TableFactoryService} from '@arhs/ui';
+import {ITableColumn, ITableFactory, ITableOptions, ITableStyles, TableFactoryService} from '@arhs/ui';
 import {ILoggerService} from '@src/app/shared/services/ILoggerService';
 import {LoggerService} from '@src/app/shared/services/implementations/logger.service';
 import {FormattedSubscription} from '@src/app/subscription/models/FormattedSubscription';
@@ -92,6 +92,10 @@ export class UserSubscriptionsListComponent extends RefreshableListComponent<For
      * Event triggered for refreshing the graphical component.
      */
     onRefresh: EventEmitter<FormattedSubscription[]> = new EventEmitter<FormattedSubscription[]>();
+    /**
+     * Table custom styles.
+     */
+    styles: ITableStyles = null;
 
     /**
      *  API requests state (for waiting components)
@@ -156,8 +160,14 @@ export class UserSubscriptionsListComponent extends RefreshableListComponent<For
         ]);
         this.tableOptions = this.tableFactory.getOptions({
             pagination: true,
+            paginationSorting: [10, 5 , 1, 25],
             sorting: true,
             stickyHeader: true,
+        });
+        this.styles = this.tableFactory.getStyles({
+            filterContainer: ['bg-white', 'dark'],
+            headerText: ['dark'],
+            rowText: ['dark']
         });
     }
 

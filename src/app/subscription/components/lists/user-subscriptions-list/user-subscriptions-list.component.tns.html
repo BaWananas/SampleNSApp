@@ -5,7 +5,7 @@
     <ng-container *ngIf="isAPIRequestFinalized">
         <Label *ngIf="data && data.length == 0" class="text-center body dark font-italic" text="You haven't subscribed to any group yet."></Label>
         <ng-container *ngIf="tableColumns && tableOptions && onRefresh && data && data.length > 0">
-            <arhs-ui-basic-table [columns]="tableColumns" [options]="tableOptions" [data]="data" [refreshEvent]="onRefresh" (onSelect)="onSelect($event)" [details]="elementDetails"></arhs-ui-basic-table>
+            <arhs-ui-basic-table [styles]="styles" [columns]="tableColumns" [options]="tableOptions" [data]="data" [refreshEvent]="onRefresh" (onSelect)="onSelect($event)" [details]="elementDetails"></arhs-ui-basic-table>
         </ng-container>
     </ng-container>
 </StackLayout>
