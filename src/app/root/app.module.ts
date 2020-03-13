@@ -25,6 +25,24 @@ export class SentryErrorHandler implements ErrorHandler {
     }
 }
 
+export const imports = [
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    MatToolbarModule,
+    FontAwesomeModule,
+    MatRippleModule,
+    MatSnackBarModule,
+    ClipboardModule,
+
+    // Custom modules
+    SharedModule,
+    AuthenticationModule,
+
+    // Must be specified at the end.
+    AppRoutingModule,
+];
+
 /**
  * Root module of the application - web version.
  */
@@ -33,21 +51,7 @@ export class SentryErrorHandler implements ErrorHandler {
         componentDeclarations
     ],
     imports: [
-        BrowserModule,
-        BrowserAnimationsModule,
-        HttpClientModule,
-        MatToolbarModule,
-        FontAwesomeModule,
-        MatRippleModule,
-        MatSnackBarModule,
-        ClipboardModule,
-
-        // Custom modules
-        SharedModule,
-        AuthenticationModule,
-
-        // Must be specified at the end.
-        AppRoutingModule,
+        imports
     ],
     providers: [
         {provide: ErrorHandler, useClass: SentryErrorHandler}

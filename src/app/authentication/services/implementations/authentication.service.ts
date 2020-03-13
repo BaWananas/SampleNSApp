@@ -40,7 +40,7 @@ export class AuthenticationService implements IAuthenticationService {
   }
 
   /**
-   * Refers to {@link ISessionService}
+   * Refers to {@link IAuthenticationService}
    * @param id
    */
   signIn(id: number): boolean {
@@ -55,7 +55,7 @@ export class AuthenticationService implements IAuthenticationService {
   }
 
   /**
-   * Refers to {@link ISessionService}
+   * Refers to {@link IAuthenticationService}
    */
   signOut(): void {
     this.authenticatedUser = -1;

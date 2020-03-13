@@ -3,9 +3,9 @@ import {LoginPageCommon} from '@src/app/authentication/components/login/login-pa
 import {environment} from '@src/environments/environment';
 import {exit} from 'nativescript-exit';
 import {RouterExtensions} from '@nativescript/angular';
-import {SessionService} from '@src/app/shared/services/implementations/sessionService/session.service';
 import {IFeedbackService} from '@src/app/feedback/services/IFeedbackService';
 import {FeedbackService} from '@src/app/feedback/services/implementations/feedback.service';
+import { SessionService } from '@src/app/shared/services/implementations/sessionService/session.service.tns';
 
 /**
  * Implementation of {@link LoginPageCommon} for mobile platforms.
@@ -39,7 +39,9 @@ export class LoginPageComponent extends LoginPageCommon implements OnInit {
    * Refers to {@link OnInit}
    */
   ngOnInit() {
-    (<SessionService>this.sessionService).sideDrawer.gesturesEnabled = false;
+    if ((<SessionService>this.sessionService).sideDrawer) {
+      (<SessionService>this.sessionService).sideDrawer.gesturesEnabled = false;
+    }
   }
 
   /**
@@ -57,7 +59,9 @@ export class LoginPageComponent extends LoginPageCommon implements OnInit {
   public onSubmit(succeeds: boolean): void {
     if (succeeds) {
       this.routerExtensions.navigate(['home'], {clearHistory: true, transition: environment.defaultRoutingTransition});
-      (<SessionService>this.sessionService).sideDrawer.gesturesEnabled = true;
+      if ((<SessionService>this.sessionService).sideDrawer) {
+        (<SessionService>this.sessionService).sideDrawer.gesturesEnabled = true;
+      }
     } else {
       this.feedbackService.notifyWarning('Incorrect email or password.');
     }

@@ -5,6 +5,13 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {MatProgressSpinnerModule} from '@angular/material';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
+export const imports = [
+    CommonModule,
+    ReactiveFormsModule,
+    MatProgressSpinnerModule,
+    FontAwesomeModule,
+];
+
 /**
  * Shared module of the App.
  */
@@ -13,10 +20,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
         componentDeclarations,
     ],
     imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        MatProgressSpinnerModule,
-        FontAwesomeModule
+        imports
     ],
     exports: [
         componentDeclarations,

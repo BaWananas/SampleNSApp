@@ -11,5 +11,11 @@
   },
   "files": [
     "src/main.tns.ts"
+  ],
+  "include": [
+    "**/*.spec.tns.ts"
+  ],
+  "exclude": [
+    "**/*.spec.ts"
   ]
 }
