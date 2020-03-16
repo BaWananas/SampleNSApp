@@ -13,7 +13,7 @@ module.exports = function (config) {
     // list of files / patterns to load in the browser
     files: [
       'src/tests/mobile/setup.spec.tns.ts',
-      '**/*.spec.tns.ts'
+      'src/tests/mobile/**/*.spec.tns.ts'
     ],
 
     // list of files to exclude
