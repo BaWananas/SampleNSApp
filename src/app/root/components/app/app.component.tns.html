@@ -1,33 +1,33 @@
 <RadSideDrawer #sideDrawer>
     <GridLayout rows="auto, *" tkDrawerContent class="primary sidedrawer-left">
         <ng-container *ngIf="isAuthenticated() else isNotAuthenticated">
-            <StackLayout row="0" class="sidedrawer-header primary">
+            <StackLayout row="0" class="sidedrawer-header primary" automationText="authenticatedSideDrawerHeader">
                 <StackLayout horizontalAlignment="center" marginTop="20">
                     <Label class="text-center far" text="&#xf007;" fontSize="100"></Label>
                 </StackLayout>
                 <StackLayout horizontalAlignment="center" orientation="horizontal">
                     <Label class="fas" borderWidth="0" text="&#xf015;" fontSize="20" margin="10"
-                           (tap)="navToHome(); animateButtons($event)"></Label>
+                           (tap)="navToHome(); animateButtons($event)" automationText="authenticatedSideDrawerHeaderHome"></Label>
                     <Label class="fas text-danger" borderWidth="0" text="&#xf2f5;" fontSize="20" margin="10"
-                           (tap)="logout(); animateButtons($event)"></Label>
+                           (tap)="logout(); animateButtons($event)" automationText="authenticatedSideDrawerHeaderLogout"></Label>
                 </StackLayout>
             </StackLayout>
-            <StackLayout row="1" class="sidedrawer-content primary" paddingLeft="10" paddingRight="10">
+            <StackLayout row="1" class="sidedrawer-content primary" paddingLeft="10" paddingRight="10" automationText="authenticatedSideDrawerContent">
                 <StackLayout class="hr primary" borderColor="white"></StackLayout>
                 <StackLayout class="sidedrawer-list-item" orientation="horizontal" horizontalAlignment="center">
                     <Label class="body fas sidedrawer-list-item-text m-l-8 primary" color="white" fontSize="30"
-                           text="&#xf0c0;" (tap)="navToSubscriptions(); animateButtons($event)"></Label>
+                           text="&#xf0c0;" (tap)="navToSubscriptions(); animateButtons($event)" automationText="authenticatedSideDrawerContentSubscriptions"></Label>
                 </StackLayout>
                 <StackLayout class="hr primary" borderColor="white"></StackLayout>
             </StackLayout>
         </ng-container>
         <ng-template #isNotAuthenticated>
-            <StackLayout row="0" class="sidedrawer-header primary">
+            <StackLayout row="0" class="sidedrawer-header primary" automationText="unauthenticatedSideDrawerHeader">
                 <StackLayout horizontalAlignment="center" marginTop="20" marginBottom="20">
                     <Label class="text-center fas" text="&#xf057;" fontSize="100" color="red"></Label>
                 </StackLayout>
             </StackLayout>
-            <StackLayout row="1" class="sidedrawer-content primary" paddingLeft="10" paddingRight="10">
+            <StackLayout row="1" class="sidedrawer-content primary" paddingLeft="10" paddingRight="10" automationText="unauthenticatedSideDrawerContent">
                 <StackLayout class="hr primary" borderColor="white"></StackLayout>
                 <StackLayout horizontalAlignment="center" marginTop="10" marginBottom="10">
                     <Label class="text-center body" color="red" textWrap="true" text="Content is currently blocked due to the lack of permissions."></Label>

@@ -1,9 +1,9 @@
 <GridLayout class="dark" columns="auto, auto, *" rows="auto">
     <StackLayout row="0" col="0" class="m-r-15">
-        <Label (tap)="animateButtons($event); goBack()" *ngIf="backEnabled" class="text-center far dark" fontSize="25" text="&#xf191;"></Label>
+        <Label (tap)="animateButtons($event); goBack()" *ngIf="backEnabled" class="text-center far dark" fontSize="25" text="&#xf191;" automationText="titleNavBarBackButton"></Label>
     </StackLayout>
     <StackLayout row="0" col="1">
-        <Label (tap)="animateButtons($event); goHome()" *ngIf="homeUrls" class="text-center fas dark" color="orange" fontSize="25" text="&#xf015;"></Label>
+        <Label (tap)="animateButtons($event); goHome()" *ngIf="homeUrls" class="text-center fas dark" color="orange" fontSize="25" text="&#xf015;" automationText="titleNavBarHomeButton"></Label>
     </StackLayout>
     <GridLayout horizontalAlignment="right" row="0" col="2" columns="auto, auto">
         <StackLayout col="0" verticalAlignment="center">

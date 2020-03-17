@@ -4,10 +4,10 @@
     </StackLayout>
     <StackLayout verticalAlignment="top" height="50%">
         <form [formGroup]="loginForm">
-            <TextField class="body" width="70%" borderColor="#d3d3d3" borderWidth="3" textAlignment="center" borderRadius="5" backgroundColor="white" formControlName="id" keyboardType="email" hint="Email"></TextField>
-            <TextField class="body" width="70%" borderColor="#d3d3d3" borderWidth="3" textAlignment="center" backgroundColor="white" borderRadius="5" formControlName="password" secure="true" hint="Password"></TextField>
-            <TextField class="body" width="70%" borderColor="#d3d3d3" borderWidth="3" textAlignment="center" backgroundColor="white" borderRadius="5" formControlName="userId" keyboardType="number" hint="#ID"></TextField>
+            <TextField class="body" width="70%" borderColor="#d3d3d3" borderWidth="3" textAlignment="center" borderRadius="5" backgroundColor="white" formControlName="id" keyboardType="email" hint="Email" automationText="loginFormEmail"></TextField>
+            <TextField class="body" width="70%" borderColor="#d3d3d3" borderWidth="3" textAlignment="center" backgroundColor="white" borderRadius="5" formControlName="password" secure="true" hint="Password" automationText="loginFormPassword"></TextField>
+            <TextField class="body" width="70%" borderColor="#d3d3d3" borderWidth="3" textAlignment="center" backgroundColor="white" borderRadius="5" formControlName="userId" keyboardType="number" hint="#ID" automationText="loginFormId"></TextField>
         </form>
-        <Button width="100" text="Sign-in" class="-primary -rounded-sm text-uppercase body m-t-20" (tap)="submitForm()"></Button>
+        <Button automationText="loginFormSubmit" width="100" text="Sign-in" class="-primary -rounded-sm text-uppercase body m-t-20" (tap)="submitForm()"></Button>
     </StackLayout>
 </StackLayout>

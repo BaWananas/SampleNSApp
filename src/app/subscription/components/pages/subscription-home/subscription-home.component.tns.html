@@ -1,10 +1,10 @@
 <app-side-drawer-bar></app-side-drawer-bar>
-<GridLayout rows="auto, *" class="dark" padding="15">
+<GridLayout rows="auto, *" class="dark" padding="15" automationText="subscriptionHomePage">
     <StackLayout row="0" orientation="horizontal" horizontalAlignment="right">
         <Label class="text-center fas c-success m-r-15" fontSize="30" text="&#xf067;"
-               (tap)="animateButton($event); navToSubscribing();"></Label>
+               (tap)="animateButton($event); navToSubscribing();" automationText="navToSubscribingButton"></Label>
         <Label class="text-center fas" fontSize="25" text="&#xf509;"
-               (tap)="animateButton($event); navToSettings();"></Label>
+               (tap)="animateButton($event); navToSettings();" automationText="navToSettingsButton"></Label>
     </StackLayout>
     <StackLayout row="1">
         <Label class="h2 dark" text="Current subscriptions :"></Label>
