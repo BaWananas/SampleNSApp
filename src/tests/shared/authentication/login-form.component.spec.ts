@@ -23,6 +23,8 @@ describe('LoginForm component class', () => {
 
     it('should emit event when submit form', (done) => {
         component.formSubmit.subscribe(() => {
+            // Event emitted - test successfully terminated.
+            expect(true).toBe(true);
             done();
         }, () => {
             done.fail();
