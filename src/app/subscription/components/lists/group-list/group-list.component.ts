@@ -306,10 +306,9 @@ export class GroupListComponent extends RefreshableListComponent<Group, number> 
         this.groups.forEach(value => {
             if (value.id === id) {
                 group = value;
-                return;
             }
         });
-        return undefined;
+        return group;
     }
 
     /**
@@ -317,7 +316,11 @@ export class GroupListComponent extends RefreshableListComponent<Group, number> 
      * @param element
      */
     protected convertToId(element: Group): number {
-        return element.id;
+        if (element) {
+            return element.id;
+        } else {
+            return -1;
+        }
     }
 
     /**
@@ -327,12 +330,14 @@ export class GroupListComponent extends RefreshableListComponent<Group, number> 
      */
     private findIndex(id: number): number {
         let index = -1;
-        this.groups.forEach((value, i) => {
-            if (value.id === id) {
-                index = i;
-                return;
-            }
-        });
+        if (this.groups) {
+            this.groups.forEach((value, i) => {
+                if (value.id === id) {
+                    index = i;
+                    return;
+                }
+            });
+        }
         return index;
     }
 }

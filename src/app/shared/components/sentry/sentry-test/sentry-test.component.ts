@@ -17,7 +17,7 @@ export class SentryTestComponent implements OnInit {
    * Form for throwing an error.
    */
   public throwErrorForm = this.formBuilder.group({
-    message: ['', Validators.required]
+    message: ['My message', Validators.required]
   });
 
   /**

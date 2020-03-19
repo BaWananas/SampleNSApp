@@ -1,11 +1,10 @@
 import 'reflect-metadata';
-import { nsTestBedBeforeEach, nsTestBedAfterEach, nsTestBedRender } from 'nativescript-angular/testing';
+import {nsTestBedAfterEach, nsTestBedBeforeEach, nsTestBedRender} from 'nativescript-angular/testing';
 import {AppModule} from '@src/app/root/app.module';
 import {AppComponent} from '@src/app/root/components/app/app.component.tns';
 import {SessionService} from '@src/app/shared/services/implementations/sessionService/session.service.tns';
 import {RouterTestingModule} from '@angular/router/testing';
 import createSpy = jasmine.createSpy;
-import { GestureEventData } from '@nativescript/core';
 
 describe('App root component', () => {
     beforeEach(nsTestBedBeforeEach([], [], [AppModule, RouterTestingModule]));

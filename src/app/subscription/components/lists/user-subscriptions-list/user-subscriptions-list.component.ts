@@ -273,12 +273,14 @@ export class UserSubscriptionsListComponent extends RefreshableListComponent<For
      */
     protected convertToElement(groupId: number): FormattedSubscription {
         let sub: FormattedSubscription = null;
-        this.userSubscriptions.forEach(value => {
-            if (value.groupId === groupId) {
-                sub = this.formatData([value])[0];
-            }
-        });
-        return undefined;
+        if (this.userSubscriptions) {
+            this.userSubscriptions.forEach(value => {
+                if (value.groupId === groupId) {
+                    sub = this.formatData([value])[0];
+                }
+            });
+        }
+        return sub;
     }
 
     /**
@@ -286,7 +288,11 @@ export class UserSubscriptionsListComponent extends RefreshableListComponent<For
      * @param element
      */
     protected convertToId(element: FormattedSubscription): number {
-        return element.groupId;
+        if (element) {
+            return element.groupId;
+        } else {
+            return -1;
+        }
     }
 
     /**
