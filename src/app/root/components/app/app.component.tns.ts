@@ -10,6 +10,8 @@ import {environment} from '@src/environments/environment';
 import {AuthenticationService} from '@src/app/authentication/services/implementations/authentication.service';
 import {AppCommon} from '@src/app/root/components/app/app.common';
 import {SessionService} from '@src/app/shared/services/implementations/sessionService/session.service';
+import {Message} from 'nativescript-plugin-firebase';
+const firebase = require('nativescript-plugin-firebase');
 
 /**
  * Root component. Entrance of the App.
@@ -133,5 +135,31 @@ export class AppComponent extends AppCommon implements OnInit {
    */
   protected redirectToLoginPage(): void {
     this.navToLogin();
+  }
+
+  /**
+   * Init the firebase plugin.
+   */
+  private initFirebase(): void {
+    firebase.init({
+      // Optionally pass in properties for database, authentication and cloud messaging,
+      // see their respective docs.
+      onMessageReceivedCallback: (message: Message) => {
+        console.log(`Title: ${message.title}`);
+        console.log(`Body: ${message.body}`);
+        // if your server passed a custom property called 'foo', then do this:
+        console.log(`Value of 'foo': ${message.data.foo}`);
+      },
+      onPushTokenReceivedCallback: function(token) {
+        console.log('Firebase push token: ' + token);
+      },
+      showNotificationsWhenInForeground: true,
+    }).then(() => {}, reason => {
+      console.error('firebase.init fail: ' + reason);
+    });
+
+    firebase.subscribeToTopic('groupCreation').then(() => console.log('Subscribed to topic groupCreation'), reason => {
+      console.log(reason);
+    });
   }
 }
