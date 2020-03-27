@@ -42,7 +42,8 @@ export class AppComponent extends AppCommon implements OnInit {
               authenticationService: AuthenticationService) {
     super(authenticationService, sessionService);
     this.animationService = animationSrv;
-    httpService.rootUrl = 'http://10.66.0.21:9700/';
+    // httpService.rootUrl = 'http://10.66.0.21:9700/';
+    httpService.rootUrl = 'http://10.0.2.2:9700/';
 
     AppComponent.hideAndroidStatusBar();
     on('resume', (args: ApplicationEventData) => {

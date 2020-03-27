@@ -165,9 +165,10 @@ export class UserSubscriptionsListComponent extends RefreshableListComponent<For
             stickyHeader: true,
         });
         this.styles = this.tableFactory.getStyles({
-            filterContainer: ['bg-white', 'dark'],
-            headerText: ['dark'],
-            rowText: ['dark']
+            tableContainer: ['dark'],
+            filterContainer: ['bg-white', 'dark', 'text-dark'],
+            headerText: ['dark', 'bg-white', 'text-dark'],
+            rowText: ['dark', 'bg-white', 'text-dark']
         });
     }
 

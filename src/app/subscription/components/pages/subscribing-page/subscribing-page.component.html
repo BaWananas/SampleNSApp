@@ -8,7 +8,7 @@
         <div class="col-12">
             <app-groups-list [removeElementFromList]="subscribingEvent" [onlyIfSubscribed]="false" [elementDetails]="elementDetails"></app-groups-list>
             <ng-template #elementDetails let-element>
-                <div class="w-100 h-100">
+                <div class="w-100 h-100 bg-white text-dark">
                     <fa-icon [icon]="subscribeIcon" size="1x" class="btn btn-link text-success" (click)="subscribe(element.id)"></fa-icon>
                 </div>
             </ng-template>

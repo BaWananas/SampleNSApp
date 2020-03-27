@@ -50,7 +50,8 @@ export class AppComponent extends AppCommon implements OnInit {
               authenticationService: AuthenticationService,
               sessionService: SessionService) {
     super(authenticationService, sessionService);
-    httpService.rootUrl = 'http://10.66.0.21:9700/';
+    // httpService.rootUrl = 'http://10.66.0.21:9700/';
+    httpService.rootUrl = 'http://localhost:9700/';
   }
 
   /**

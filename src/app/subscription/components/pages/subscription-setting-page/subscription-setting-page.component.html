@@ -13,7 +13,7 @@
                 <div class="col-12 my-4">
                     <app-groups-list [refreshEntireList]="createGroupEvent" [removeElementFromList]="deleteGroupEvent" [elementDetails]="elementDetails"></app-groups-list>
                     <ng-template #elementDetails let-element>
-                        <div class="w-100 h-100">
+                        <div class="w-100 h-100 bg-white text-dark">
                             <fa-icon [icon]="deleteIcon" size="1x" class="btn btn-link text-decoration-none text-danger" (click)="deleteGroup(element.id)"></fa-icon>
                         </div>
                     </ng-template>

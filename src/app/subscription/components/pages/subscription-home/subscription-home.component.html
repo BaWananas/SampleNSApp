@@ -16,7 +16,7 @@
             <app-user-subscriptions-list [removeElementFromList]="unsubscriptionEvent" [elementDetails]="elementDetails"></app-user-subscriptions-list>
         </div>
         <ng-template #elementDetails let-element>
-            <div class="w-100 h-100">
+            <div class="w-100 h-100 bg-white text-dark">
                 <fa-icon [icon]="unsubscribeIcon" size="1x" class="btn btn-link text-decoration-none text-danger" (click)="unsubscribe(element.groupId)"></fa-icon>
             </div>
         </ng-template>
