@@ -9,8 +9,12 @@ import {RadSideDrawerComponent} from 'nativescript-ui-sidedrawer/angular';
 import {environment} from '@src/environments/environment';
 import {AuthenticationService} from '@src/app/authentication/services/implementations/authentication.service';
 import {AppCommon} from '@src/app/root/components/app/app.common';
-import {SessionService} from '@src/app/shared/services/implementations/sessionService/session.service';
+import {SessionService} from '@src/app/shared/services/implementations/sessionService/session.service.tns';
 import {Message} from 'nativescript-plugin-firebase';
+
+/**
+ * Firebase plugin.
+ */
 const firebase = require('nativescript-plugin-firebase');
 
 /**
@@ -19,147 +23,149 @@ const firebase = require('nativescript-plugin-firebase');
  * Extends {@link AppCommon}.
  */
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.tns.html',
-  styleUrls: [
-      './app.component.css',
-  ]
+    selector: 'app-root',
+    templateUrl: './app.component.tns.html',
+    styleUrls: [
+        './app.component.css',
+    ]
 })
 export class AppComponent extends AppCommon implements OnInit {
 
-  /**
-   * Constructor.
-   * @param page Related page of the component.
-   * @param httpService Service used to Http CRUD operations.
-   * @param routerExtensions Nativescript router.
-   * @param sessionService Service related to user authentication.
-   * @param animationSrv Manage all the animations.
-   * @param authenticationService Service used for sessions and data persistence.
-   */
-  constructor(page: Page,
-              private httpService: HttpService,
-              private routerExtensions: RouterExtensions,
-              sessionService: SessionService,
-              animationSrv: MobileAnimationService,
-              authenticationService: AuthenticationService) {
-    super(authenticationService, sessionService);
-    this.animationService = animationSrv;
-    // httpService.rootUrl = 'http://10.66.0.21:9700/';
-    httpService.rootUrl = 'http://10.0.2.2:9700/';
+    /**
+     * Side drawer menu.
+     */
+    @ViewChild('sideDrawer', {static: true}) sideDrawer: RadSideDrawerComponent;
+    /**
+     * @ignore
+     */
+    private animationService: IMobileAnimationService;
 
-    AppComponent.hideAndroidStatusBar();
-    on('resume', (args: ApplicationEventData) => {
-      if (args.android) {
+    /**
+     * Constructor.
+     * @param page Related page of the component.
+     * @param httpService Service used to Http CRUD operations.
+     * @param routerExtensions Nativescript router.
+     * @param sessionService Service related to user authentication.
+     * @param animationSrv Manage all the animations.
+     * @param authenticationService Service used for sessions and data persistence.
+     */
+    constructor(page: Page,
+                private httpService: HttpService,
+                private routerExtensions: RouterExtensions,
+                sessionService: SessionService,
+                animationSrv: MobileAnimationService,
+                authenticationService: AuthenticationService) {
+        super(authenticationService, sessionService);
+        this.animationService = animationSrv;
+        // httpService.rootUrl = 'http://10.66.0.21:9700/';
+        httpService.rootUrl = 'http://10.0.2.2:9700/';
+
         AppComponent.hideAndroidStatusBar();
-      }
-    }, this);
-  }
-
-  /**
-   * @ignore
-   */
-  private animationService: IMobileAnimationService;
-
-  /**
-   * Side drawer menu.
-   */
-  @ViewChild('sideDrawer', {static: true}) sideDrawer: RadSideDrawerComponent;
-
-  /**
-   * Hide android status Bar.
-   */
-  private static hideAndroidStatusBar(): void {
-    if (isAndroid) {
-      statusBar.hide();
+        on('resume', (args: ApplicationEventData) => {
+            if (args.android) {
+                AppComponent.hideAndroidStatusBar();
+            }
+        }, this);
     }
-  }
 
-  /**
-   * Refers to {@link OnInit}.
-   */
-  ngOnInit(): void {
-    super.ngOnInit();
-    (<SessionService>this.sessionService).sideDrawer = this.sideDrawer;
-  }
+    /**
+     * Hide android status Bar.
+     */
+    private static hideAndroidStatusBar(): void {
+        if (isAndroid) {
+            statusBar.hide();
+        }
+    }
 
-  /**
-   * Refers to {@link AppCommon}
-   */
-  public logout(): void {
-    this.authenticationService.signOut();
-    this.routerExtensions.navigate([''], {clearHistory: true, transition: environment.defaultRoutingTransition});
-    this.sideDrawer.sideDrawer.closeDrawer();
-  }
+    /**
+     * Refers to {@link OnInit}.
+     */
+    ngOnInit(): void {
+        super.ngOnInit();
+        (<SessionService>this.sessionService).sideDrawer = this.sideDrawer;
+        this.initFirebase();
+    }
 
-  /**
-   * Navigate to home page.
-   */
-  public navToHome(): void {
-    this.routerExtensions.navigate(['home'], {clearHistory: true, transition: environment.defaultRoutingTransition});
-    this.sideDrawer.sideDrawer.closeDrawer();
-  }
+    /**
+     * Refers to {@link AppCommon}
+     */
+    public logout(): void {
+        this.authenticationService.signOut();
+        this.routerExtensions.navigate([''], {clearHistory: true, transition: environment.defaultRoutingTransition});
+        this.sideDrawer.sideDrawer.closeDrawer();
+    }
 
-  /**
-   * Navigate to subscription page.
-   */
-  public navToSubscriptions(): void {
-    this.routerExtensions.navigate(['subscription'], {clearHistory: true, transition: environment.defaultRoutingTransition});
-    this.sideDrawer.sideDrawer.closeDrawer();
-  }
+    /**
+     * Navigate to home page.
+     */
+    public navToHome(): void {
+        this.routerExtensions.navigate(['home'], {clearHistory: true, transition: environment.defaultRoutingTransition});
+        this.sideDrawer.sideDrawer.closeDrawer();
+    }
 
-  /**
-   * Navigate to the login page.
-   */
-  public navToLogin(): void {
-    this.routerExtensions.navigate(['login'], {clearHistory: true, transition: environment.defaultRoutingTransition});
-    this.sideDrawer.sideDrawer.closeDrawer();
-  }
+    /**
+     * Navigate to subscription page.
+     */
+    public navToSubscriptions(): void {
+        this.routerExtensions.navigate(['subscription'], {clearHistory: true, transition: environment.defaultRoutingTransition});
+        this.sideDrawer.sideDrawer.closeDrawer();
+    }
 
-  /**
-   * Animate the page buttons.
-   * @param event
-   */
-  public animateButtons(event: GestureEventData): void {
-    this.animationService.animate<TapAnimation>(event.view, TapAnimation);
-  }
+    /**
+     * Navigate to the login page.
+     */
+    public navToLogin(): void {
+        this.routerExtensions.navigate(['login'], {clearHistory: true, transition: environment.defaultRoutingTransition});
+        this.sideDrawer.sideDrawer.closeDrawer();
+    }
 
-  /**
-   * Refers to {@link AppCommon}
-   */
-  protected redirectToHomePage(): void {
-    this.navToHome();
-  }
+    /**
+     * Navigate to the notification page.
+     */
+    public navToNotifications(): void {
+        this.routerExtensions.navigate(['notification'], {clearHistory: true, transition: environment.defaultRoutingTransition});
+        this.sideDrawer.sideDrawer.closeDrawer();
+    }
 
-  /**
-   * Refers to {@link AppCommon}
-   */
-  protected redirectToLoginPage(): void {
-    this.navToLogin();
-  }
+    /**
+     * Animate the page buttons.
+     * @param event
+     */
+    public animateButtons(event: GestureEventData): void {
+        this.animationService.animate<TapAnimation>(event.view, TapAnimation);
+    }
 
-  /**
-   * Init the firebase plugin.
-   */
-  private initFirebase(): void {
-    firebase.init({
-      // Optionally pass in properties for database, authentication and cloud messaging,
-      // see their respective docs.
-      onMessageReceivedCallback: (message: Message) => {
-        console.log(`Title: ${message.title}`);
-        console.log(`Body: ${message.body}`);
-        // if your server passed a custom property called 'foo', then do this:
-        console.log(`Value of 'foo': ${message.data.foo}`);
-      },
-      onPushTokenReceivedCallback: function(token) {
-        console.log('Firebase push token: ' + token);
-      },
-      showNotificationsWhenInForeground: true,
-    }).then(() => {}, reason => {
-      console.error('firebase.init fail: ' + reason);
-    });
+    /**
+     * Refers to {@link AppCommon}
+     */
+    protected redirectToHomePage(): void {
+        this.navToHome();
+    }
 
-    firebase.subscribeToTopic('groupCreation').then(() => console.log('Subscribed to topic groupCreation'), reason => {
-      console.log(reason);
-    });
-  }
+    /**
+     * Refers to {@link AppCommon}
+     */
+    protected redirectToLoginPage(): void {
+        this.navToLogin();
+    }
+
+    /**
+     * Init the firebase plugin.
+     */
+    private initFirebase(): void {
+        firebase.init({
+            onMessageReceivedCallback: (message: Message) => {
+                console.log(`Title: ${message.title}`);
+                console.log(`Body: ${message.body}`);
+            },
+            onPushTokenReceivedCallback: function (token) {
+                console.log('Firebase push token: ' + token);
+            },
+            showNotificationsWhenInForeground: false,
+        }).then(() => {
+            console.error('Firebase.init ok.');
+        }, reason => {
+            console.error('Firebase.init fail: ' + reason);
+        });
+    }
 }

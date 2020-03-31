@@ -1,8 +1,6 @@
 import {IAuthenticationService} from '@src/app/authentication/services/IAuthenticationService';
 import {OnInit} from '@angular/core';
 import {ISessionService} from '@src/app/shared/services/ISessionService';
-import {Message} from 'nativescript-plugin-firebase';
-const firebase = require('nativescript-plugin-firebase');
 
 /**
  * Shared part of AppComponent.

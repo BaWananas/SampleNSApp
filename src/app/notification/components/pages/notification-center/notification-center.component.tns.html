@@ -1,0 +1,11 @@
+<app-side-drawer-bar></app-side-drawer-bar>
+<StackLayout orientation="vertical" padding="5" class="dark">
+    <GridLayout columns="*, auto" rows="auto" verticalAlignment="center">
+        <StackLayout col="0" row="0" verticalAlignment="center">
+            <Label class="body dark m-x-10" text="Group creation notifications"></Label>
+        </StackLayout>
+        <StackLayout col="1" row="0">
+            <Switch [checked]="isSubscribedToGroupCreation" (checkedChange)="onGroupCreationSwitchCheckedChange($event)"></Switch>
+        </StackLayout>
+    </GridLayout>
+</StackLayout>

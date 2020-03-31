@@ -7,16 +7,24 @@
                 </StackLayout>
                 <StackLayout horizontalAlignment="center" orientation="horizontal">
                     <Label class="fas" borderWidth="0" text="&#xf015;" fontSize="20" margin="10"
-                           (tap)="navToHome(); animateButtons($event)" automationText="authenticatedSideDrawerHeaderHome"></Label>
+                           (tap)="navToHome(); animateButtons($event)"
+                           automationText="authenticatedSideDrawerHeaderHome"></Label>
                     <Label class="fas text-danger" borderWidth="0" text="&#xf2f5;" fontSize="20" margin="10"
-                           (tap)="logout(); animateButtons($event)" automationText="authenticatedSideDrawerHeaderLogout"></Label>
+                           (tap)="logout(); animateButtons($event)"
+                           automationText="authenticatedSideDrawerHeaderLogout"></Label>
                 </StackLayout>
             </StackLayout>
-            <StackLayout row="1" class="sidedrawer-content primary" paddingLeft="10" paddingRight="10" automationText="authenticatedSideDrawerContent">
+            <StackLayout row="1" class="sidedrawer-content primary" paddingLeft="10" paddingRight="10"
+                         automationText="authenticatedSideDrawerContent">
                 <StackLayout class="hr primary" borderColor="white"></StackLayout>
                 <StackLayout class="sidedrawer-list-item" orientation="horizontal" horizontalAlignment="center">
-                    <Label class="body fas sidedrawer-list-item-text m-l-8 primary" color="white" fontSize="30"
-                           text="&#xf0c0;" (tap)="navToSubscriptions(); animateButtons($event)" automationText="authenticatedSideDrawerContentSubscriptions"></Label>
+                    <Label class="body fas sidedrawer-list-item-text primary m-r-10" color="white" fontSize="30"
+                           text="&#xf0c0;" (tap)="navToSubscriptions(); animateButtons($event)"
+                           automationText="authenticatedSideDrawerContentSubscriptions"></Label>
+                    <Label class="body fas sidedrawer-list-item-text primary" color="white" fontSize="30"
+                           text="&#xf0f3;" (tap)="navToNotifications(); animateButtons($event)"
+                           automationText="authenticatedSideDrawerContentNotifications">
+                    </Label>
                 </StackLayout>
                 <StackLayout class="hr primary" borderColor="white"></StackLayout>
             </StackLayout>
@@ -27,10 +35,12 @@
                     <Label class="text-center fas" text="&#xf057;" fontSize="100" color="red"></Label>
                 </StackLayout>
             </StackLayout>
-            <StackLayout row="1" class="sidedrawer-content primary" paddingLeft="10" paddingRight="10" automationText="unauthenticatedSideDrawerContent">
+            <StackLayout row="1" class="sidedrawer-content primary" paddingLeft="10" paddingRight="10"
+                         automationText="unauthenticatedSideDrawerContent">
                 <StackLayout class="hr primary" borderColor="white"></StackLayout>
                 <StackLayout horizontalAlignment="center" marginTop="10" marginBottom="10">
-                    <Label class="text-center body" color="red" textWrap="true" text="Content is currently blocked due to the lack of permissions."></Label>
+                    <Label class="text-center body" color="red" textWrap="true"
+                           text="Content is currently blocked due to the lack of permissions."></Label>
                 </StackLayout>
                 <StackLayout class="hr primary" borderColor="white"></StackLayout>
             </StackLayout>
