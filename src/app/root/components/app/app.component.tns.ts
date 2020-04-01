@@ -11,6 +11,8 @@ import {AuthenticationService} from '@src/app/authentication/services/implementa
 import {AppCommon} from '@src/app/root/components/app/app.common';
 import {SessionService} from '@src/app/shared/services/implementations/sessionService/session.service.tns';
 import {Message} from 'nativescript-plugin-firebase';
+import {IFeedbackService} from '@src/app/feedback/services/IFeedbackService';
+import {FeedbackService} from '@src/app/feedback/services/implementations/feedback.service';
 
 /**
  * Firebase plugin.
@@ -41,6 +43,11 @@ export class AppComponent extends AppCommon implements OnInit {
     private animationService: IMobileAnimationService;
 
     /**
+     * @ignore
+     */
+    private feedbackService: IFeedbackService;
+
+    /**
      * Constructor.
      * @param page Related page of the component.
      * @param httpService Service used to Http CRUD operations.
@@ -54,9 +61,12 @@ export class AppComponent extends AppCommon implements OnInit {
                 private routerExtensions: RouterExtensions,
                 sessionService: SessionService,
                 animationSrv: MobileAnimationService,
-                authenticationService: AuthenticationService) {
+                authenticationService: AuthenticationService,
+                feedbackService: FeedbackService) {
         super(authenticationService, sessionService);
         this.animationService = animationSrv;
+        this.feedbackService = feedbackService;
+
         // httpService.rootUrl = 'http://10.66.0.21:9700/';
         httpService.rootUrl = 'http://10.0.2.2:9700/';
 
@@ -155,6 +165,9 @@ export class AppComponent extends AppCommon implements OnInit {
     private initFirebase(): void {
         firebase.init({
             onMessageReceivedCallback: (message: Message) => {
+                if (message.foreground) {
+                    this.feedbackService.notifyInfo('PUSH Notification: ' + message.title, message.body);
+                }
                 console.log(`Title: ${message.title}`);
                 console.log(`Body: ${message.body}`);
             },
